@@ -2,8 +2,5 @@
 
 public class Pawn : IChessPiece
 {
-    public char ToChar()
-    {
-        return 'P';
-    }
+    public char ToChar() => 'P';
 }
