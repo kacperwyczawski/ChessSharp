@@ -1,8 +1,14 @@
 ﻿namespace ConsoleChess;
 
-internal class Program
+/// <summary>
+/// The main Program class.
+/// </summary>
+public class Program
 {
-    static void Main(string[] args)
+    /// <summary>
+    /// The main entry point for application.
+    /// </summary>
+    public static void Main()
     {
         Console.WriteLine("Hello, World!");
     }
