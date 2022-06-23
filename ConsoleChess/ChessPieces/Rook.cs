@@ -2,8 +2,8 @@
 
 using System.Drawing;
 
-/// <inheritdoc cref="IChessPiece"/>
-public class Rook : IChessPiece
+/// <inheritdoc cref="ChessPiece"/>
+public class Rook : ChessPiece
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rook"/> class.
@@ -12,16 +12,10 @@ public class Rook : IChessPiece
     /// Color of chess piece.
     /// </param>
     public Rook(Color color)
+        : base(color)
     {
-        this.Color = color;
     }
 
     /// <inheritdoc/>
-    public Color Color
-    {
-        get;
-    }
-
-    /// <inheritdoc/>
-    public char ToChar() => 'R';
+    public override char ToChar() => 'R';
 }

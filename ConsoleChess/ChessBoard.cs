@@ -7,5 +7,5 @@ using ChessPieces;
 /// </summary>
 public partial class ChessBoard
 {
-    private IChessPiece?[,] chessPiecesArray = StartingChessPiecesArray;
+    private ChessPiece?[,] chessPiecesArray = StartingChessPiecesArray;
 }

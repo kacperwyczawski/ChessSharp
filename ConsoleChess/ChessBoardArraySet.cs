@@ -8,7 +8,7 @@ using System.Drawing;
 /// </content>
 public partial class ChessBoard
 {
-    private static readonly IChessPiece?[,] StartingChessPiecesArray = new IChessPiece?[8, 8]
+    private static readonly ChessPiece?[,] StartingChessPiecesArray = new ChessPiece?[8, 8]
     {
         { new Rook(Color.Black), new Knight(Color.Black), new Bishop(Color.Black), new Queen(Color.Black), new King(Color.Black), new Bishop(Color.Black), new Knight(Color.Black), new Rook(Color.Black) },
         { new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black) },
@@ -20,7 +20,7 @@ public partial class ChessBoard
         { new Rook(Color.White), new Knight(Color.White), new Bishop(Color.White), new Queen(Color.White), new King(Color.White), new Bishop(Color.White), new Knight(Color.White), new Rook(Color.White) },
     };
 
-    private static readonly IChessPiece?[,] EmptyChessPiecesArray = new IChessPiece?[8, 8]
+    private static readonly ChessPiece?[,] EmptyChessPiecesArray = new ChessPiece?[8, 8]
     {
         { null, null, null, null, null, null, null, null, },
         { null, null, null, null, null, null, null, null, },

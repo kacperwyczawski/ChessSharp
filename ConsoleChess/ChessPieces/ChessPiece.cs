@@ -5,8 +5,19 @@ using System.Drawing;
 /// <summary>
 /// Represents single chess piece.
 /// </summary>
-public interface IChessPiece
+public abstract class ChessPiece
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ChessPiece"/> class.
+    /// </summary>
+    /// <param name="color">
+    /// Color of chess piece.
+    /// </param>
+    public ChessPiece(Color color)
+    {
+        this.Color = color;
+    }
+
     /// <summary>
     /// Gets color of chess piece.
     /// </summary>
@@ -18,5 +29,5 @@ public interface IChessPiece
     /// <returns>
     /// The <see cref="char"/> representation of object.
     /// </returns>
-    public char ToChar();
+    public abstract char ToChar();
 }
