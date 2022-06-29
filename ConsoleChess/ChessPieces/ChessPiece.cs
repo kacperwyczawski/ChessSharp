@@ -31,3 +31,5 @@ public abstract class ChessPiece
     /// </returns>
     public abstract char ToChar();
 }
+
+// TODO: Add equality comparer
