@@ -1,2 +1,2 @@
 # ♟️ ConsoleChess
-WIP
+## :toolbox: *Work In Progress*
