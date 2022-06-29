@@ -1,3 +1,10 @@
 obj/
 bin/
+
+# files from visual studio
 .vs/
+
+# files from rider
+workspace.xml
+*.iws
+tasks.xml
