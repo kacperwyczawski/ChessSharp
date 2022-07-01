@@ -19,7 +19,7 @@ public class ChessBoardTests
     {
         ChessBoard chessBoard = new();
 
-        var expectedArray = new char?[8, 8]
+        var expectedArray = new char?[,]
         {
             { 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R' },
             { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P' },
@@ -38,7 +38,7 @@ public class ChessBoardTests
     {
         ChessBoard chessBoard = new();
 
-        var expectedArray = new ChessPiece?[8, 8]
+        var expectedArray = new ChessPiece?[,]
         {
             {
                 new Rook(Color.Black), new Knight(Color.Black), new Bishop(Color.Black), new Queen(Color.Black),
