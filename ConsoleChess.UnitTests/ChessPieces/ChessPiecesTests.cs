@@ -46,4 +46,18 @@ public class ChessPiecesTests
             Assert.That(king.Color, Is.EqualTo(Color.Black));
         });
     }
+
+    [Test]
+    public void CompareValueEquality()
+    {
+        var pawn1 = new Pawn(Color.White);
+        var pawn2 = new Pawn(Color.Black);
+        var pawn3 = new Pawn(Color.White);
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(pawn2, Is.Not.EqualTo(pawn1));
+            Assert.That(pawn1, Is.EqualTo(pawn3));
+        });
+    }
 }

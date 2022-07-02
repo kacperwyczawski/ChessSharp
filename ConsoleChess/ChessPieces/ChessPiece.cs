@@ -7,6 +7,27 @@ using System.Drawing;
 /// </summary>
 public abstract class ChessPiece
 {
+    protected bool Equals(ChessPiece other)
+    {
+        return this.Color.Equals(other.Color);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        if (ReferenceEquals(null, obj))
+            return false;
+        if (ReferenceEquals(this, obj))
+            return true;
+        if (obj.GetType() != this.GetType())
+            return false;
+        return Equals((ChessPiece)obj);
+    }
+
+    public override int GetHashCode()
+    {
+        return Color.GetHashCode();
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessPiece"/> class.
     /// </summary>
