@@ -11,7 +11,7 @@ public class ChessBoardTests
         ChessBoard chessBoard = new(true);
 
         var expectedArray = new char?[8, 8];
-        Assert.That(chessBoard.ToCharArray, Is.EqualTo(expectedArray));
+        Assert.That(chessBoard.ToCharArray(), Is.EqualTo(expectedArray));
     }
 
     [Test]
