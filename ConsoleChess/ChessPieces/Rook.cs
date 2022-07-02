@@ -3,7 +3,7 @@
 using System.Drawing;
 
 /// <inheritdoc cref="ChessPiece"/>
-public class Rook : ChessPiece
+public sealed class Rook : ChessPiece
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Rook"/> class.
