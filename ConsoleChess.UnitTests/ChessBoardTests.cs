@@ -82,4 +82,24 @@ public class ChessBoardTests
         Assert.That(chessBoard[0, 0], Is.EqualTo(null));
         Assert.That(chessBoard[1, 1], Is.EqualTo(new Pawn(Color.Black)));
     }
+
+    [Test]
+    public void MovePiece()
+    {
+        ChessBoard chessBoard = new();
+        var pieceToMove = chessBoard[1, 0];
+        
+        chessBoard.Move((1, 0), (2, 0));
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(chessBoard[1, 0], Is.EqualTo(null));
+            Assert.That(chessBoard[2, 0], Is.EqualTo(pieceToMove));
+        });
+        
+        Assert.Throws<IndexOutOfRangeException>(
+            () =>chessBoard.Move((0, 0), (10, 8)));
+        Assert.Throws<IndexOutOfRangeException>(
+            () =>chessBoard.Move((0, -3), (3, 8)));
+    }
 }

@@ -34,6 +34,13 @@ public partial class ChessBoard
         set => this.chessPiecesArray[i, j] = value;
     }
 
+    public void Move((int x, int y) from, (int x, int y) to)
+    {
+        ChessPiece? pickedItem = this[from.x, from.y];
+        this[from.x, from.y] = null;
+        this[to.x, to.y] = pickedItem;
+    }
+
     /// <summary>
     /// Converts <see cref="ChessBoard"/> to an array of <see cref="char"/> representing chess pieces.
     /// </summary>
