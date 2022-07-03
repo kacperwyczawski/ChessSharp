@@ -97,9 +97,9 @@ public class ChessBoardTests
             Assert.That(chessBoard[2, 0], Is.EqualTo(pieceToMove));
         });
         
-        Assert.Throws<IndexOutOfRangeException>(
+        Assert.Throws<ArgumentOutOfRangeException>(
             () =>chessBoard.Move((0, 0), (10, 8)));
-        Assert.Throws<IndexOutOfRangeException>(
+        Assert.Throws<ArgumentOutOfRangeException>(
             () =>chessBoard.Move((0, -3), (3, 8)));
     }
 }

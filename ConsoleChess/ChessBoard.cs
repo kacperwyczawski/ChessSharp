@@ -36,9 +36,16 @@ public partial class ChessBoard
 
     public void Move((int x, int y) from, (int x, int y) to)
     {
-        ChessPiece? pickedItem = this[from.x, from.y];
-        this[from.x, from.y] = null;
-        this[to.x, to.y] = pickedItem;
+        try
+        {
+            ChessPiece? pickedItem = this[from.x, from.y];
+            this[from.x, from.y] = null;
+            this[to.x, to.y] = pickedItem;
+        }
+        catch (IndexOutOfRangeException)
+        {
+            throw new ArgumentOutOfRangeException();
+        }
     }
 
     /// <summary>
