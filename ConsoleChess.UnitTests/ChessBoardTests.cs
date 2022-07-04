@@ -84,21 +84,26 @@ public class ChessBoardTests
     }
 
     [Test]
-    public void MovePiece()
+    [TestCase(1, 0, 2, 0)]
+    [TestCase(6, 7, 4, 7)]
+    [TestCase(6, 7, 7, 7)]
+    public void MovePiece(int fromX, int fromY, int toX, int toY)
     {
         ChessBoard chessBoard = new();
-        var pieceToMove = chessBoard[1, 0];
+        var pieceToMove = chessBoard[fromX, fromY];
+        (int, int) from = (fromX, fromY);
+        (int, int) to = (toX, toY);
         
-        chessBoard.Move((1, 0), (2, 0));
+        chessBoard.Move(from, to);
         
         Assert.Multiple(() =>
         {
-            Assert.That(chessBoard[1, 0], Is.EqualTo(null));
-            Assert.That(chessBoard[2, 0], Is.EqualTo(pieceToMove));
+            Assert.That(chessBoard[fromX, fromY], Is.EqualTo(null));
+            Assert.That(chessBoard[toX, toY], Is.EqualTo(pieceToMove));
         });
         
         Assert.Throws<ArgumentOutOfRangeException>(
-            () =>chessBoard.Move((0, 0), (10, 8)));
+            () =>chessBoard.Move((0, 0), (4, 8)));
         Assert.Throws<ArgumentOutOfRangeException>(
             () =>chessBoard.Move((0, -3), (3, 8)));
     }
