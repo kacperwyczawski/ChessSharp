@@ -22,30 +22,44 @@ public partial class ChessBoard
 
     /// <summary>
     /// Gets specified chess piece from given index or sets specified chess piece on given index.
+    /// Left upper corner == [0, 0].
     /// </summary>
-    /// <param name="i">i index.</param>
-    /// <param name="j">j index.</param>
+    /// <param name="x">i index.</param>
+    /// <param name="y">j index.</param>
     /// <returns>
     /// <see cref="ChessPiece"/> on given index.
     /// </returns>
-    public ChessPiece? this[int i, int j]
+    public ChessPiece? this[int x, int y]
     {
-        get => this.chessPiecesArray[i, j];
-        set => this.chessPiecesArray[i, j] = value;
+        get => this.chessPiecesArray[x, y];
+        set => this.chessPiecesArray[x, y] = value;
     }
 
-    public void Move((int x, int y) from, (int x, int y) to)
+    public void MovePiece((int x, int y) from, (int x, int y) to)
     {
-        try
-        {
-            ChessPiece? pickedItem = this[from.x, from.y];
-            this[from.x, from.y] = null;
-            this[to.x, to.y] = pickedItem;
-        }
-        catch (IndexOutOfRangeException)
-        {
-            throw new ArgumentOutOfRangeException();
-        }
+        // if move is to the same position, do nothing
+        if (from == to)
+            return;
+
+        // check if parameters are outside array, if so, throw exception
+        if (from.x > 7 || from.y > 7 || from.x < 0 || from.y < 0)
+            throw new ArgumentOutOfRangeException(nameof(from));
+        if (to.x > 7 || to.y > 7 || to.x < 0 || to.y < 0)
+            throw new ArgumentOutOfRangeException(nameof(to));
+
+        var currentPiece = this.chessPiecesArray[from.x, from.y];
+
+        // check if piece to move does not exist
+        if (currentPiece is null)
+            throw new Exception("Starting index must contain chess piece.");
+
+        // check if move is invalid
+        if (currentPiece.ValidateMove(from, to, this) == false)
+            throw new Exception("Invalid move");
+
+        // finally move piece
+        this.chessPiecesArray[to.x, to.y] = currentPiece;
+        this.chessPiecesArray[from.x, from.y] = null;
     }
 
     /// <summary>
@@ -60,7 +74,11 @@ public partial class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                charArray[i, j] = this.chessPiecesArray[i, j]?.ToChar();
+                var piece = this.chessPiecesArray[i, j];
+                if (piece is null)
+                    charArray[i, j] = ' ';
+                else
+                    charArray[i, j] = piece.ToChar();
             }
         }
 

@@ -7,11 +7,12 @@ using System.Drawing;
 /// </summary>
 public abstract class ChessPiece
 {
-    protected bool Equals(ChessPiece other)
+    private bool Equals(ChessPiece other)
     {
         return this.Color.Equals(other.Color);
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object? obj)
     {
         if (ReferenceEquals(null, obj))
@@ -20,12 +21,12 @@ public abstract class ChessPiece
             return true;
         if (obj.GetType() != this.GetType())
             return false;
-        return Equals((ChessPiece)obj);
+        return this.Equals((ChessPiece)obj);
     }
 
     public override int GetHashCode()
     {
-        return Color.GetHashCode();
+        return this.Color.GetHashCode();
     }
 
     /// <summary>
@@ -51,4 +52,13 @@ public abstract class ChessPiece
     /// The <see cref="char"/> representation of object.
     /// </returns>
     public abstract char ToChar();
+
+    /// <summary>
+    /// Checks if move is valid.
+    /// </summary>
+    /// <param name="from">starting index.</param>
+    /// <param name="to">target index.</param>
+    /// <param name="board">parent board.</param>
+    /// <returns>True when move is valid, false when not.</returns>
+    public abstract bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board);
 }

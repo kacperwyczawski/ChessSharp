@@ -78,33 +78,11 @@ public class ChessBoardTests
         chessBoard[0, 0] = null;
 
         // Assert
-        Assert.That(chessBoard[3, 3], Is.EqualTo(knight));
-        Assert.That(chessBoard[0, 0], Is.EqualTo(null));
-        Assert.That(chessBoard[1, 1], Is.EqualTo(new Pawn(Color.Black)));
-    }
-
-    [Test]
-    [TestCase(1, 0, 2, 0)]
-    [TestCase(6, 7, 4, 7)]
-    [TestCase(6, 7, 7, 7)]
-    public void MovePiece(int fromX, int fromY, int toX, int toY)
-    {
-        ChessBoard chessBoard = new();
-        var pieceToMove = chessBoard[fromX, fromY];
-        (int, int) from = (fromX, fromY);
-        (int, int) to = (toX, toY);
-        
-        chessBoard.Move(from, to);
-        
         Assert.Multiple(() =>
         {
-            Assert.That(chessBoard[fromX, fromY], Is.EqualTo(null));
-            Assert.That(chessBoard[toX, toY], Is.EqualTo(pieceToMove));
+            Assert.That(chessBoard[3, 3], Is.EqualTo(knight));
+            Assert.That(chessBoard[0, 0], Is.EqualTo(null));
+            Assert.That(chessBoard[1, 1], Is.EqualTo(new Pawn(Color.Black)));
         });
-        
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>chessBoard.Move((0, 0), (4, 8)));
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>chessBoard.Move((0, -3), (3, 8)));
     }
 }
