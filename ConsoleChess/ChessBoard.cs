@@ -1,23 +1,69 @@
-﻿namespace ConsoleChess;
+﻿using System.Drawing;
+
+namespace ConsoleChess;
 
 using ChessPieces;
 
 /// <summary>
 /// Represents chess board.
 /// </summary>
-public partial class ChessBoard
+public class ChessBoard
 {
-    private ChessPiece?[,] _chessPiecesArray;
+    private Cell[,] _boardArray;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessBoard"/> class.
     /// </summary>
-    /// <param name="initializeEmpty">
-    /// Describe if <see cref="ChessBoard"/> would be initialized empty.
-    /// </param>
-    public ChessBoard(bool initializeEmpty = false)
+    public ChessBoard()
     {
-        _chessPiecesArray = initializeEmpty ? EmptyChessPiecesArray : StartingChessPiecesArray;
+        _boardArray = new Cell[8, 8];
+        for (var i = 0; i < 8; i++)
+        {
+            for (var j = 0; j < 8; j++)
+            {
+                _boardArray[i, j] = new Cell(i, j);
+            }
+        }
+
+        #region Initialize White Pieces
+        this[6, 0].Piece = new Pawn(Color.White);
+        this[6, 1].Piece = new Pawn(Color.White);
+        this[6, 2].Piece = new Pawn(Color.White);
+        this[6, 3].Piece = new Pawn(Color.White);
+        this[6, 4].Piece = new Pawn(Color.White);
+        this[6, 5].Piece = new Pawn(Color.White);
+        this[6, 6].Piece = new Pawn(Color.White);
+        this[6, 7].Piece = new Pawn(Color.White);
+        
+        this[7, 0].Piece = new Rook(Color.White);
+        this[7, 1].Piece = new Knight(Color.White);
+        this[7, 2].Piece = new Bishop(Color.White);
+        this[7, 3].Piece = new Queen(Color.White);
+        this[7, 4].Piece = new King(Color.White);
+        this[7, 5].Piece = new Bishop(Color.White);
+        this[7, 6].Piece = new Knight(Color.White);
+        this[7, 7].Piece = new Rook(Color.White);
+        #endregion
+        
+        #region Initialize Black Pieces
+        this[1, 0].Piece = new Pawn(Color.Black);
+        this[1, 1].Piece = new Pawn(Color.Black);
+        this[1, 2].Piece = new Pawn(Color.Black);
+        this[1, 3].Piece = new Pawn(Color.Black);
+        this[1, 4].Piece = new Pawn(Color.Black);
+        this[1, 5].Piece = new Pawn(Color.Black);
+        this[1, 6].Piece = new Pawn(Color.Black);
+        this[1, 7].Piece = new Pawn(Color.Black);
+            
+        this[0, 0].Piece = new Rook(Color.Black);
+        this[0, 1].Piece = new Knight(Color.Black);
+        this[0, 2].Piece = new Bishop(Color.Black);
+        this[0, 3].Piece = new Queen(Color.Black);
+        this[0, 4].Piece = new King(Color.Black);
+        this[0, 5].Piece = new Bishop(Color.Black);
+        this[0, 6].Piece = new Knight(Color.Black);
+        this[0, 7].Piece = new Rook(Color.Black);    
+        #endregion
     }
 
     /// <summary>
@@ -29,25 +75,19 @@ public partial class ChessBoard
     /// <returns>
     /// <see cref="ChessPiece"/> on given index.
     /// </returns>
-    public ChessPiece? this[int x, int y]
+    public Cell this[int x, int y]
     {
-        get => _chessPiecesArray[x, y];
-        set => _chessPiecesArray[x, y] = value;
+        get => _boardArray[x, y];
+        set => _boardArray[x, y] = value;
     }
 
-    public void MovePiece((int x, int y) from, (int x, int y) to)
+    public void MovePiece(Cell from, Cell to)
     {
         // if move is to the same position, do nothing
-        if (from == to)
+        if (ReferenceEquals(from, to))
             return;
 
-        // check if parameters are outside array, if so, throw exception
-        if (from.x > 7 || from.y > 7 || from.x < 0 || from.y < 0)
-            throw new ArgumentOutOfRangeException(nameof(from));
-        if (to.x > 7 || to.y > 7 || to.x < 0 || to.y < 0)
-            throw new ArgumentOutOfRangeException(nameof(to));
-
-        var currentPiece = _chessPiecesArray[from.x, from.y];
+        var currentPiece = from.Piece;
 
         // check if piece to move does not exist
         if (currentPiece is null)
@@ -58,10 +98,11 @@ public partial class ChessBoard
             throw new Exception("Invalid move");
 
         // finally move piece
-        _chessPiecesArray[to.x, to.y] = currentPiece;
-        _chessPiecesArray[from.x, from.y] = null;
+        to.Piece = currentPiece;
+        from.Piece = null;
     }
 
+    #region Convertion Methods
     /// <summary>
     /// Converts <see cref="ChessBoard"/> to an array of <see cref="char"/> representing chess pieces.
     /// </summary>
@@ -74,11 +115,10 @@ public partial class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                var piece = _chessPiecesArray[i, j];
-                if (piece is null)
-                    charArray[i, j] = ' ';
-                else
+                if (this[i, j].Piece is { } piece)
                     charArray[i, j] = piece.ToChar();
+                else
+                    charArray[i, j] = ' ';
             }
         }
 
@@ -89,5 +129,19 @@ public partial class ChessBoard
     /// Converts <see cref="ChessBoard"/> to an array of <see cref="ChessPiece"/>.
     /// </summary>
     /// <returns>An array of <see cref="ChessPiece"/>.</returns>
-    public ChessPiece?[,] ToArray() => _chessPiecesArray;
+    public ChessPiece?[,] ToChessPiecesArray()
+    {
+        var chessPieceArray = new ChessPiece?[8, 8];
+
+        for (var i = 0; i < 8; i++)
+        {
+            for (var j = 0; j < 8; j++)
+            {
+                chessPieceArray[i, j] = this[i, j].Piece;
+            }
+        }
+
+        return chessPieceArray;
+    }
+    #endregion
 }

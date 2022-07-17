@@ -20,10 +20,10 @@ public sealed class Pawn : ChessPiece
     public override char ToChar() => 'P';
 
     /// <inheritdoc/>
-    public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board) =>
-        ((from.x == to.x && from.y + 1 == to.y && Color == Color.White) || // regular move (when white)
-         (from.x == to.x && from.y - 1 == to.y && Color == Color.Black) || // regular move (when black)
-         (from.x == to.x && from.y == 1 && to.y == 3 && Color == Color.White) || // first move (when white)
-         (from.x == to.x && from.y == 6 && to.y == 4 && Color == Color.Black)) && // first move (when black)
-        board[to.x, to.y] is null;
+    public override bool ValidateMove(Cell from, Cell to, ChessBoard board) =>
+        ((from.X == to.X && from.Y + 1 == to.Y && Color == Color.White) || // regular move (when white)
+         (from.X == to.X && from.Y - 1 == to.Y && Color == Color.Black) || // regular move (when black)
+         (from.X == to.X && from.Y == 1 && to.Y == 3 && Color == Color.White) || // first move (when white)
+         (from.X == to.X && from.Y == 6 && to.Y == 4 && Color == Color.Black)) && // first move (when black)
+        to.IsOccupied == false;
 }

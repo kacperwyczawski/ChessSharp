@@ -6,15 +6,6 @@ using System.Drawing;
 public class ChessBoardTests
 {
     [Test]
-    public void CreateInstanceWithEmptyBoard()
-    {
-        ChessBoard chessBoard = new(true);
-
-        var expectedArray = new char?[8, 8];
-        Assert.That(chessBoard.ToCharArray(), Is.EqualTo(expectedArray));
-    }
-
-    [Test]
     public void CreateInstanceWithStartingBoard()
     {
         ChessBoard chessBoard = new();
@@ -23,10 +14,10 @@ public class ChessBoardTests
         {
             { 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R' },
             { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P' },
-            { null, null, null, null, null, null, null, null },
-            { null, null, null, null, null, null, null, null },
-            { null, null, null, null, null, null, null, null },
-            { null, null, null, null, null, null, null, null },
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
             { 'P', 'P', 'P', 'P', 'P', 'P', 'P', 'P' },
             { 'R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R' }
         };
@@ -48,10 +39,10 @@ public class ChessBoardTests
                 new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black),
                 new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black), new Pawn(Color.Black)
             },
-            { null, null, null, null, null, null, null, null, },
-            { null, null, null, null, null, null, null, null, },
-            { null, null, null, null, null, null, null, null, },
-            { null, null, null, null, null, null, null, null, },
+            { null, null, null, null, null, null, null, null },
+            { null, null, null, null, null, null, null, null },
+            { null, null, null, null, null, null, null, null },
+            { null, null, null, null, null, null, null, null },
             {
                 new Pawn(Color.White), new Pawn(Color.White), new Pawn(Color.White), new Pawn(Color.White),
                 new Pawn(Color.White), new Pawn(Color.White), new Pawn(Color.White), new Pawn(Color.White)
@@ -59,9 +50,9 @@ public class ChessBoardTests
             {
                 new Rook(Color.White), new Knight(Color.White), new Bishop(Color.White), new Queen(Color.White),
                 new King(Color.White), new Bishop(Color.White), new Knight(Color.White), new Rook(Color.White)
-            },
+            }
         };
-        var actualArray = chessBoard.ToArray();
+        var actualArray = chessBoard.ToChessPiecesArray();
 
         Assert.That(actualArray, Is.EqualTo(expectedArray));
     }
@@ -74,15 +65,15 @@ public class ChessBoardTests
         Knight knight = new(Color.White);
 
         // Act
-        chessBoard[3, 3] = knight;
-        chessBoard[0, 0] = null;
+        chessBoard[3, 3].Piece = knight;
+        chessBoard[0, 0].Piece = null;
 
         // Assert
         Assert.Multiple(() =>
         {
-            Assert.That(chessBoard[3, 3], Is.EqualTo(knight));
-            Assert.That(chessBoard[0, 0], Is.EqualTo(null));
-            Assert.That(chessBoard[1, 1], Is.EqualTo(new Pawn(Color.Black)));
+            Assert.That(chessBoard[3, 3].Piece, Is.EqualTo(knight));
+            Assert.That(chessBoard[0, 0].Piece, Is.EqualTo(null));
+            Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black)));
         });
     }
 }

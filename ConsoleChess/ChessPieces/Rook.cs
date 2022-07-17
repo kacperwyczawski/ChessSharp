@@ -20,16 +20,16 @@ public sealed class Rook : ChessPiece
     public override char ToChar() => 'R';
 
     /// <inheritdoc/>
-    public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board)
+    public override bool ValidateMove(Cell from, Cell to, ChessBoard board)
     {
         // West direction
         // x is decrementing, y is constant
-        if (to.x < from.x && to.y == from.y)
+        if (to.X < from.X && to.Y == from.Y)
         {
             // if there is a piece in the way, return false
-            for (var i = from.x - 1; i >= to.x; i--)
+            for (var i = from.X - 1; i >= to.X; i--)
             {
-                if (board[i, from.y] != null)
+                if (board[i, from.Y].IsOccupied)
                     return false;
             }
 
@@ -39,12 +39,12 @@ public sealed class Rook : ChessPiece
 
         // North direction
         // y is decrementing, x is constant
-        if (to.y < from.y && to.x == from.x)
+        if (to.Y < from.Y && to.X == from.X)
         {
             // if there is a piece in the way, return false
-            for (var i = from.y - 1; i >= to.y; i--)
+            for (var i = from.Y - 1; i >= to.Y; i--)
             {
-                if (board[from.x, i] != null)
+                if (board[from.X, i].IsOccupied)
                     return false;
             }
 
@@ -54,12 +54,12 @@ public sealed class Rook : ChessPiece
 
         // East direction
         // x is incrementing, y is constant
-        if (to.x > from.x && to.y == from.y)
+        if (to.X > from.X && to.Y == from.Y)
         {
             // if there is a piece in the way, return false
-            for (var i = from.x + 1; i <= to.x; i++)
+            for (var i = from.X + 1; i <= to.X; i++)
             {
-                if (board[i, from.y] != null)
+                if (board[i, from.Y].IsOccupied)
                     return false;
             }
 
@@ -69,12 +69,12 @@ public sealed class Rook : ChessPiece
 
         // South direction
         // y is incrementing, x is constant
-        if (to.y > from.y && to.x == from.x)
+        if (to.Y > from.Y && to.X == from.X)
         {
             // if there is a piece in the way, return false
-            for (var i = from.y + 1; i <= to.y; i++)
+            for (var i = from.Y + 1; i <= to.Y; i++)
             {
-                if (board[from.x, i] != null)
+                if (board[from.X, i].IsOccupied)
                     return false;
             }
 

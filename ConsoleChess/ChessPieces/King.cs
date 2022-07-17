@@ -20,20 +20,20 @@ public sealed class King : ChessPiece
     public override char ToChar() => 'K';
 
     /// <inheritdoc/>
-    public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board) =>
+    public override bool ValidateMove(Cell from, Cell to, ChessBoard board) =>
 
         // vertical
-        ((from.x - 1 == to.x && from.y - 1 == to.y) ||
-         (from.x - 1 == to.x && from.y + 1 == to.y) ||
-         (from.x + 1 == to.x && from.y - 1 == to.y) ||
-         (from.x + 1 == to.x && from.y + 1 == to.y) ||
+        ((from.X - 1 == to.X && from.Y - 1 == to.Y) ||
+         (from.X - 1 == to.X && from.Y + 1 == to.Y) ||
+         (from.X + 1 == to.X && from.Y - 1 == to.Y) ||
+         (from.X + 1 == to.X && from.Y + 1 == to.Y) ||
 
         // diagonal / horizontal
-         (from.x - 1 == to.x && from.y == to.y) ||
-         (from.x + 1 == to.x && from.y == to.y) ||
-         (from.y - 1 == to.y && from.x == to.x) ||
-         (from.y + 1 == to.y && from.x == to.x)) &&
+         (from.X - 1 == to.X && from.Y == to.Y) ||
+         (from.X + 1 == to.X && from.Y == to.Y) ||
+         (from.Y - 1 == to.Y && from.X == to.X) ||
+         (from.Y + 1 == to.Y && from.X == to.X)) &&
 
         // destination must be empty
-        board[to.x, to.y] is null;
+        to.IsOccupied == false;
 }

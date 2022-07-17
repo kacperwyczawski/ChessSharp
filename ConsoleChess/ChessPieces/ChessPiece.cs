@@ -60,5 +60,5 @@ public abstract class ChessPiece
     /// <param name="to">target index.</param>
     /// <param name="board">parent board.</param>
     /// <returns>True when move is valid, false when not.</returns>
-    public abstract bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board);
+    public abstract bool ValidateMove(Cell from, Cell to, ChessBoard board);
 }

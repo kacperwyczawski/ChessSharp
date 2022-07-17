@@ -20,12 +20,12 @@ public sealed class Queen : ChessPiece
     public override char ToChar() => 'Q';
 
     /// <inheritdoc/>
-    public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board)
+    public override bool ValidateMove(Cell from, Cell to, ChessBoard board)
     {
         // combine mechanics of rook and bishop
         
         // check if move is vertical, horizontal, or diagonal, if not, return false
-        if ((from.x == to.x || from.y == to.y || Math.Abs(from.x - to.x) == Math.Abs(from.y - to.y)) == false)
+        if ((from.X == to.X || from.Y == to.Y || Math.Abs(from.X - to.X) == Math.Abs(from.Y - to.Y)) == false)
             return false;
 
         // -- bishop part -- //
@@ -34,15 +34,15 @@ public sealed class Queen : ChessPiece
         int yIterator;
 
         // North-West direction
-        if (to.x < from.x && to.y < from.y)
+        if (to.X < from.X && to.Y < from.Y)
         {
-            xIterator = from.x - 1;
-            yIterator = from.y - 1;
+            xIterator = from.X - 1;
+            yIterator = from.Y - 1;
 
             // if there is a piece in the way, return false
-            for (; xIterator >= to.x && yIterator >= to.y; xIterator--, yIterator--)
+            for (; xIterator >= to.X && yIterator >= to.Y; xIterator--, yIterator--)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -51,15 +51,15 @@ public sealed class Queen : ChessPiece
         }
 
         // North-East direction
-        if (to.x > from.x && to.y < from.y)
+        if (to.X > from.X && to.Y < from.Y)
         {
-            xIterator = from.x + 1;
-            yIterator = from.y - 1;
+            xIterator = from.X + 1;
+            yIterator = from.Y - 1;
             
             // if there is a piece in the way, return false
-            for (; xIterator <= to.x && yIterator >= to.y; xIterator++, yIterator--)
+            for (; xIterator <= to.X && yIterator >= to.Y; xIterator++, yIterator--)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -68,15 +68,15 @@ public sealed class Queen : ChessPiece
         }
 
         // South-West direction
-        if (to.x < from.x && to.y > from.y)
+        if (to.X < from.X && to.Y > from.Y)
         {
-            xIterator = from.x - 1;
-            yIterator = from.y + 1;
+            xIterator = from.X - 1;
+            yIterator = from.Y + 1;
             
             // if there is a piece in the way, return false
-            for (; xIterator >= to.x && yIterator <= to.y; xIterator--, yIterator++)
+            for (; xIterator >= to.X && yIterator <= to.Y; xIterator--, yIterator++)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -85,15 +85,15 @@ public sealed class Queen : ChessPiece
         }
 
         // South-East direction
-        if (to.x > from.x && to.y > from.y)
+        if (to.X > from.X && to.Y > from.Y)
         {
-            xIterator = from.x + 1;
-            yIterator = from.y + 1;
+            xIterator = from.X + 1;
+            yIterator = from.Y + 1;
             
             // if there is a piece in the way, return false
-            for (; xIterator <= to.x && yIterator <= to.y; xIterator++, yIterator++)
+            for (; xIterator <= to.X && yIterator <= to.Y; xIterator++, yIterator++)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -105,12 +105,12 @@ public sealed class Queen : ChessPiece
         
         // West direction
         // x is decrementing, y is constant
-        if (to.x < from.x && to.y == from.y)
+        if (to.X < from.X && to.Y == from.Y)
         {
             // if there is a piece in the way, return false
-            for (var i = from.x - 1; i >= to.x; i--)
+            for (var i = from.X - 1; i >= to.X; i--)
             {
-                if (board[i, from.y] != null)
+                if (board[i, from.Y].IsOccupied)
                     return false;
             }
 
@@ -120,12 +120,12 @@ public sealed class Queen : ChessPiece
 
         // North direction
         // y is decrementing, x is constant
-        if (to.y < from.y && to.x == from.x)
+        if (to.Y < from.Y && to.X == from.X)
         {
             // if there is a piece in the way, return false
-            for (var i = from.y - 1; i >= to.y; i--)
+            for (var i = from.Y - 1; i >= to.Y; i--)
             {
-                if (board[from.x, i] != null)
+                if (board[from.X, i].IsOccupied)
                     return false;
             }
 
@@ -135,12 +135,12 @@ public sealed class Queen : ChessPiece
 
         // East direction
         // x is incrementing, y is constant
-        if (to.x > from.x && to.y == from.y)
+        if (to.X > from.X && to.Y == from.Y)
         {
             // if there is a piece in the way, return false
-            for (var i = from.x + 1; i <= to.x; i++)
+            for (var i = from.X + 1; i <= to.X; i++)
             {
-                if (board[i, from.y] != null)
+                if (board[i, from.Y].IsOccupied)
                     return false;
             }
 
@@ -150,12 +150,12 @@ public sealed class Queen : ChessPiece
 
         // South direction
         // y is incrementing, x is constant
-        if (to.y > from.y && to.x == from.x)
+        if (to.Y > from.Y && to.X == from.X)
         {
             // if there is a piece in the way, return false
-            for (var i = from.y + 1; i <= to.y; i++)
+            for (var i = from.Y + 1; i <= to.Y; i++)
             {
-                if (board[from.x, i] != null)
+                if (board[from.X, i].IsOccupied)
                     return false;
             }
 

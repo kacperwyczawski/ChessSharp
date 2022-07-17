@@ -20,25 +20,25 @@ public sealed class Bishop : ChessPiece
     public override char ToChar() => 'B';
 
     /// <inheritdoc/>
-    public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board)
+    public override bool ValidateMove(Cell from, Cell to, ChessBoard board)
     {
         // if move is not diagonal, return false
-        if (Math.Abs(from.x - to.x) == Math.Abs(from.y - to.y) == false)
+        if (Math.Abs(from.X - to.X) == Math.Abs(from.Y - to.Y) == false)
             return false;
 
         int xIterator;
         int yIterator;
 
         // North-West direction
-        if (to.x < from.x && to.y < from.y)
+        if (to.X < from.X && to.Y < from.Y)
         {
-            xIterator = from.x - 1;
-            yIterator = from.y - 1;
+            xIterator = from.X - 1;
+            yIterator = from.Y - 1;
 
             // if there is a piece in the way, return false
-            for (; xIterator >= to.x && yIterator >= to.y; xIterator--, yIterator--)
+            for (; xIterator >= to.X && yIterator >= to.Y; xIterator--, yIterator--)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -47,15 +47,15 @@ public sealed class Bishop : ChessPiece
         }
 
         // North-East direction
-        if (to.x > from.x && to.y < from.y)
+        if (to.X > from.X && to.Y < from.Y)
         {
-            xIterator = from.x + 1;
-            yIterator = from.y - 1;
-            
+            xIterator = from.X + 1;
+            yIterator = from.Y - 1;
+
             // if there is a piece in the way, return false
-            for (; xIterator <= to.x && yIterator >= to.y; xIterator++, yIterator--)
+            for (; xIterator <= to.X && yIterator >= to.Y; xIterator++, yIterator--)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -64,15 +64,15 @@ public sealed class Bishop : ChessPiece
         }
 
         // South-West direction
-        if (to.x < from.x && to.y > from.y)
+        if (to.X < from.X && to.Y > from.Y)
         {
-            xIterator = from.x - 1;
-            yIterator = from.y + 1;
-            
+            xIterator = from.X - 1;
+            yIterator = from.Y + 1;
+
             // if there is a piece in the way, return false
-            for (; xIterator >= to.x && yIterator <= to.y; xIterator--, yIterator++)
+            for (; xIterator >= to.X && yIterator <= to.Y; xIterator--, yIterator++)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
@@ -81,15 +81,15 @@ public sealed class Bishop : ChessPiece
         }
 
         // South-East direction
-        if (to.x > from.x && to.y > from.y)
+        if (to.X > from.X && to.Y > from.Y)
         {
-            xIterator = from.x + 1;
-            yIterator = from.y + 1;
-            
+            xIterator = from.X + 1;
+            yIterator = from.Y + 1;
+
             // if there is a piece in the way, return false
-            for (; xIterator <= to.x && yIterator <= to.y; xIterator++, yIterator++)
+            for (; xIterator <= to.X && yIterator <= to.Y; xIterator++, yIterator++)
             {
-                if (board[xIterator, yIterator] != null)
+                if (board[xIterator, yIterator].IsOccupied)
                     return false;
             }
 
