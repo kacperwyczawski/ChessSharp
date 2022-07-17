@@ -21,9 +21,9 @@ public sealed class Pawn : ChessPiece
 
     /// <inheritdoc/>
     public override bool ValidateMove((int x, int y) from, (int x, int y) to, ChessBoard board) =>
-        ((from.x == to.x && from.y + 1 == to.y && this.Color == Color.White) || // regular move (when white)
-         (from.x == to.x && from.y - 1 == to.y && this.Color == Color.Black) || // regular move (when black)
-         (from.x == to.x && from.y == 1 && to.y == 3 && this.Color == Color.White) || // first move (when white)
-         (from.x == to.x && from.y == 6 && to.y == 4 && this.Color == Color.Black)) && // first move (when black)
+        ((from.x == to.x && from.y + 1 == to.y && Color == Color.White) || // regular move (when white)
+         (from.x == to.x && from.y - 1 == to.y && Color == Color.Black) || // regular move (when black)
+         (from.x == to.x && from.y == 1 && to.y == 3 && Color == Color.White) || // first move (when white)
+         (from.x == to.x && from.y == 6 && to.y == 4 && Color == Color.Black)) && // first move (when black)
         board[to.x, to.y] is null;
 }

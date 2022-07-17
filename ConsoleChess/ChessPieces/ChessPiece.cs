@@ -9,7 +9,7 @@ public abstract class ChessPiece
 {
     private bool Equals(ChessPiece other)
     {
-        return this.Color.Equals(other.Color);
+        return Color.Equals(other.Color);
     }
 
     /// <inheritdoc/>
@@ -19,14 +19,14 @@ public abstract class ChessPiece
             return false;
         if (ReferenceEquals(this, obj))
             return true;
-        if (obj.GetType() != this.GetType())
+        if (obj.GetType() != GetType())
             return false;
-        return this.Equals((ChessPiece)obj);
+        return Equals((ChessPiece)obj);
     }
 
     public override int GetHashCode()
     {
-        return this.Color.GetHashCode();
+        return Color.GetHashCode();
     }
 
     /// <summary>
@@ -37,7 +37,7 @@ public abstract class ChessPiece
     /// </param>
     public ChessPiece(Color color)
     {
-        this.Color = color;
+        Color = color;
     }
 
     /// <summary>

@@ -7,7 +7,7 @@ using ChessPieces;
 /// </summary>
 public partial class ChessBoard
 {
-    private ChessPiece?[,] chessPiecesArray;
+    private ChessPiece?[,] _chessPiecesArray;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessBoard"/> class.
@@ -17,7 +17,7 @@ public partial class ChessBoard
     /// </param>
     public ChessBoard(bool initializeEmpty = false)
     {
-        this.chessPiecesArray = initializeEmpty ? EmptyChessPiecesArray : StartingChessPiecesArray;
+        _chessPiecesArray = initializeEmpty ? EmptyChessPiecesArray : StartingChessPiecesArray;
     }
 
     /// <summary>
@@ -31,8 +31,8 @@ public partial class ChessBoard
     /// </returns>
     public ChessPiece? this[int x, int y]
     {
-        get => this.chessPiecesArray[x, y];
-        set => this.chessPiecesArray[x, y] = value;
+        get => _chessPiecesArray[x, y];
+        set => _chessPiecesArray[x, y] = value;
     }
 
     public void MovePiece((int x, int y) from, (int x, int y) to)
@@ -47,7 +47,7 @@ public partial class ChessBoard
         if (to.x > 7 || to.y > 7 || to.x < 0 || to.y < 0)
             throw new ArgumentOutOfRangeException(nameof(to));
 
-        var currentPiece = this.chessPiecesArray[from.x, from.y];
+        var currentPiece = _chessPiecesArray[from.x, from.y];
 
         // check if piece to move does not exist
         if (currentPiece is null)
@@ -58,8 +58,8 @@ public partial class ChessBoard
             throw new Exception("Invalid move");
 
         // finally move piece
-        this.chessPiecesArray[to.x, to.y] = currentPiece;
-        this.chessPiecesArray[from.x, from.y] = null;
+        _chessPiecesArray[to.x, to.y] = currentPiece;
+        _chessPiecesArray[from.x, from.y] = null;
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public partial class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                var piece = this.chessPiecesArray[i, j];
+                var piece = _chessPiecesArray[i, j];
                 if (piece is null)
                     charArray[i, j] = ' ';
                 else
@@ -89,5 +89,5 @@ public partial class ChessBoard
     /// Converts <see cref="ChessBoard"/> to an array of <see cref="ChessPiece"/>.
     /// </summary>
     /// <returns>An array of <see cref="ChessPiece"/>.</returns>
-    public ChessPiece?[,] ToArray() => this.chessPiecesArray;
+    public ChessPiece?[,] ToArray() => _chessPiecesArray;
 }
