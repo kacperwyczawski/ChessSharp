@@ -1,9 +1,9 @@
 obj/
 bin/
-.user
+*.user
 
 # files from visual studio
-.vs/
+*.vs/
 
 # files from rider
 workspace.xml
