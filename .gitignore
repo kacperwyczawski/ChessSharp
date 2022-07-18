@@ -1,5 +1,6 @@
 obj/
 bin/
+.user
 
 # files from visual studio
 .vs/
