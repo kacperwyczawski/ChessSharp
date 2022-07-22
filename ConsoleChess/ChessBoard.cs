@@ -9,7 +9,7 @@ using ChessPieces;
 /// </summary>
 public class ChessBoard
 {
-    private Cell[,] _boardArray;
+    private readonly Cell[,] _boardArray;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessBoard"/> class.
