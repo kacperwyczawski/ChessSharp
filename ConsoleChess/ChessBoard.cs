@@ -26,43 +26,43 @@ public class ChessBoard
         }
 
         #region Initialize White Pieces
-        this[6, 0].Piece = new Pawn(Color.White);
-        this[6, 1].Piece = new Pawn(Color.White);
-        this[6, 2].Piece = new Pawn(Color.White);
-        this[6, 3].Piece = new Pawn(Color.White);
-        this[6, 4].Piece = new Pawn(Color.White);
-        this[6, 5].Piece = new Pawn(Color.White);
+        this[0, 6].Piece = new Pawn(Color.White);
+        this[1, 6].Piece = new Pawn(Color.White);
+        this[2, 6].Piece = new Pawn(Color.White);
+        this[3, 6].Piece = new Pawn(Color.White);
+        this[4, 6].Piece = new Pawn(Color.White);
+        this[5, 6].Piece = new Pawn(Color.White);
         this[6, 6].Piece = new Pawn(Color.White);
-        this[6, 7].Piece = new Pawn(Color.White);
+        this[7, 6].Piece = new Pawn(Color.White);
         
-        this[7, 0].Piece = new Rook(Color.White);
-        this[7, 1].Piece = new Knight(Color.White);
-        this[7, 2].Piece = new Bishop(Color.White);
-        this[7, 3].Piece = new Queen(Color.White);
-        this[7, 4].Piece = new King(Color.White);
-        this[7, 5].Piece = new Bishop(Color.White);
-        this[7, 6].Piece = new Knight(Color.White);
+        this[0, 7].Piece = new Rook(Color.White);
+        this[1, 7].Piece = new Knight(Color.White);
+        this[2, 7].Piece = new Bishop(Color.White);
+        this[3, 7].Piece = new Queen(Color.White);
+        this[4, 7].Piece = new King(Color.White);
+        this[5, 7].Piece = new Bishop(Color.White);
+        this[6, 7].Piece = new Knight(Color.White);
         this[7, 7].Piece = new Rook(Color.White);
         #endregion
         
         #region Initialize Black Pieces
-        this[1, 0].Piece = new Pawn(Color.Black);
+        this[0, 1].Piece = new Pawn(Color.Black);
         this[1, 1].Piece = new Pawn(Color.Black);
-        this[1, 2].Piece = new Pawn(Color.Black);
-        this[1, 3].Piece = new Pawn(Color.Black);
-        this[1, 4].Piece = new Pawn(Color.Black);
-        this[1, 5].Piece = new Pawn(Color.Black);
-        this[1, 6].Piece = new Pawn(Color.Black);
-        this[1, 7].Piece = new Pawn(Color.Black);
-            
+        this[2, 1].Piece = new Pawn(Color.Black);
+        this[3, 1].Piece = new Pawn(Color.Black);
+        this[4, 1].Piece = new Pawn(Color.Black);
+        this[5, 1].Piece = new Pawn(Color.Black);
+        this[6, 1].Piece = new Pawn(Color.Black);
+        this[7, 1].Piece = new Pawn(Color.Black);
+        
         this[0, 0].Piece = new Rook(Color.Black);
-        this[0, 1].Piece = new Knight(Color.Black);
-        this[0, 2].Piece = new Bishop(Color.Black);
-        this[0, 3].Piece = new Queen(Color.Black);
-        this[0, 4].Piece = new King(Color.Black);
-        this[0, 5].Piece = new Bishop(Color.Black);
-        this[0, 6].Piece = new Knight(Color.Black);
-        this[0, 7].Piece = new Rook(Color.Black);    
+        this[1, 0].Piece = new Knight(Color.Black);
+        this[2, 0].Piece = new Bishop(Color.Black);
+        this[3, 0].Piece = new Queen(Color.Black);
+        this[4, 0].Piece = new King(Color.Black);
+        this[5, 0].Piece = new Bishop(Color.Black);
+        this[6, 0].Piece = new Knight(Color.Black);
+        this[7, 0].Piece = new Rook(Color.Black);
         #endregion
     }
 
