@@ -36,4 +36,9 @@ public sealed class King : ChessPiece
 
         // destination must be empty
         to.IsOccupied == false;
+
+    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    {
+        throw new NotImplementedException();
+    }
 }

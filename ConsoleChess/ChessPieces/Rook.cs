@@ -85,4 +85,9 @@ public sealed class Rook : ChessPiece
         // move is not horizontal nor vertical
         return false;
     }
+
+    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    {
+        throw new NotImplementedException();
+    }
 }

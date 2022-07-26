@@ -91,15 +91,19 @@ public class ChessBoard
 
         // check if piece to move does not exist
         if (currentPiece is null)
-            throw new Exception("Starting index must contain chess piece.");
+            throw new Exception("There is no piece on given position.");
 
         // check if move is invalid
-        if (currentPiece.ValidateMove(from, to, this) == false)
+        if (currentPiece.GetValidMoves(from, this).Contains(to))
+        {
+            // move piece
+            to.Piece = currentPiece;
+            from.Piece = null;
+        }
+        else
+        {
             throw new Exception("Invalid move");
-
-        // finally move piece
-        to.Piece = currentPiece;
-        from.Piece = null;
+        }
     }
 
     #region Convertion Methods

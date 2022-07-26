@@ -60,5 +60,8 @@ public abstract class ChessPiece
     /// <param name="to">target index.</param>
     /// <param name="board">parent board.</param>
     /// <returns>True when move is valid, false when not.</returns>
+    [Obsolete($"Use {nameof(GetValidMoves)} method instead.")]
     public abstract bool ValidateMove(Cell from, Cell to, ChessBoard board);
+    
+    public abstract IEnumerable<Cell> GetValidMoves (Cell position, ChessBoard board);
 }

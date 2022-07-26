@@ -100,4 +100,9 @@ public sealed class Bishop : ChessPiece
         // this return statement should never be reached, but is here to make the compiler happy :P
         return false;
     }
+
+    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -166,4 +166,9 @@ public sealed class Queen : ChessPiece
         // this should be unreachable, but poor compiler doesn't know that :(
         return false;
     }
+
+    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    {
+        throw new NotImplementedException();
+    }
 }

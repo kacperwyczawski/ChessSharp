@@ -30,4 +30,9 @@ public sealed class Knight : ChessPiece
          (from.X - 2 == to.X && from.Y + 1 == to.Y) ||
          (from.X - 2 == to.X && from.Y - 1 == to.Y)) &&
         to.IsOccupied == false;
+
+    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    {
+        throw new NotImplementedException();
+    }
 }

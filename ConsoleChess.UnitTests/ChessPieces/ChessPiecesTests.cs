@@ -137,4 +137,48 @@ public class BishopTests
 
         Assert.That(from.Piece.ValidateMove(from, to, Board), Is.EqualTo(expectedResult));
     }
+
+    private static object[] _getValidMovesCases =
+    {
+        #region Pawn
+
+        // Pawn white
+        // 4, 4
+        new object?[] { Board[4, 4], new Pawn(Color.White), Board, new List<Cell> { Board[4, 3] }, null },
+        // 4, 4 with obstacle in destination
+        new object?[] { Board[4, 4], new Pawn(Color.White), Board, new List<Cell>(), Board[4, 3], },
+        // 4, 6
+        new object?[] { Board[4, 6], new Pawn(Color.White), Board, new List<Cell> { Board[4, 5], Board[4, 4] }, null },
+        // 4, 6 with obstacle in 4, 5
+        new object?[] { Board[4, 6], new Pawn(Color.White), Board, new List<Cell>(), Board[4, 5] },
+        // 4, 6 with obstacle in 4, 4
+        new object?[] { Board[4, 6], new Pawn(Color.White), Board, new List<Cell> { Board[4, 5] }, Board[4, 4] },
+        
+        // Pawn black
+        // 4, 4
+        new object?[] { Board[4, 4], new Pawn(Color.Black), Board, new List<Cell> { Board[4, 5] }, null },
+        // 4, 4 with obstacle in destination
+        new object?[] { Board[4, 4], new Pawn(Color.Black), Board, new List<Cell>(), Board[4, 5] },
+        // 4, 1
+        new object?[] { Board[4, 1], new Pawn(Color.Black), Board, new List<Cell> { Board[4, 2], Board[4, 3] }, null },
+        // 4, 1 with obstacle in 4, 2
+        new object?[] { Board[4, 1], new Pawn(Color.Black), Board, new List<Cell>(), Board[4, 2] },
+        // 4, 1 with obstacle in 4, 3
+        new object?[] { Board[4, 1], new Pawn(Color.Black), Board, new List<Cell> { Board[4, 2] }, Board[4, 3] },
+
+        #endregion
+    };
+
+    [TestCaseSource(nameof(_getValidMovesCases))]
+    public void GetValidMoves(Cell position, ChessPiece piece, ChessBoard board, IEnumerable<Cell> expectedValidMoves, Cell? obstacleCell = null)
+    {
+        for (var i = 0; i < 8; i++)
+            for (var j = 0; j < 8; j++)
+                Board[i, j].Piece = null;
+        
+        if (obstacleCell is not null)
+            obstacleCell.Piece = new Pawn(Color.White);
+        
+        Assert.That(piece.GetValidMoves(position, board), Is.EquivalentTo(expectedValidMoves));
+    }
 }
