@@ -76,4 +76,21 @@ public class ChessBoardTests
             Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black)));
         });
     }
+
+    [Test]
+    public void MovePiece()
+    {
+        // Arrange
+        ChessBoard board = new();
+        
+        // Act
+        board.MovePiece(board[0, 6], board[0, 4]);
+        
+        // Assert
+        Assert.Multiple(() =>
+        {
+            Assert.That(board[0, 6].Piece, Is.EqualTo(null));
+            Assert.That(board[0, 4].Piece, Is.EqualTo(new Pawn(Color.White)));
+        });
+    }
 }
