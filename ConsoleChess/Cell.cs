@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using ConsoleChess.ChessPieces;
 
 namespace ConsoleChess;
 
+[DebuggerDisplay("(Cell {X},{Y}) with {Piece}")]
 public class Cell
 {
     [Range(0, 7)]
