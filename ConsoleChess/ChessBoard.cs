@@ -9,6 +9,10 @@ using ChessPieces;
 /// </summary>
 public class ChessBoard
 {
+    /// <summary>
+    /// Represents cells on board.
+    /// Should be modified only by ChessBoard's indexer.
+    /// </summary>
     private readonly Cell[,] _boardArray;
 
     /// <summary>
@@ -67,18 +71,34 @@ public class ChessBoard
     }
 
     /// <summary>
-    /// Gets specified chess piece from given index or sets specified chess piece on given index.
-    /// Left upper corner == [0, 0].
+    /// Gets specified chess piece from given coordinates or sets specified chess piece on given coordinates.
+    /// This indexer uses Cartesian coordinates instead of array indexes.
     /// </summary>
-    /// <param name="x">i index.</param>
-    /// <param name="y">j index.</param>
+    /// <example>
+    /// Here is the example how chess board is indexed:
+    ///     <code>
+    ///     [0,0] [1,0] [2,0] [3,0]
+    ///     [0,1] [1,1] [2,1] [3,1]
+    ///     [0,2] [1,2] [2,2] [3,2]
+    ///     [0,3] [1,3] [2,3] [3,3]
+    ///     </code>
+    /// Here is the example how regular array is indexed:
+    ///     <code>
+    ///     [0,0] [0,1] [0,2] [0,3]
+    ///     [1,0] [1,1] [1,2] [1,3]
+    ///     [2,0] [2,1] [2,2] [2,3]
+    ///     [3,0] [3,1] [3,2] [3,3]
+    ///     </code>
+    /// </example>
+    /// <param name="x">x coordinate.</param>
+    /// <param name="y">y coordinate.</param>
     /// <returns>
-    /// <see cref="ChessPiece"/> on given index.
+    /// <see cref="ChessPiece"/> on given coordinates.
     /// </returns>
     public Cell this[int x, int y]
     {
-        get => _boardArray[x, y];
-        private init => _boardArray[x, y] = value;
+        get => _boardArray[y, x];
+        private init => _boardArray[y, x] = value;
     }
 
     public void MovePiece(Cell from, Cell to)
