@@ -163,6 +163,15 @@ public class ChessPiecesTests
                     Board[1, 1]
                 }
             ).SetName("{m} White knight 2, 2 with obstacle in: 4, 1; 2, 1; 1, 1");
+            
+            // Black 0, 0
+            yield return new TestCaseData
+            (
+                Board[0, 0],
+                new Knight(Color.Black),
+                new List<Cell> { Board[2, 1], Board[1, 2] },
+                Array.Empty<Cell>()
+            ).SetName("{m} Black knight 0, 0");
 
             #endregion
         }
