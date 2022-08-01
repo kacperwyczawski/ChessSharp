@@ -32,6 +32,10 @@ public sealed class Pawn : ChessPiece
     {
         if (Color == Color.White)
         {
+            // at the edge of the board
+            if (position.Y == 0)
+                yield break;
+            
             // regular move
             if(board[position.X, position.Y - 1].IsOccupied == false)
             {
@@ -48,6 +52,10 @@ public sealed class Pawn : ChessPiece
         }
         if (Color == Color.Black)
         {
+            // at the edge of the board
+            if (position.Y == 7)
+                yield break;
+            
             // regular move
             if (board[position.X, position.Y + 1].IsOccupied == false)
             {
