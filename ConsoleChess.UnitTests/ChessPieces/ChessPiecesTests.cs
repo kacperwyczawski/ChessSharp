@@ -77,6 +77,15 @@ public class ChessPiecesTests
                 new[] { Board[4, 4] }
             ).SetName("{m} White pawn 4, 6 with obstacle in 4, 4");
             
+            // White 0, 0
+            yield return new TestCaseData
+            (
+                Board[0, 0],
+                new Pawn(Color.White),
+                new List<Cell>(),
+                Array.Empty<Cell>()
+            ).SetName("{m} White pawn 0, 0");
+            
             // Black 4, 4
             yield return new TestCaseData
             (
@@ -121,6 +130,15 @@ public class ChessPiecesTests
                 new List<Cell> { Board[4, 2] },
                 new[] { Board[4, 3] }
             ).SetName("{m} Black pawn 4, 1 with obstacle in 4, 3");
+            
+            // Black 0, 7
+            yield return new TestCaseData
+            (
+                Board[0, 7],
+                new Pawn(Color.Black),
+                new List<Cell>(),
+                Array.Empty<Cell>()
+            ).SetName("{m} Black pawn 0, 7");
             
             #endregion
 
