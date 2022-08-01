@@ -10,7 +10,8 @@ public class ChessPiecesTests
     private static readonly ChessBoard Board = new();
 
     [TestCaseSource(nameof(GetValidMovesTestCases))]
-    public void GetValidMoves(Cell position, ChessPiece piece, IEnumerable<Cell> expectedValidMoves, Cell[] obstacleCells)
+    public void GetValidMoves(Cell position, ChessPiece piece, 
+        IEnumerable<Cell> expectedValidMoves, Cell[] obstacleCells)
     {
         for (var i = 0; i < 8; i++)
         {
