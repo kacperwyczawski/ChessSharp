@@ -21,7 +21,7 @@ public class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                _boardArray[i, j] = new Cell(i, j);
+                this[i, j] = new Cell(i, j);
             }
         }
 
@@ -78,7 +78,7 @@ public class ChessBoard
     public Cell this[int x, int y]
     {
         get => _boardArray[x, y];
-        set => _boardArray[x, y] = value;
+        private init => _boardArray[x, y] = value;
     }
 
     public void MovePiece(Cell from, Cell to)
