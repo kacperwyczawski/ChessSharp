@@ -140,9 +140,9 @@ public class ChessBoard
             for (var j = 0; j < 8; j++)
             {
                 if (this[i, j].Piece is { } piece)
-                    charArray[i, j] = piece.ToChar();
+                    charArray[j, i] = piece.ToChar();
                 else
-                    charArray[i, j] = ' ';
+                    charArray[j, i] = ' ';
             }
         }
 
@@ -161,7 +161,7 @@ public class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                chessPieceArray[i, j] = this[i, j].Piece;
+                chessPieceArray[j, i] = this[i, j].Piece;
             }
         }
 
