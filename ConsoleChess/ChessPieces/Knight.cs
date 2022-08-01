@@ -33,28 +33,25 @@ public sealed class Knight : ChessPiece
 
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
-        if(board[position.X - 1, position.Y - 2].IsOccupied == false)
-            yield return board[position.X - 1, position.Y - 2];
-        
-        if(board[position.X + 1, position.Y - 2].IsOccupied == false)
-            yield return board[position.X + 1, position.Y - 2];
-        
-        if(board[position.X + 2, position.Y - 1].IsOccupied == false)
-            yield return board[position.X + 2, position.Y - 1];
-        
-        if(board[position.X + 2, position.Y + 1].IsOccupied == false)
-            yield return board[position.X + 2, position.Y + 1];
-        
-        if(board[position.X + 1, position.Y + 2].IsOccupied == false)
-            yield return board[position.X + 1, position.Y + 2];
-        
-        if(board[position.X - 1, position.Y + 2].IsOccupied == false)
-            yield return board[position.X - 1, position.Y + 2];
-        
-        if(board[position.X - 2, position.Y + 1].IsOccupied == false)
-            yield return board[position.X - 2, position.Y + 1];
+        List<Cell> validCells = new();
 
-        if (board[position.X - 2, position.Y - 1].IsOccupied == false)
-            yield return board[position.X - 2, position.Y - 1];
+        if(position.X - 1 >= 0 && position.Y - 2 >= 0)
+            validCells.Add(board[position.X - 1, position.Y - 2]);
+        if(position.X + 1 <= 7 && position.Y - 2 >= 0)
+            validCells.Add(board[position.X + 1, position.Y - 2]);
+        if(position.X + 2 <= 7 && position.Y - 1 >= 0)
+            validCells.Add(board[position.X + 2, position.Y - 1]);
+        if(position.X + 2 <= 7 && position.Y + 1 <= 7)
+            validCells.Add(board[position.X + 2, position.Y + 1]);
+        if(position.X + 1 <= 7 && position.Y + 2 <= 7)
+            validCells.Add(board[position.X + 1, position.Y + 2]);
+        if(position.X - 1 >= 0 && position.Y + 2 <= 7)
+            validCells.Add(board[position.X - 1, position.Y + 2]);
+        if(position.X - 2 >= 0 && position.Y + 1 <= 7)
+            validCells.Add(board[position.X - 2, position.Y + 1]);
+        if(position.X - 2 >= 0 && position.Y - 1 >= 0)
+            validCells.Add(board[position.X - 2, position.Y - 1]);
+
+        return validCells.Where(cell => !cell.IsOccupied);
     }
 }
