@@ -103,6 +103,40 @@ public sealed class Bishop : ChessPiece
 
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
-        throw new NotImplementedException();
+        // North-West direction
+        for (int x = position.X - 1, y = position.Y - 1; x >= 0 && y >= 0; x--, y--)
+        {
+            if (board[x, y].IsOccupied)
+                break;
+
+            yield return board[x, y];
+        }
+        
+        // North-East direction
+        for (int x = position.X + 1, y = position.Y - 1; x <= 7 && y >= 0; x++, y--)
+        {
+            if (board[x, y].IsOccupied)
+                break;
+
+            yield return board[x, y];
+        }
+        
+        // South-West direction
+        for (int x = position.X - 1, y = position.Y + 1; x >= 0 && y <= 7; x--, y++)
+        {
+            if (board[x, y].IsOccupied)
+                break;
+
+            yield return board[x, y];
+        }
+        
+        // South-East direction
+        for (int x = position.X + 1, y = position.Y + 1; x <= 7 && y <= 7; x++, y++)
+        {
+            if (board[x, y].IsOccupied)
+                break;
+
+            yield return board[x, y];
+        }
     }
 }

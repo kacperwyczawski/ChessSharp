@@ -175,6 +175,31 @@ public class ChessPiecesTests
             ).SetName("{m} Black knight 0, 0");
 
             #endregion
+
+            #region Bishop
+            
+            // White 3, 2 with obstacle in: 4, 1 and 3, 1
+            yield return new TestCaseData
+            (
+                Board[3, 2],
+                new Bishop(Color.White),
+                new List<Cell>
+                {
+                    // North-west
+                    Board[2, 1], Board[1, 0],
+                    // South-east
+                    Board[4, 3], Board[5, 4], Board[6, 5], Board[7, 6],
+                    // South-west
+                    Board[2, 3], Board[1, 4], Board[0, 5]
+                },
+                new[]
+                {
+                    Board[4, 1],
+                    Board[3, 1]
+                }
+            ).SetName("{m} White bishop 3, 2 with obstacle in: 4, 1 and 3, 1");
+
+            #endregion
         }
     }
 }
