@@ -197,7 +197,33 @@ public class ChessPiecesTests
                     Board[4, 1],
                     Board[3, 1]
                 }
-            ).SetName("{m} White bishop 3, 2 with obstacle in: 4, 1 and 3, 1");
+            ).SetName("{m} White bishop 3, 2 with obstacle in 4, 1 and 3, 1");
+
+            #endregion
+
+            #region Rook
+
+            // White 3, 4 with obstacle in 5, 4
+            yield return new TestCaseData
+            (
+                Board[3, 4],
+                new Rook(Color.White),
+                new List<Cell>
+                {
+                    // North
+                    Board[3, 3], Board[3, 2], Board[3, 1], Board[3, 0],
+                    // East
+                    Board[4, 4],
+                    // South
+                    Board[3, 5], Board[3, 6], Board[3, 7],
+                    // West
+                    Board[2, 4], Board[1, 4], Board[0, 4]
+                },
+                new[]
+                {
+                    Board[5, 4]
+                }
+            ).SetName("{m} White rook 3, 4 with obstacle in 5, 4");
 
             #endregion
         }
