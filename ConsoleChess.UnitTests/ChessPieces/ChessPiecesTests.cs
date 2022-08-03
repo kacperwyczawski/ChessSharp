@@ -178,7 +178,7 @@ public class ChessPiecesTests
 
             #region Bishop
             
-            // White 3, 2 with obstacle in: 4, 1 and 3, 1
+            // White 3, 2 with obstacle in 4, 1 and 3, 1
             yield return new TestCaseData
             (
                 Board[3, 2],
