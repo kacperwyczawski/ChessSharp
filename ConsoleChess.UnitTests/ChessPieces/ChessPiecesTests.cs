@@ -251,6 +251,42 @@ public class ChessPiecesTests
             ).SetName("{m} White king 3, 3 with obstacle in 4, 4 and 3, 4");
 
             #endregion
+
+            #region Queen
+
+            // White 6, 3 with obstacle in 4, 1; 5, 1; 6, 1
+            yield return new TestCaseData
+            (
+                Board[6, 3],
+                new Queen(Color.White),
+                new List<Cell>
+                {
+                    // North-west
+                    Board[5, 2],
+                    // North-east
+                    Board[7, 2],
+                    // South-west
+                    Board[5, 4], Board[4, 5], Board[3, 6], Board[2, 7],
+                    // South-east
+                    Board[7, 4],
+                    // North
+                    Board[6, 2],
+                    // East
+                    Board[7, 3],
+                    // South
+                    Board[6, 4], Board[6, 5], Board[6, 6], Board[6, 7],
+                    // West
+                    Board[5, 3], Board[4, 3], Board[3, 3], Board[2, 3], Board[1, 3], Board[0, 3]
+                },
+                new[]
+                {
+                    Board[4, 1],
+                    Board[5, 1],
+                    Board[6, 1]
+                }
+            ).SetName("{m} White queen 6, 3 with obstacle in 4, 1; 5, 1; 6, 1");
+
+            #endregion
         }
     }
 }
