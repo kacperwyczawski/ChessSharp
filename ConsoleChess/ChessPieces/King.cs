@@ -39,6 +39,21 @@ public sealed class King : ChessPiece
 
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
-        throw new NotImplementedException();
+        if(board[position.X - 1, position.Y - 1].IsOccupied == false)
+            yield return board[position.X - 1, position.Y - 1];
+        if(board[position.X - 1, position.Y + 1].IsOccupied == false)
+            yield return board[position.X - 1, position.Y + 1];
+        if(board[position.X + 1, position.Y - 1].IsOccupied == false)
+            yield return board[position.X + 1, position.Y - 1];
+        if(board[position.X + 1, position.Y + 1].IsOccupied == false)
+            yield return board[position.X + 1, position.Y + 1];
+        if(board[position.X - 1, position.Y].IsOccupied == false)
+            yield return board[position.X - 1, position.Y];
+        if(board[position.X + 1, position.Y].IsOccupied == false)
+            yield return board[position.X + 1, position.Y];
+        if(board[position.X, position.Y - 1].IsOccupied == false)
+            yield return board[position.X, position.Y - 1];
+        if(board[position.X, position.Y + 1].IsOccupied == false)
+            yield return board[position.X, position.Y + 1];
     }
 }
