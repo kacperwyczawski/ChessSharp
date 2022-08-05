@@ -40,21 +40,36 @@ public sealed class King : ChessPiece
 
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
-        if (board[position.X - 1, position.Y - 1].IsOccupied == false)
+        if (position.X - 1 >= 0 && position.Y - 1 >= 0
+            && board[position.X - 1, position.Y - 1].IsOccupied == false)
             yield return board[position.X - 1, position.Y - 1];
-        if (board[position.X - 1, position.Y + 1].IsOccupied == false)
+        
+        if (position.X - 1 >= 0 && position.Y + 1 < 8
+            && board[position.X - 1, position.Y + 1].IsOccupied == false)
             yield return board[position.X - 1, position.Y + 1];
-        if (board[position.X + 1, position.Y - 1].IsOccupied == false)
+        
+        if (position.X + 1 < 8 && position.Y - 1 >= 0
+            && board[position.X + 1, position.Y - 1].IsOccupied == false)
             yield return board[position.X + 1, position.Y - 1];
-        if (board[position.X + 1, position.Y + 1].IsOccupied == false)
+        
+        if (position.X + 1 < 8 && position.Y + 1 < 8
+            && board[position.X + 1, position.Y + 1].IsOccupied == false)
             yield return board[position.X + 1, position.Y + 1];
-        if (board[position.X - 1, position.Y].IsOccupied == false)
+        
+        if (position.X - 1 >= 0
+            && board[position.X - 1, position.Y].IsOccupied == false)
             yield return board[position.X - 1, position.Y];
-        if (board[position.X + 1, position.Y].IsOccupied == false)
+        
+        if (position.X + 1 < 8
+            && board[position.X + 1, position.Y].IsOccupied == false)
             yield return board[position.X + 1, position.Y];
-        if (board[position.X, position.Y - 1].IsOccupied == false)
+        
+        if (position.Y - 1 >= 0
+            && board[position.X, position.Y - 1].IsOccupied == false)
             yield return board[position.X, position.Y - 1];
-        if (board[position.X, position.Y + 1].IsOccupied == false)
+        
+        if (position.Y + 1 < 8
+            && board[position.X, position.Y + 1].IsOccupied == false)
             yield return board[position.X, position.Y + 1];
     }
 }
