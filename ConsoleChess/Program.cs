@@ -1,4 +1,6 @@
-﻿namespace ConsoleChess;
+﻿using System;
+
+namespace ConsoleChess;
 
 /// <summary>
 /// The main Program class.

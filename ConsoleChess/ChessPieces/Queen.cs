@@ -1,6 +1,8 @@
-﻿namespace ConsoleChess.ChessPieces;
-
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+
+namespace ConsoleChess.ChessPieces;
 
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class Queen : ChessPiece

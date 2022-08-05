@@ -1,6 +1,7 @@
-﻿namespace ConsoleChess.ChessPieces;
-
+﻿using System.Collections.Generic;
 using System.Drawing;
+
+namespace ConsoleChess.ChessPieces;
 
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class King : ChessPiece
@@ -28,7 +29,7 @@ public sealed class King : ChessPiece
          (from.X + 1 == to.X && from.Y - 1 == to.Y) ||
          (from.X + 1 == to.X && from.Y + 1 == to.Y) ||
 
-        // diagonal / horizontal
+         // diagonal / horizontal
          (from.X - 1 == to.X && from.Y == to.Y) ||
          (from.X + 1 == to.X && from.Y == to.Y) ||
          (from.Y - 1 == to.Y && from.X == to.X) ||
@@ -39,21 +40,21 @@ public sealed class King : ChessPiece
 
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
-        if(board[position.X - 1, position.Y - 1].IsOccupied == false)
+        if (board[position.X - 1, position.Y - 1].IsOccupied == false)
             yield return board[position.X - 1, position.Y - 1];
-        if(board[position.X - 1, position.Y + 1].IsOccupied == false)
+        if (board[position.X - 1, position.Y + 1].IsOccupied == false)
             yield return board[position.X - 1, position.Y + 1];
-        if(board[position.X + 1, position.Y - 1].IsOccupied == false)
+        if (board[position.X + 1, position.Y - 1].IsOccupied == false)
             yield return board[position.X + 1, position.Y - 1];
-        if(board[position.X + 1, position.Y + 1].IsOccupied == false)
+        if (board[position.X + 1, position.Y + 1].IsOccupied == false)
             yield return board[position.X + 1, position.Y + 1];
-        if(board[position.X - 1, position.Y].IsOccupied == false)
+        if (board[position.X - 1, position.Y].IsOccupied == false)
             yield return board[position.X - 1, position.Y];
-        if(board[position.X + 1, position.Y].IsOccupied == false)
+        if (board[position.X + 1, position.Y].IsOccupied == false)
             yield return board[position.X + 1, position.Y];
-        if(board[position.X, position.Y - 1].IsOccupied == false)
+        if (board[position.X, position.Y - 1].IsOccupied == false)
             yield return board[position.X, position.Y - 1];
-        if(board[position.X, position.Y + 1].IsOccupied == false)
+        if (board[position.X, position.Y + 1].IsOccupied == false)
             yield return board[position.X, position.Y + 1];
     }
 }

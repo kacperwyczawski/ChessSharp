@@ -1,6 +1,8 @@
-﻿namespace ConsoleChess.ChessPieces;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Drawing;
+
+namespace ConsoleChess.ChessPieces;
 
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class Knight : ChessPiece
