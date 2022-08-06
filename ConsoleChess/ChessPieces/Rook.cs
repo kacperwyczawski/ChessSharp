@@ -9,53 +9,51 @@ public sealed class Rook : ChessPiece
     /// <summary>
     /// Initializes a new instance of the <see cref="Rook"/> class.
     /// </summary>
-    /// <param name="color">
-    /// Color of chess piece.
-    /// </param>
-    public Rook(Color color)
-        : base(color)
+    /// <inheritdoc/>
+    public Rook(Color color, Cell position, ChessBoard parentBoard)
+        : base(color, position, parentBoard)
     {
     }
 
     /// <inheritdoc/>
     public override char ToChar() => 'R';
 
-    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    public override IEnumerable<Cell> GetValidMoves()
     {
         // West direction
         // x is decrementing, y is constant
-        for (var i = position.X - 1; i >= 0; i--)
+        for (var i = Position.X - 1; i >= 0; i--)
         {
-            if (board[i, position.Y].IsOccupied)
+            if (ParentBoard[i, Position.Y].IsOccupied)
                 break;
-            yield return board[i, position.Y];
+            yield return ParentBoard[i, Position.Y];
         }
         
         // East direction
         // x is incrementing, y is constant
-        for (var i = position.X + 1; i < 8; i++)
+        for (var i = Position.X + 1; i < 8; i++)
         {
-            if (board[i, position.Y].IsOccupied)
+            if (ParentBoard[i, Position.Y].IsOccupied)
                 break;
-            yield return board[i, position.Y];
+            yield return ParentBoard[i, Position.Y];
         }
         
         // North direction
         // y is decrementing, x is constant
-        for (var i = position.Y - 1; i >= 0; i--)
+        for (var i = Position.Y - 1; i >= 0; i--)
         {
-            if (board[position.X, i].IsOccupied)
+            if (ParentBoard[Position.X, i].IsOccupied)
                 break;
-            yield return board[position.X, i];
+            yield return ParentBoard[Position.X, i];
         }
         
         // South direction
         // y is incrementing, x is constant
-        for (var i = position.Y + 1; i < 8; i++)
+        for (var i = Position.Y + 1; i < 8; i++)
         {
-            if (board[position.X, i].IsOccupied)
+            if (ParentBoard[Position.X, i].IsOccupied)
                 break;
-            yield return board[position.X, i];
+            yield return ParentBoard[Position.X, i];
         }
     }
 }

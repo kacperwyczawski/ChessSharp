@@ -9,49 +9,47 @@ public sealed class King : ChessPiece
     /// <summary>
     /// Initializes a new instance of the <see cref="King"/> class.
     /// </summary>
-    /// <param name="color">
-    /// Color of chess piece.
-    /// </param>
-    public King(Color color)
-        : base(color)
+    /// <inheritdoc/>
+    public King(Color color, Cell position, ChessBoard parentBoard)
+        : base(color, position, parentBoard)
     {
     }
 
     /// <inheritdoc/>
     public override char ToChar() => 'K';
 
-    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    public override IEnumerable<Cell> GetValidMoves()
     {
-        if (position.X - 1 >= 0 && position.Y - 1 >= 0
-            && board[position.X - 1, position.Y - 1].IsOccupied == false)
-            yield return board[position.X - 1, position.Y - 1];
+        if (Position.X - 1 >= 0 && Position.Y - 1 >= 0
+            && ParentBoard[Position.X - 1, Position.Y - 1].IsOccupied == false)
+            yield return ParentBoard[Position.X - 1, Position.Y - 1];
         
-        if (position.X - 1 >= 0 && position.Y + 1 < 8
-            && board[position.X - 1, position.Y + 1].IsOccupied == false)
-            yield return board[position.X - 1, position.Y + 1];
+        if (Position.X - 1 >= 0 && Position.Y + 1 < 8
+            && ParentBoard[Position.X - 1, Position.Y + 1].IsOccupied == false)
+            yield return ParentBoard[Position.X - 1, Position.Y + 1];
         
-        if (position.X + 1 < 8 && position.Y - 1 >= 0
-            && board[position.X + 1, position.Y - 1].IsOccupied == false)
-            yield return board[position.X + 1, position.Y - 1];
+        if (Position.X + 1 < 8 && Position.Y - 1 >= 0
+            && ParentBoard[Position.X + 1, Position.Y - 1].IsOccupied == false)
+            yield return ParentBoard[Position.X + 1, Position.Y - 1];
         
-        if (position.X + 1 < 8 && position.Y + 1 < 8
-            && board[position.X + 1, position.Y + 1].IsOccupied == false)
-            yield return board[position.X + 1, position.Y + 1];
+        if (Position.X + 1 < 8 && Position.Y + 1 < 8
+            && ParentBoard[Position.X + 1, Position.Y + 1].IsOccupied == false)
+            yield return ParentBoard[Position.X + 1, Position.Y + 1];
         
-        if (position.X - 1 >= 0
-            && board[position.X - 1, position.Y].IsOccupied == false)
-            yield return board[position.X - 1, position.Y];
+        if (Position.X - 1 >= 0
+            && ParentBoard[Position.X - 1, Position.Y].IsOccupied == false)
+            yield return ParentBoard[Position.X - 1, Position.Y];
         
-        if (position.X + 1 < 8
-            && board[position.X + 1, position.Y].IsOccupied == false)
-            yield return board[position.X + 1, position.Y];
+        if (Position.X + 1 < 8
+            && ParentBoard[Position.X + 1, Position.Y].IsOccupied == false)
+            yield return ParentBoard[Position.X + 1, Position.Y];
         
-        if (position.Y - 1 >= 0
-            && board[position.X, position.Y - 1].IsOccupied == false)
-            yield return board[position.X, position.Y - 1];
+        if (Position.Y - 1 >= 0
+            && ParentBoard[Position.X, Position.Y - 1].IsOccupied == false)
+            yield return ParentBoard[Position.X, Position.Y - 1];
         
-        if (position.Y + 1 < 8
-            && board[position.X, position.Y + 1].IsOccupied == false)
-            yield return board[position.X, position.Y + 1];
+        if (Position.Y + 1 < 8
+            && ParentBoard[Position.X, Position.Y + 1].IsOccupied == false)
+            yield return ParentBoard[Position.X, Position.Y + 1];
     }
 }

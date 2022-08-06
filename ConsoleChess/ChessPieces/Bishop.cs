@@ -10,53 +10,51 @@ public sealed class Bishop : ChessPiece
     /// <summary>
     /// Initializes a new instance of the <see cref="Bishop"/> class.
     /// </summary>
-    /// <param name="color">
-    /// Color of chess piece.
-    /// </param>
-    public Bishop(Color color)
-        : base(color)
+    /// <inheritdoc/>
+    public Bishop(Color color, Cell position, ChessBoard parentBoard) 
+        : base(color, position, parentBoard)
     {
     }
-
+    
     /// <inheritdoc/>
     public override char ToChar() => 'B';
 
-    public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
+    public override IEnumerable<Cell> GetValidMoves()
     {
         // North-West direction
-        for (int x = position.X - 1, y = position.Y - 1; x >= 0 && y >= 0; x--, y--)
+        for (int x = Position.X - 1, y = Position.Y - 1; x >= 0 && y >= 0; x--, y--)
         {
-            if (board[x, y].IsOccupied)
+            if (ParentBoard[x, y].IsOccupied)
                 break;
 
-            yield return board[x, y];
+            yield return ParentBoard[x, y];
         }
         
         // North-East direction
-        for (int x = position.X + 1, y = position.Y - 1; x <= 7 && y >= 0; x++, y--)
+        for (int x = Position.X + 1, y = Position.Y - 1; x <= 7 && y >= 0; x++, y--)
         {
-            if (board[x, y].IsOccupied)
+            if (ParentBoard[x, y].IsOccupied)
                 break;
 
-            yield return board[x, y];
+            yield return ParentBoard[x, y];
         }
         
         // South-West direction
-        for (int x = position.X - 1, y = position.Y + 1; x >= 0 && y <= 7; x--, y++)
+        for (int x = Position.X - 1, y = Position.Y + 1; x >= 0 && y <= 7; x--, y++)
         {
-            if (board[x, y].IsOccupied)
+            if (ParentBoard[x, y].IsOccupied)
                 break;
 
-            yield return board[x, y];
+            yield return ParentBoard[x, y];
         }
         
         // South-East direction
-        for (int x = position.X + 1, y = position.Y + 1; x <= 7 && y <= 7; x++, y++)
+        for (int x = Position.X + 1, y = Position.Y + 1; x <= 7 && y <= 7; x++, y++)
         {
-            if (board[x, y].IsOccupied)
+            if (ParentBoard[x, y].IsOccupied)
                 break;
 
-            yield return board[x, y];
+            yield return ParentBoard[x, y];
         }
     }
 }
