@@ -46,6 +46,18 @@ public abstract class ChessPiece
     /// Gets color of chess piece.
     /// </summary>
     public Color Color { get; }
+    
+    
+    /// <summary>
+    /// Gets or sets cell on which chess piece is located.
+    /// </summary>
+    public Cell Position { get; set; }
+    
+    
+    /// <summary>
+    /// Gets board on which chess piece is located.
+    /// </summary>
+    public ChessBoard ParentBoard { get; }
 
     /// <summary>
     /// Converts chess piece to it's <see cref="char"/> representation.
@@ -55,5 +67,5 @@ public abstract class ChessPiece
     /// </returns>
     public abstract char ToChar();
     
-    public abstract IEnumerable<Cell> GetValidMoves (Cell position, ChessBoard board);
+    public abstract IEnumerable<Cell> GetValidMoves ();
 }
