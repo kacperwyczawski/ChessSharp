@@ -20,24 +20,6 @@ public sealed class King : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'K';
 
-    /// <inheritdoc/>
-    public override bool ValidateMove(Cell from, Cell to, ChessBoard board) =>
-
-        // vertical
-        ((from.X - 1 == to.X && from.Y - 1 == to.Y) ||
-         (from.X - 1 == to.X && from.Y + 1 == to.Y) ||
-         (from.X + 1 == to.X && from.Y - 1 == to.Y) ||
-         (from.X + 1 == to.X && from.Y + 1 == to.Y) ||
-
-         // diagonal / horizontal
-         (from.X - 1 == to.X && from.Y == to.Y) ||
-         (from.X + 1 == to.X && from.Y == to.Y) ||
-         (from.Y - 1 == to.Y && from.X == to.X) ||
-         (from.Y + 1 == to.Y && from.X == to.X)) &&
-
-        // destination must be empty
-        to.IsOccupied == false;
-
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
         if (position.X - 1 >= 0 && position.Y - 1 >= 0

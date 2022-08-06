@@ -21,15 +21,6 @@ public sealed class Pawn : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'P';
 
-    /// <inheritdoc/>
-    [Obsolete("Use GetValidMoves method instead.")]
-    public override bool ValidateMove(Cell from, Cell to, ChessBoard board) =>
-        ((from.X == to.X && from.Y - 1 == to.Y && Color == Color.White) || // regular move (when white)
-         (from.X == to.X && from.Y + 1 == to.Y && Color == Color.Black) || // regular move (when black)
-         (from.X == to.X && from.Y == 6 && to.Y == 4 && Color == Color.White) || // first move (when white)
-         (from.X == to.X && from.Y == 1 && to.Y == 3 && Color == Color.Black)) && // first move (when black)
-        to.IsOccupied == false;
-
     public override IEnumerable<Cell> GetValidMoves(Cell position, ChessBoard board)
     {
         if (Color == Color.White)

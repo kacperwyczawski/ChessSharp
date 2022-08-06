@@ -54,16 +54,6 @@ public abstract class ChessPiece
     /// The <see cref="char"/> representation of object.
     /// </returns>
     public abstract char ToChar();
-
-    /// <summary>
-    /// Checks if move is valid.
-    /// </summary>
-    /// <param name="from">starting index.</param>
-    /// <param name="to">target index.</param>
-    /// <param name="board">parent board.</param>
-    /// <returns>True when move is valid, false when not.</returns>
-    [Obsolete($"Use {nameof(GetValidMoves)} method instead.")]
-    public abstract bool ValidateMove(Cell from, Cell to, ChessBoard board);
     
     public abstract IEnumerable<Cell> GetValidMoves (Cell position, ChessBoard board);
 }
