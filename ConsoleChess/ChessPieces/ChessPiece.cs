@@ -37,9 +37,17 @@ public abstract class ChessPiece
     /// <param name="color">
     /// Color of chess piece.
     /// </param>
-    public ChessPiece(Color color)
+    /// <param name="position">
+    /// Cell on which chess piece is placed.
+    /// </param>
+    /// <param name="parentBoard">
+    /// Board on which chess piece is located.
+    /// </param>
+    public ChessPiece(Color color, Cell position, ChessBoard parentBoard)
     {
         Color = color;
+        Position = position;
+        ParentBoard = parentBoard;
     }
 
     /// <summary>
