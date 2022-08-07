@@ -27,7 +27,7 @@ public class ChessBoard
         {
             for (var j = 0; j < 8; j++)
             {
-                this[i, j] = new Cell(i, j);
+                this[i, j] = new Cell(i, j, this);
             }
         }
 
