@@ -15,12 +15,14 @@ public class Cell
     
     public ChessPiece? Piece { get; set; }
     
+    private ChessBoard _parentBoard;
+    
     public bool IsOccupied => Piece is not null;
 
-    public Cell(int x, int y, ChessPiece? piece = null)
+    public Cell(int x, int y, ChessBoard parentBoard)
     {
         X = x;
         Y = y;
-        Piece = piece;
+        _parentBoard = parentBoard;
     }
 }
