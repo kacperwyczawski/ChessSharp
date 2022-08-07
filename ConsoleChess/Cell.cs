@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
+using System.Drawing;
 using ConsoleChess.ChessPieces;
 
 namespace ConsoleChess;
@@ -13,7 +14,7 @@ public class Cell
     [Range(0, 7)]
     public int Y { get; }
     
-    public ChessPiece? Piece { get; set; }
+    public ChessPiece? Piece { get; private set; }
     
     private ChessBoard _parentBoard;
     
@@ -24,5 +25,15 @@ public class Cell
         X = x;
         Y = y;
         _parentBoard = parentBoard;
+    }
+
+    public void SetPiece<T>(Color color) where T : ChessPiece
+    {
+        Piece = (T?)Activator.CreateInstance(typeof(T), color, this, _parentBoard);
+    }
+    
+    public void RemovePiece()
+    {
+        Piece = null;
     }
 }
