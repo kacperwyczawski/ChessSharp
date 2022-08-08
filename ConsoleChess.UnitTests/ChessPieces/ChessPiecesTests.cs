@@ -24,7 +24,7 @@ public class ChessPiecesTests
         foreach (var cell in obstacleCells)
             cell.Piece = new Pawn(Color.White);
 
-        Assert.That(piece.GetValidMoves(position, Board), Is.EquivalentTo(expectedValidMoves));
+        Assert.That(piece.GetValidMoves(), Is.EquivalentTo(expectedValidMoves));
     }
 
     private static IEnumerable GetValidMovesTestCases

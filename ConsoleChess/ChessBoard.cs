@@ -119,7 +119,7 @@ public class ChessBoard
             throw new Exception("There is no piece on given position.");
 
         // check if move is invalid
-        if (currentPiece.GetValidMoves(from, this).Contains(to))
+        if (currentPiece.GetValidMoves().Contains(to))
         {
             // move piece
             to.Piece = currentPiece;
