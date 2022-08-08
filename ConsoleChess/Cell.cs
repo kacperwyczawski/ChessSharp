@@ -14,7 +14,7 @@ public class Cell
     [Range(0, 7)]
     public int Y { get; }
     
-    public ChessPiece? Piece { get; private set; }
+    public ChessPiece? Piece { get; set; }
     
     private ChessBoard _parentBoard;
     
@@ -27,7 +27,7 @@ public class Cell
         _parentBoard = parentBoard;
     }
 
-    public void SetPiece<T>(Color color) where T : ChessPiece
+    public void CreateAndSetPiece<T>(Color color) where T : ChessPiece
     {
         Piece = (T?)Activator.CreateInstance(typeof(T), color, this, _parentBoard);
     }
