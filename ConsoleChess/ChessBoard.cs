@@ -130,8 +130,7 @@ public class ChessBoard
             throw new Exception("Invalid move");
         }
     }
-
-    #region Convertion Methods
+    
     /// <summary>
     /// Converts <see cref="ChessBoard"/> to an array of <see cref="char"/> representing chess pieces.
     /// </summary>
@@ -153,24 +152,4 @@ public class ChessBoard
 
         return charArray;
     }
-
-    /// <summary>
-    /// Converts <see cref="ChessBoard"/> to an array of <see cref="ChessPiece"/>.
-    /// </summary>
-    /// <returns>An array of <see cref="ChessPiece"/>.</returns>
-    public ChessPiece?[,] ToChessPiecesArray()
-    {
-        var chessPieceArray = new ChessPiece?[8, 8];
-
-        for (var i = 0; i < 8; i++)
-        {
-            for (var j = 0; j < 8; j++)
-            {
-                chessPieceArray[j, i] = this[i, j].Piece;
-            }
-        }
-
-        return chessPieceArray;
-    }
-    #endregion
 }
