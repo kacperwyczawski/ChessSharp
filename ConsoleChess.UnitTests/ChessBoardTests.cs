@@ -29,7 +29,7 @@ public class ChessBoardTests
     {
         // Arrange
         ChessBoard chessBoard = new();
-        Knight knight = new(Color.White);
+        Knight knight = new(Color.White, chessBoard[1, 1], chessBoard);
 
         // Act
         chessBoard[3, 3].Piece = knight;
@@ -40,7 +40,7 @@ public class ChessBoardTests
         {
             Assert.That(chessBoard[3, 3].Piece, Is.EqualTo(knight));
             Assert.That(chessBoard[0, 0].Piece, Is.EqualTo(null));
-            Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black)));
+            Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black, chessBoard[1, 1], chessBoard)));
         });
     }
 
@@ -58,10 +58,10 @@ public class ChessBoardTests
         Assert.Multiple(() =>
         {
             Assert.That(board[0, 6].Piece, Is.EqualTo(null));
-            Assert.That(board[0, 4].Piece, Is.EqualTo(new Pawn(Color.White)));
+            Assert.That(board[0, 4].Piece, Is.EqualTo(new Pawn(Color.White, board[0, 4], board)));
             
             Assert.That(board[6, 0].Piece, Is.EqualTo(null));
-            Assert.That(board[5, 2].Piece, Is.EqualTo(new Knight(Color.Black)));
+            Assert.That(board[5, 2].Piece, Is.EqualTo(new Knight(Color.Black, board[5, 2], board)));
         });
     }
 }
