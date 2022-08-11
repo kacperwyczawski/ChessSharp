@@ -50,7 +50,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.White, Board[4, 4], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 new[] { Board[4, 3] }
             ).SetName("{m} White pawn 4, 4 with obstacle in 4, 3");
             
@@ -66,7 +66,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.White, Board[4, 6], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 new[] { Board[4, 5] }
             ).SetName("{m} White pawn 4, 6 with obstacle in 4, 5");
             
@@ -82,7 +82,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.White, Board[0, 0], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 Array.Empty<Cell>()
             ).SetName("{m} White pawn 0, 0");
             
@@ -98,7 +98,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.Black, Board[4, 4], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 new[] { Board[4, 5] }
             ).SetName("{m} Black pawn 4, 4 with obstacle in 4, 5");
             
@@ -114,7 +114,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.Black, Board[4, 1], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 new[] { Board[4, 2] }
             ).SetName("{m} Black pawn 4, 1 with obstacle in 4, 2");
             
@@ -130,7 +130,7 @@ public class ChessPiecesTests
             yield return new TestCaseData
             (
                 new Pawn(Color.Black, Board[0, 7], Board),
-                new List<Cell>(),
+                Enumerable.Empty<Cell>(),
                 Array.Empty<Cell>()
             ).SetName("{m} Black pawn 0, 7");
             
