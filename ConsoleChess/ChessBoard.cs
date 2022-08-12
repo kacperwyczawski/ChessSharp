@@ -103,29 +103,26 @@ public class ChessBoard
         get => _boardArray[y, x];
         private init => _boardArray[y, x] = value;
     }
-
-    public void MovePiece(Cell from, Cell to)
+    public void MovePiece(ChessPiece piece, Cell to)
     {
-        // if move is to the same position, do nothing
-        if (ReferenceEquals(from, to))
-            return;
-
-        var currentPiece = from.Piece;
-
-        // check if piece to move does not exist
-        if (currentPiece is null)
-            throw new Exception("There is no piece on given position.");
-
-        // check if move is invalid
-        if (currentPiece.GetValidMoves().Contains(to))
+        try
         {
-            // move piece
-            to.Piece = currentPiece;
-            from.RemovePiece();
+            piece
+                // Get valid moves for this piece
+                // returns: IEnumerable<Move>
+                .GetValidMoves()
+                // get valid move where destination match destination passed as parameter
+                // if no matching move is found, InvalidOperationException will be thrown by First method
+                // returns: Move
+                // -- or --
+                // throws: InvalidOperationException
+                .First(m => m.Destination == to)
+                // if exception is not thrown, execute move
+                .ExecuteMove();
         }
-        else
+        catch (InvalidOperationException)
         {
-            throw new Exception("Invalid move");
+            throw new Exception("Invalid move.");
         }
     }
     
