@@ -73,5 +73,5 @@ public abstract class ChessPiece
     /// </returns>
     public abstract char ToChar();
     
-    public abstract IEnumerable<Cell> GetValidMoves ();
+    public abstract IEnumerable<Move> GetValidMoves ();
 }
