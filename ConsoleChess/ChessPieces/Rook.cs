@@ -17,42 +17,79 @@ public sealed class Rook : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'R';
 
-    public override IEnumerable<Cell> GetValidMoves()
+    /// <inheritdoc/>
+    public override IEnumerable<Move> GetValidMoves()
     {
         // West direction
         // x is decrementing, y is constant
-        for (var i = Position.X - 1; i >= 0; i--)
+        for (var currentX = Position.X - 1; currentX >= 0; currentX--)
         {
-            if (ParentBoard[i, Position.Y].IsOccupied)
+            if (ParentBoard[currentX, Position.Y].IsOccupied)
+            {
+                yield return new Move(
+                    ParentBoard[currentX, Position.Y],
+                    Position,
+                    ParentBoard[currentX, Position.Y]);
                 break;
-            yield return ParentBoard[i, Position.Y];
+            }
+            yield return new Move(
+                ParentBoard[currentX, Position.Y],
+                Position,
+                null);
         }
         
         // East direction
         // x is incrementing, y is constant
-        for (var i = Position.X + 1; i < 8; i++)
+        for (var currentX = Position.X + 1; currentX < 8; currentX++)
         {
-            if (ParentBoard[i, Position.Y].IsOccupied)
+            if (ParentBoard[currentX, Position.Y].IsOccupied)
+            {
+                yield return new Move(
+                    ParentBoard[currentX, Position.Y],
+                    Position,
+                    ParentBoard[currentX, Position.Y]);
                 break;
-            yield return ParentBoard[i, Position.Y];
+            }
+            yield return new Move(
+                ParentBoard[currentX, Position.Y],
+                Position,
+                null);
         }
         
         // North direction
         // y is decrementing, x is constant
-        for (var i = Position.Y - 1; i >= 0; i--)
+        for (var currentY = Position.Y - 1; currentY >= 0; currentY--)
         {
-            if (ParentBoard[Position.X, i].IsOccupied)
+            if (ParentBoard[Position.X, currentY].IsOccupied)
+            {
+                yield return new Move(
+                    ParentBoard[Position.X, currentY],
+                    Position,
+                    ParentBoard[Position.X, currentY]);
                 break;
-            yield return ParentBoard[Position.X, i];
+            }
+            yield return new Move(
+                ParentBoard[Position.X, currentY],
+                Position,
+                null);
         }
         
         // South direction
         // y is incrementing, x is constant
-        for (var i = Position.Y + 1; i < 8; i++)
+        for (var currentY = Position.Y + 1; currentY < 8; currentY++)
         {
-            if (ParentBoard[Position.X, i].IsOccupied)
+            if (ParentBoard[Position.X, currentY].IsOccupied)
+            {
+                yield return new Move(
+                    ParentBoard[Position.X, currentY],
+                    Position,
+                    ParentBoard[Position.X, currentY]);
                 break;
-            yield return ParentBoard[Position.X, i];
+            }
+            yield return new Move(
+                ParentBoard[Position.X, currentY],
+                Position,
+                null);
         }
     }
 }
