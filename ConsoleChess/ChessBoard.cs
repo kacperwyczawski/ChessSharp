@@ -116,7 +116,7 @@ public class ChessBoard
                 // returns: Move
                 // -- or --
                 // throws: InvalidOperationException
-                .First(m => m.Destination == to)
+                .First(m => m.DestinationCell == to)
                 // if exception is not thrown, execute move
                 .ExecuteMove();
         }
