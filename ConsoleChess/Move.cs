@@ -9,13 +9,13 @@ namespace ConsoleChess;
 public readonly struct Move
 {
     public readonly Cell DestinationCell;
-    
+
     private readonly Cell _sourceCell;
-    
+
     private readonly Cell _captureCell;
-    
+
     public bool IsCapture => _captureCell.IsOccupied;
-    
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Move"/> struct.
     /// </summary>
@@ -60,13 +60,13 @@ public readonly struct Move
                               + @"(?<destination>[0-7],[0-7])" // n,n (destination cell)
                               + @"\s?x\s?" // x (optionally surrounded by spaces)
                               + @"(?<capture>[0-7],[0-7])?$"); // n,n (capture cell)
-        
+
         var match = regex.Match(moveString);
-        
+
         // throw exception if move string is invalid
         if (!match.Success)
             throw new ArgumentException("Invalid move string", nameof(moveString));
-        
+
         var sourceCell = board[
             int.Parse(match.Groups["source"].Value[0].ToString()),
             int.Parse(match.Groups["source"].Value[2].ToString())];
@@ -78,7 +78,7 @@ public readonly struct Move
                 int.Parse(match.Groups["capture"].Value[0].ToString()),
                 int.Parse(match.Groups["capture"].Value[2].ToString())]
             : destinationCell;
-        
+
         DestinationCell = destinationCell;
         _sourceCell = sourceCell;
         _captureCell = captureCell;
@@ -88,10 +88,10 @@ public readonly struct Move
     {
         // Move piece to destination
         DestinationCell.Piece = _sourceCell.Piece;
-        
+
         // Remove piece from source
         _sourceCell.Piece = null;
-        
+
         // If there is a capture, remove the captured piece
         _captureCell.RemovePiece();
     }
