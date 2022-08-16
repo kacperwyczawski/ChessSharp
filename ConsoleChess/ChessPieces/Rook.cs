@@ -24,72 +24,48 @@ public sealed class Rook : ChessPiece
         // x is decrementing, y is constant
         for (var currentX = Position.X - 1; currentX >= 0; currentX--)
         {
+            // return new move
+            yield return new Move(ParentBoard[currentX, Position.Y], Position);
+            
+            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
             if (ParentBoard[currentX, Position.Y].IsOccupied)
-            {
-                yield return new Move(
-                    ParentBoard[currentX, Position.Y],
-                    Position,
-                    ParentBoard[currentX, Position.Y]);
                 break;
-            }
-            yield return new Move(
-                ParentBoard[currentX, Position.Y],
-                Position,
-                null);
         }
         
         // East direction
         // x is incrementing, y is constant
         for (var currentX = Position.X + 1; currentX < 8; currentX++)
         {
+            // return new move
+            yield return new Move(ParentBoard[currentX, Position.Y], Position);
+            
+            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
             if (ParentBoard[currentX, Position.Y].IsOccupied)
-            {
-                yield return new Move(
-                    ParentBoard[currentX, Position.Y],
-                    Position,
-                    ParentBoard[currentX, Position.Y]);
                 break;
-            }
-            yield return new Move(
-                ParentBoard[currentX, Position.Y],
-                Position,
-                null);
         }
         
         // North direction
         // y is decrementing, x is constant
         for (var currentY = Position.Y - 1; currentY >= 0; currentY--)
         {
+            // return new move
+            yield return new Move(ParentBoard[Position.X, currentY], Position);
+            
+            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
             if (ParentBoard[Position.X, currentY].IsOccupied)
-            {
-                yield return new Move(
-                    ParentBoard[Position.X, currentY],
-                    Position,
-                    ParentBoard[Position.X, currentY]);
                 break;
-            }
-            yield return new Move(
-                ParentBoard[Position.X, currentY],
-                Position,
-                null);
         }
         
         // South direction
         // y is incrementing, x is constant
         for (var currentY = Position.Y + 1; currentY < 8; currentY++)
         {
+            // return new move
+            yield return new Move(ParentBoard[Position.X, currentY], Position);
+            
+            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
             if (ParentBoard[Position.X, currentY].IsOccupied)
-            {
-                yield return new Move(
-                    ParentBoard[Position.X, currentY],
-                    Position,
-                    ParentBoard[Position.X, currentY]);
                 break;
-            }
-            yield return new Move(
-                ParentBoard[Position.X, currentY],
-                Position,
-                null);
         }
     }
 }
