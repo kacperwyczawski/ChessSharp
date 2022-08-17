@@ -10,6 +10,8 @@ public readonly struct Move
 {
     public readonly Cell DestinationCell;
 
+    public static readonly ChessBoard? Board;
+
     private readonly Cell _sourceCell;
 
     private readonly Cell _captureCell;
@@ -45,12 +47,12 @@ public readonly struct Move
     /// "1,2 > 1,4" - move piece from cell 1,2 to 1,4 and capture piece on 1,4
     /// note: spaces are optional
     /// </param>
-    /// <param name="board">
-    /// board on which move is performed
-    /// has to be provided to get cells
-    /// </param>
-    public Move(string moveString, ChessBoard board)
+    public Move(string moveString)
     {
+        if (Board == null)
+            throw new ArgumentException($"You have to set {nameof(Board)} " +
+                                        "property before creating moves with this constructor");
+
         // regex for move string
         // can be: "n,n > n,n x n,n" or "n,n > n,n"
         // where n is number between 0 and 7
@@ -67,14 +69,14 @@ public readonly struct Move
         if (!match.Success)
             throw new ArgumentException("Invalid move string", nameof(moveString));
 
-        var sourceCell = board[
+        var sourceCell = Board[
             int.Parse(match.Groups["source"].Value[0].ToString()),
             int.Parse(match.Groups["source"].Value[2].ToString())];
-        var destinationCell = board[
+        var destinationCell = Board[
             int.Parse(match.Groups["destination"].Value[0].ToString()),
             int.Parse(match.Groups["destination"].Value[2].ToString())];
         var captureCell = match.Groups["capture"].Success
-            ? board[
+            ? Board[
                 int.Parse(match.Groups["capture"].Value[0].ToString()),
                 int.Parse(match.Groups["capture"].Value[2].ToString())]
             : destinationCell;
