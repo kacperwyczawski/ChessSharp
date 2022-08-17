@@ -10,7 +10,7 @@ public readonly struct Move
 {
     public readonly Cell DestinationCell;
 
-    public static readonly ChessBoard? Board;
+    public static readonly ChessBoard? Board = null;
 
     private readonly Cell _sourceCell;
 
