@@ -61,7 +61,7 @@ public readonly struct Move
                               + @"\s?>\s?" // > (optionally surrounded by spaces)
                               + @"(?<destination>[0-7],[0-7])" // n,n (destination cell)
                               + @"\s?x\s?" // x (optionally surrounded by spaces)
-                              + @"(?<capture>[0-7],[0-7])?$"); // n,n (capture cell)
+                              + @"(?<capture>[0-7],[0-7])?$"); // n,n (capture cell)(optional)
 
         var match = regex.Match(moveString);
 
