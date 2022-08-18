@@ -69,6 +69,9 @@ public readonly struct Move
     /// </param>
     public Move(string moveString)
     {
+        // TODO: adjust this to match 5990accba2883566ea9cd162e9b64d03bb27a0ce commit
+        // TODO: move string should still have option to omit capture cell if it is on destination cell
+        // TODO: but should also accept null as capture cell when there is no capture cell
         if (Board == null)
             throw new ArgumentException($"You have to set {nameof(Board)} " +
                                         "property before creating moves with this constructor");
