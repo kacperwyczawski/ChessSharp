@@ -14,12 +14,30 @@ public readonly struct Move
 
     private readonly Cell _sourceCell;
 
-    private readonly Cell _captureCell;
+    private readonly Cell? _captureCell;
 
-    public bool IsCapture => _captureCell.IsOccupied;
+    public bool IsCapture => _captureCell?.IsOccupied ?? false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Move"/> struct.
+    /// This constructor is recommended for most cases.
+    /// </summary>
+    /// <param name="destinationAndCaptureCell">
+    /// cell on which piece is moving and cell on which enemy piece is captured
+    /// </param>
+    /// <param name="sourceCell">
+    /// cell from which piece is moving
+    /// </param>
+    public Move(Cell destinationAndCaptureCell, Cell sourceCell)
+    {
+        _sourceCell = sourceCell;
+        _captureCell = DestinationCell = destinationAndCaptureCell;
+    }
+    
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Move"/> struct.
+    /// This constructor is recommended for specific cases
+    /// when move doesn't have a capture cell or it is not in destination.
     /// </summary>
     /// <param name="destinationCell">
     /// cell on which piece is moving
@@ -28,13 +46,15 @@ public readonly struct Move
     /// cell from which piece is moving
     /// </param>
     /// <param name="captureCell">
-    /// cell on which piece is captured (if null or not specified, capture is on destination cell)
+    /// cell on which enemy piece is captured
+    /// (if null, then no capture but remember that even move to empty cell have it's capture cell)
+    /// (null here is used for example when pawn is moving forward without capture)
     /// </param>
-    public Move(Cell destinationCell, Cell sourceCell, Cell? captureCell = null)
+    public Move(Cell destinationCell, Cell sourceCell, Cell? captureCell)
     {
         DestinationCell = destinationCell;
         _sourceCell = sourceCell;
-        _captureCell = captureCell ?? destinationCell;
+        _captureCell = captureCell;
     }
 
     /// <summary>
