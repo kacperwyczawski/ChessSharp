@@ -84,6 +84,9 @@ public readonly struct Move
         // [3] "a,a > a,a n"
         // where a is number between 0 and 7
         
+        // ✨ and here is over complicated way to match this and get values ✨
+        // probably i should match each case separately and at the end if no match found throw exception
+        
         // also this regex match [4] "a,a > a,a n a,a" but last cell is anyway ignored.
         // Why? I don't know how to write proper regex.
         var regex = new Regex(@"^(?<source>[0-7],[0-7])" // a,a (source cell)
@@ -99,8 +102,7 @@ public readonly struct Move
         // throw exception if move string is invalid
         if (!match.Success)
             throw new ArgumentException("Invalid move string", nameof(moveString));
-
-        // ✨ and here is over complicated way to get values from match ✨
+        
         var sourceCell = Board[
             int.Parse(match.Groups["source"].Value[0].ToString()),
             int.Parse(match.Groups["source"].Value[2].ToString())];
