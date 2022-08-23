@@ -17,38 +17,70 @@ public sealed class King : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'K';
 
-    public override IEnumerable<Cell> GetValidMoves()
+    public override IEnumerable<Move> GetValidMoves()
     {
-        if (Position.X - 1 >= 0 && Position.Y - 1 >= 0
-            && ParentBoard[Position.X - 1, Position.Y - 1].IsOccupied == false)
-            yield return ParentBoard[Position.X - 1, Position.Y - 1];
+        // North
+        if (Position.Y - 1 >= 0)
+        {
+            yield return new Move(
+                ParentBoard[Position.X, Position.Y - 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.X - 1 >= 0 && Position.Y + 1 < 8
-            && ParentBoard[Position.X - 1, Position.Y + 1].IsOccupied == false)
-            yield return ParentBoard[Position.X - 1, Position.Y + 1];
+        // North-East
+        if (Position.X + 1 < 8 && Position.Y - 1 >= 0)
+        {
+            yield return new Move(
+                ParentBoard[Position.X + 1, Position.Y - 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.X + 1 < 8 && Position.Y - 1 >= 0
-            && ParentBoard[Position.X + 1, Position.Y - 1].IsOccupied == false)
-            yield return ParentBoard[Position.X + 1, Position.Y - 1];
+        // East
+        if (Position.X + 1 < 8)
+        {
+            yield return new Move(
+                ParentBoard[Position.X + 1, Position.Y],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.X + 1 < 8 && Position.Y + 1 < 8
-            && ParentBoard[Position.X + 1, Position.Y + 1].IsOccupied == false)
-            yield return ParentBoard[Position.X + 1, Position.Y + 1];
+        // South-East
+        if (Position.X + 1 < 8 && Position.Y + 1 < 8)
+        {
+            yield return new Move(
+                ParentBoard[Position.X + 1, Position.Y + 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.X - 1 >= 0
-            && ParentBoard[Position.X - 1, Position.Y].IsOccupied == false)
-            yield return ParentBoard[Position.X - 1, Position.Y];
+        // South
+        if (Position.Y + 1 < 8)
+        {
+            yield return new Move(
+                ParentBoard[Position.X, Position.Y + 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.X + 1 < 8
-            && ParentBoard[Position.X + 1, Position.Y].IsOccupied == false)
-            yield return ParentBoard[Position.X + 1, Position.Y];
+        // South-West
+        if (Position.X - 1 >= 0 && Position.Y + 1 < 8)
+        {
+            yield return new Move(
+                ParentBoard[Position.X - 1, Position.Y + 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.Y - 1 >= 0
-            && ParentBoard[Position.X, Position.Y - 1].IsOccupied == false)
-            yield return ParentBoard[Position.X, Position.Y - 1];
+        // West
+        if (Position.X - 1 >= 0)
+        {
+            yield return new Move(
+                ParentBoard[Position.X - 1, Position.Y],
+                ParentBoard[Position.X, Position.Y]);
+        }
         
-        if (Position.Y + 1 < 8
-            && ParentBoard[Position.X, Position.Y + 1].IsOccupied == false)
-            yield return ParentBoard[Position.X, Position.Y + 1];
+        // North-West
+        if (Position.X - 1 >= 0 && Position.Y - 1 >= 0)
+        {
+            yield return new Move(
+                ParentBoard[Position.X - 1, Position.Y - 1],
+                ParentBoard[Position.X, Position.Y]);
+        }
     }
 }
