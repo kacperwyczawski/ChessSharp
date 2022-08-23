@@ -17,27 +17,23 @@ public sealed class Knight : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'N';
 
-    public override IEnumerable<Cell> GetValidMoves()
+    public override IEnumerable<Move> GetValidMoves()
     {
-        List<Cell> validCells = new();
-
-        if(Position.X - 1 >= 0 && Position.Y - 2 >= 0)
-            validCells.Add(ParentBoard[Position.X - 1, Position.Y - 2]);
+        if (Position.X - 1 >= 0 && Position.Y - 2 >= 0)
+            yield return new Move(ParentBoard[Position.X - 1, Position.Y - 2], Position);
         if(Position.X + 1 <= 7 && Position.Y - 2 >= 0)
-            validCells.Add(ParentBoard[Position.X + 1, Position.Y - 2]);
+            yield return new Move(ParentBoard[Position.X + 1, Position.Y - 2], Position);
         if(Position.X + 2 <= 7 && Position.Y - 1 >= 0)
-            validCells.Add(ParentBoard[Position.X + 2, Position.Y - 1]);
+            yield return new Move(ParentBoard[Position.X + 2, Position.Y - 1], Position);
         if(Position.X + 2 <= 7 && Position.Y + 1 <= 7)
-            validCells.Add(ParentBoard[Position.X + 2, Position.Y + 1]);
+            yield return new Move(ParentBoard[Position.X + 2, Position.Y + 1], Position);
         if(Position.X + 1 <= 7 && Position.Y + 2 <= 7)
-            validCells.Add(ParentBoard[Position.X + 1, Position.Y + 2]);
+            yield return new Move(ParentBoard[Position.X + 1, Position.Y + 2], Position);
         if(Position.X - 1 >= 0 && Position.Y + 2 <= 7)
-            validCells.Add(ParentBoard[Position.X - 1, Position.Y + 2]);
+            yield return new Move(ParentBoard[Position.X - 1, Position.Y + 2], Position);
         if(Position.X - 2 >= 0 && Position.Y + 1 <= 7)
-            validCells.Add(ParentBoard[Position.X - 2, Position.Y + 1]);
+            yield return new Move(ParentBoard[Position.X - 2, Position.Y + 1], Position);
         if(Position.X - 2 >= 0 && Position.Y - 1 >= 0)
-            validCells.Add(ParentBoard[Position.X - 2, Position.Y - 1]);
-
-        return validCells.Where(cell => !cell.IsOccupied);
+            yield return new Move(ParentBoard[Position.X - 2, Position.Y - 1], Position);
     }
 }
