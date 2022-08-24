@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ConsoleChess;
+namespace ChessCs.Core;
 
 /// <summary>
 /// represents a valid move for a piece

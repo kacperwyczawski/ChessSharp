@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Drawing;
 
-using ConsoleChess.ChessPieces;
+using ChessCs.Core.ChessPieces;
 
-namespace ConsoleChess.UnitTests.ChessPieces;
+namespace ChessCs.Core.UnitTests.ChessPieces;
 
 public class ChessPiecesTests
 {

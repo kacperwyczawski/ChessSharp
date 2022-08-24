@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ConsoleChess.ChessPieces;
+namespace ChessCs.Core.ChessPieces;
 
 /// <summary>
 /// Represents single chess piece.

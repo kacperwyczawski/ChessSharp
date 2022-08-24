@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleChess", "ConsoleChess\ConsoleChess.csproj", "{3BE2A6A4-9906-4BEA-A6E4-4B23E0C3B6AC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessCs.Core", "ChessCs.Core\ChessCs.Core.csproj", "{3BE2A6A4-9906-4BEA-A6E4-4B23E0C3B6AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleChess.UnitTests", "ConsoleChess.UnitTests\ConsoleChess.UnitTests.csproj", "{CC159D8B-A828-4801-948B-CD5E072357A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessCs.Core.UnitTests", "ChessCs.Core.UnitTests\ChessCs.Core.UnitTests.csproj", "{CC159D8B-A828-4801-948B-CD5E072357A3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

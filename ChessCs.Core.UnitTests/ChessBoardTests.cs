@@ -1,6 +1,6 @@
-﻿namespace ConsoleChess.UnitTests;
+﻿namespace ChessCs.Core.UnitTests;
 
-using ConsoleChess.ChessPieces;
+using ChessCs.Core.ChessPieces;
 using System.Drawing;
 
 public class ChessBoardTests

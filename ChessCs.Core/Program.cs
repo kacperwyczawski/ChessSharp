@@ -1,4 +1,4 @@
-﻿namespace ConsoleChess;
+﻿namespace ChessCs.Core;
 
 /// <summary>
 /// The main Program class.

@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ConsoleChess\ConsoleChess.csproj" />
+      <ProjectReference Include="..\ChessCs.Core\ChessCs.Core.csproj" />
     </ItemGroup>
 
 </Project>
