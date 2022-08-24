@@ -1,6 +1,6 @@
-﻿namespace ChessCs.Core.UnitTests;
+﻿namespace ChessSharp.Core.UnitTests;
 
-using ChessCs.Core.ChessPieces;
+using ChessSharp.Core.ChessPieces;
 using System.Drawing;
 
 public class ChessBoardTests

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ChessCs.Core;
+namespace ChessSharp.Core;
 
 using ChessPieces;
 

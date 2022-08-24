@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace ChessCs.Core.ChessPieces;
+namespace ChessSharp.Core.ChessPieces;
 
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class King : ChessPiece

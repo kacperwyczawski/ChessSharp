@@ -1,4 +1,4 @@
-﻿namespace ChessCs.Core;
+﻿namespace ChessSharp.Core;
 
 /// <summary>
 /// The main Program class.

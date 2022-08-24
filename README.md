@@ -1,4 +1,4 @@
-# ♟️ Chess.cs
+# ♟️ ChessSharp
 
 ![GitHub](https://img.shields.io/github/license/kacperwyczawski/ConsoleChess)
 

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Drawing;
-using ChessCs.Core.ChessPieces;
+using ChessSharp.Core.ChessPieces;
 
-namespace ChessCs.Core;
+namespace ChessSharp.Core;
 
 [DebuggerDisplay("(Cell {X},{Y}) with {Piece}")]
 public class Cell
