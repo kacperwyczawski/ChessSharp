@@ -17,80 +17,94 @@ public sealed class Queen : ChessPiece
     /// <inheritdoc/>
     public override char ToChar() => 'Q';
 
-    public override IEnumerable<Cell> GetValidMoves()
+    public override IEnumerable<Move> GetValidMoves()
     {
         // Combined mechanics of rook and bishop
         
-        // North direction
+        // North
         // y is decrementing, x is constant
-        for (var y = Position.Y - 1; y >= 0; y--)
+        for (var currentY = Position.Y - 1; currentY >= 0; currentY--)
         {
-            if (ParentBoard[Position.X, y].IsOccupied)
+            // return new move
+            yield return new Move(ParentBoard[Position.X, currentY], Position);
+            
+            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
+            if (ParentBoard[Position.X, currentY].IsOccupied)
                 break;
-            yield return ParentBoard[Position.X, y];
         }
         
-        // North-East direction
-        // x is incrementing, y is decrementing
+        // North-East
+        // y is decrementing, x is incrementing
         for (int x = Position.X + 1, y = Position.Y - 1; x <= 7 && y >= 0; x++, y--)
         {
+            yield return new Move(ParentBoard[x, y],
+                ParentBoard[Position.X, Position.Y]);
+            
             if (ParentBoard[x, y].IsOccupied)
                 break;
-            yield return ParentBoard[x, y];
         }
         
-        // East direction
+        // East
         // x is incrementing, y is constant
-        for (var x = Position.X + 1; x <= 7; x++)
+        for (var currentX = Position.X + 1; currentX <= 7; currentX++)
         {
-            if (ParentBoard[x, Position.Y].IsOccupied)
+            yield return new Move(ParentBoard[currentX, Position.Y], Position);
+            
+            if (ParentBoard[currentX, Position.Y].IsOccupied)
                 break;
-            yield return ParentBoard[x, Position.Y];
         }
         
-        // South-East direction
-        // x is incrementing, y is incrementing
+        // South-East
+        // y is incrementing, x is incrementing
         for (int x = Position.X + 1, y = Position.Y + 1; x <= 7 && y <= 7; x++, y++)
         {
+            yield return new Move(ParentBoard[x, y],
+                ParentBoard[Position.X, Position.Y]);
+            
             if (ParentBoard[x, y].IsOccupied)
                 break;
-            yield return ParentBoard[x, y];
         }
         
-        // South direction
+        // South
         // y is incrementing, x is constant
-        for (var y = Position.Y + 1; y <= 7; y++)
+        for (var currentY = Position.Y + 1; currentY <= 7; currentY++)
         {
-            if (ParentBoard[Position.X, y].IsOccupied)
+            yield return new Move(ParentBoard[Position.X, currentY], Position);
+            
+            if (ParentBoard[Position.X, currentY].IsOccupied)
                 break;
-            yield return ParentBoard[Position.X, y];
         }
         
-        // South-West direction
-        // x is decrementing, y is incrementing
+        // South-West
+        // y is incrementing, x is decrementing
         for (int x = Position.X - 1, y = Position.Y + 1; x >= 0 && y <= 7; x--, y++)
         {
+            yield return new Move(ParentBoard[x, y],
+                ParentBoard[Position.X, Position.Y]);
+            
             if (ParentBoard[x, y].IsOccupied)
                 break;
-            yield return ParentBoard[x, y];
         }
         
-        // West direction
+        // West
         // x is decrementing, y is constant
-        for (var x = Position.X - 1; x >= 0; x--)
+        for (var currentX = Position.X - 1; currentX >= 0; currentX--)
         {
-            if (ParentBoard[x, Position.Y].IsOccupied)
+            yield return new Move(ParentBoard[currentX, Position.Y], Position);
+            
+            if (ParentBoard[currentX, Position.Y].IsOccupied)
                 break;
-            yield return ParentBoard[x, Position.Y];
         }
         
-        // North-West direction
-        // x is decrementing, y is decrementing
+        // North-West
+        // y is decrementing, x is decrementing
         for (int x = Position.X - 1, y = Position.Y - 1; x >= 0 && y >= 0; x--, y--)
         {
+            yield return new Move(ParentBoard[x, y],
+                ParentBoard[Position.X, Position.Y]);
+            
             if (ParentBoard[x, y].IsOccupied)
                 break;
-            yield return ParentBoard[x, y];
         }
     }
 }
