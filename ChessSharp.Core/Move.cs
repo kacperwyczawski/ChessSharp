@@ -141,7 +141,7 @@ public readonly struct Move
         DestinationCell.Piece = _sourceCell.Piece;
 
         // Remove piece from source
-        _sourceCell.Piece = null;
+        _sourceCell.RemovePiece();
 
         // If there is a capture cell, remove piece from capture cell
         _captureCell?.RemovePiece();
