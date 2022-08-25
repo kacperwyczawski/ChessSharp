@@ -137,13 +137,13 @@ public readonly struct Move
 
     public void ExecuteMove()
     {
+        // If there is a capture cell, remove piece from capture cell
+        _captureCell?.RemovePiece();
+        
         // Move piece to destination
         DestinationCell.Piece = _sourceCell.Piece;
 
         // Remove piece from source
         _sourceCell.RemovePiece();
-
-        // If there is a capture cell, remove piece from capture cell
-        _captureCell?.RemovePiece();
     }
 }
