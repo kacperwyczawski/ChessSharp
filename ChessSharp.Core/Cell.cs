@@ -36,4 +36,13 @@ public class Cell
     {
         Piece = null;
     }
+    
+    public Cell GetNorthNeighbor() => _parentBoard[X, Y - 1];
+    public Cell GetSouthNeighbor() => _parentBoard[X, Y + 1];
+    public Cell GetEastNeighbor() => _parentBoard[X + 1, Y];
+    public Cell GetWestNeighbor() => _parentBoard[X - 1, Y];
+    public Cell GetNorthEastNeighbor() => _parentBoard[X + 1, Y - 1];
+    public Cell GetNorthWestNeighbor() => _parentBoard[X - 1, Y - 1];
+    public Cell GetSouthEastNeighbor() => _parentBoard[X + 1, Y + 1];
+    public Cell GetSouthWestNeighbor() => _parentBoard[X - 1, Y + 1];
 }
