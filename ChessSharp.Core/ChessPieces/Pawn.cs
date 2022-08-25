@@ -34,6 +34,8 @@ public sealed class Pawn : ChessPiece
 
     private IEnumerable<Move> GetValidMovesForBlack()
     {
+        // TODO: Implement changes from GetValidMovesForWhite, or even better, refactor this to follow DRY.
+        
         // return if at the end of the board
         if (Position.Y == 7)
             yield break;
@@ -65,7 +67,7 @@ public sealed class Pawn : ChessPiece
 
     private IEnumerable<Move> GetValidMovesForWhite()
     {
-        // return if at the end of the board
+        // break if at the end of the board
         if (Position.Y == 0)
             yield break;
         
@@ -76,21 +78,53 @@ public sealed class Pawn : ChessPiece
         // regular move
         if (ParentBoard[Position.X, Position.Y - 1].IsOccupied == false)
             yield return new Move(ParentBoard[Position.X, Position.Y - 1], Position, null);
-        
-        // capture left
-        if (ParentBoard[Position.X - 1, Position.Y - 1] is var leftCell
-            && leftCell.IsOccupied
-            && leftCell.Piece?.Color != Color)
+
+        // captures on the left-hand side of pawn
+        if (Position.X > 0)
         {
-            yield return new Move(leftCell, Position);
+            // capture left
+            if (ParentBoard[Position.X - 1, Position.Y - 1] is var leftCell
+                && leftCell.IsOccupied
+                && leftCell.Piece?.Color != Color)
+            {
+                yield return new Move(leftCell, Position);
+            }
+    
+            // capture en passant left
+            if (ParentBoard[Position.X - 1, Position.Y - 1] is var frontLeftCell
+                && ParentBoard[Position.X - 1, Position.Y] is var backLeftCell
+                // TODO: check in logs if last move was two squares pawn move
+                // TODO: check in logs if pawn is on the right side of moved pawn
+               )
+            {
+                yield return new Move(ParentBoard[Position.X + 1, Position.Y - 1],
+                    Position, ParentBoard[Position.X + 1, Position.Y]);
+            }
         }
 
-        // capture right
-        if (ParentBoard[Position.X + 1, Position.Y - 1] is var rightCell
-            && rightCell.IsOccupied
-            && rightCell.Piece?.Color != Color)
+        // captures on the right-hand side of pawn
+        if (Position.X < 7)
         {
-            yield return new Move(rightCell, Position);
+            // capture right
+
+            if (ParentBoard[Position.X + 1, Position.Y - 1] is var rightCell
+                && rightCell.IsOccupied
+                && rightCell.Piece?.Color != Color)
+            {
+                yield return new Move(rightCell, Position);
+            }
+
+            // capture en passant right
+
+            if (ParentBoard[Position.X + 1, Position.Y - 1] is var frontRightCell
+                && ParentBoard[Position.X + 1, Position.Y] is var backRightCell
+                // TODO: check in logs if last move was two squares pawn move
+                // TODO: check in logs if pawn is on the left side of moved pawn
+               )
+            {
+                yield return new Move(ParentBoard[Position.X - 1, Position.Y - 1],
+                    Position, ParentBoard[Position.X - 1, Position.Y]);
+            }
         }
     }
 }
