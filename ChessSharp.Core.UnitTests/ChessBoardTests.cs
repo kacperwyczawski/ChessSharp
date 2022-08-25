@@ -51,8 +51,8 @@ public class ChessBoardTests
         ChessBoard board = new();
         
         // Act
-        board.MovePiece(board[0, 6], board[0, 4]);
-        board.MovePiece(board[6, 0], board[5, 2]);
+        board.MovePiece(board[0, 6].Piece!, board[0, 4]); // Client is responsible to give non-null piece to move
+        board.MovePiece(board[6, 0].Piece!, board[5, 2]);
         
         // Assert
         Assert.Multiple(() =>
