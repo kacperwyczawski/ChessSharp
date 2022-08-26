@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace ChessSharp.Core.ChessPieces;
 
@@ -6,6 +7,9 @@ namespace ChessSharp.Core.ChessPieces;
 public sealed class Pawn : ChessPiece
 {
     private readonly AttackDirection _direction;
+    
+    // TODO: Implement, probably in base class
+    private override bool _hasMoved = false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Pawn"/> class.
@@ -22,111 +26,104 @@ public sealed class Pawn : ChessPiece
 
     public override IEnumerable<Move> GetValidMoves()
     {
-        // This method could also be switch expression but in the future it will be refactored
-        // to use cardinal directions instead of colors and methods would follow DRY.
-        // Also pieces that uses directions would have IDirectional or similar interface.
+        // --- setup ---
+        
+        var hasEdgeInFront = _direction switch
+        {
+            AttackDirection.North => Position.Y == 0,
+            AttackDirection.South => Position.Y == 7,
+            AttackDirection.East => Position.X == 0,
+            AttackDirection.West => Position.X == 7,
+            _ => throw new InvalidEnumArgumentException(
+                nameof(_direction),
+                (int)_direction,
+                typeof(AttackDirection))
+        };
 
-        if (Color == Color.White)
-            return GetValidMovesForWhite();
+        var hasEdgeAtLeft = _direction switch
+        {
+            AttackDirection.North => Position.X == 0,
+            AttackDirection.South => Position.X == 7,
+            AttackDirection.East => Position.Y == 0,
+            AttackDirection.West => Position.Y == 7,
+            _ => throw new InvalidEnumArgumentException(
+                nameof(_direction),
+                (int)_direction,
+                typeof(AttackDirection))
+        };
         
-        if (Color == Color.Black)
-            return GetValidMovesForBlack();
-        
-        throw new NotSupportedException("Color currently not supported");
-    }
+        var hasEdgeAtRight = _direction switch
+        {
+            AttackDirection.North => Position.X == 7,
+            AttackDirection.South => Position.X == 0,
+            AttackDirection.East => Position.Y == 7,
+            AttackDirection.West => Position.Y == 0,
+            _ => throw new InvalidEnumArgumentException(
+                nameof(_direction),
+                (int)_direction,
+                typeof(AttackDirection))
+        };
 
-    private IEnumerable<Move> GetValidMovesForBlack()
-    {
-        // TODO: Implement changes from GetValidMovesForWhite, or even better, refactor this to follow DRY.
+        // --- generate valid moves ---
         
-        // return if at the end of the board
-        if (Position.Y == 7)
+        // break if pawn is at edge of board
+        if (hasEdgeInFront)
             yield break;
         
-        // two squares move
-        if (Position.Y == 1 && ParentBoard[Position.X, 3].IsOccupied == false)
-            yield return new Move(ParentBoard[Position.X, 3], Position, null);
-        
         // regular move
-        if (ParentBoard[Position.X, Position.Y + 1].IsOccupied == false)
-            yield return new Move(ParentBoard[Position.X, Position.Y + 1], Position, null);
+        if (Position.GetFrontNeighbor(_direction).IsOccupied == false)
+            yield return new Move(Position.GetFrontNeighbor(_direction), Position, null);
         
-        // capture left
-        if (ParentBoard[Position.X - 1, Position.Y + 1] is var leftCell
-            && leftCell.IsOccupied
-            && leftCell.Piece?.Color != Color)
+        // two square move
+        if (_hasMoved == false
+            && Position.GetFrontNeighbor(_direction).IsOccupied == false
+            && Position.GetFrontNeighbor(_direction).GetFrontNeighbor(_direction) is var cellInFrontOfCellInFront
+            && cellInFrontOfCellInFront.IsOccupied == false)
         {
-            yield return new Move(leftCell, Position);
+            yield return new Move(cellInFrontOfCellInFront, Position, null);
         }
-        
-        // capture right
-        if (ParentBoard[Position.X + 1, Position.Y + 1] is var rightCell
-            && rightCell.IsOccupied
-            && rightCell.Piece?.Color != Color)
-        {
-            yield return new Move(rightCell, Position);
-        }
-    }
 
-    private IEnumerable<Move> GetValidMovesForWhite()
-    {
-        // break if at the end of the board
-        if (Position.Y == 0)
-            yield break;
-        
-        // two squares move
-        if (Position.Y == 6 && ParentBoard[Position.X, 4].IsOccupied == false)
-            yield return new Move(ParentBoard[Position.X, 4], Position, null);
-        
-        // regular move
-        if (ParentBoard[Position.X, Position.Y - 1].IsOccupied == false)
-            yield return new Move(ParentBoard[Position.X, Position.Y - 1], Position, null);
-
-        // captures on the left-hand side of pawn
-        if (Position.X > 0)
+        // captures on the left-hand side of the pawn
+        if (!hasEdgeAtLeft)
         {
             // capture left
-            if (ParentBoard[Position.X - 1, Position.Y - 1] is var leftCell
-                && leftCell.IsOccupied
-                && leftCell.Piece?.Color != Color)
+            if (Position.GetFrontLeftNeighbor(_direction) is var leftCaptureCell
+                && leftCaptureCell.IsOccupied
+                && leftCaptureCell.Piece?.Color != Color)
             {
-                yield return new Move(leftCell, Position);
+                yield return new Move(leftCaptureCell, Position);
             }
-    
+            
             // capture en passant left
-            if (ParentBoard[Position.X - 1, Position.Y - 1] is var frontLeftCell
-                && ParentBoard[Position.X - 1, Position.Y] is var backLeftCell
+            if (leftCaptureCell.IsOccupied == false
                 // TODO: check in logs if last move was two squares pawn move
-                // TODO: check in logs if pawn is on the right side of moved pawn
+                // TODO: check in logs if piece on the left is that pawn which has just moved two squares
+                //                        ^^^^^^^^^^^^^^^^^ <= Position.GetLeftNeighbor(_direction)
                )
             {
-                yield return new Move(ParentBoard[Position.X + 1, Position.Y - 1],
-                    Position, ParentBoard[Position.X + 1, Position.Y]);
+                yield return new Move(leftCaptureCell, Position, Position.GetLeftNeighbor(_direction));
             }
         }
-
-        // captures on the right-hand side of pawn
-        if (Position.X < 7)
+        
+        // captures on the right-hand side of the pawn
+        if (!hasEdgeAtRight)
         {
             // capture right
-
-            if (ParentBoard[Position.X + 1, Position.Y - 1] is var rightCell
-                && rightCell.IsOccupied
-                && rightCell.Piece?.Color != Color)
+            if (Position.GetFrontRightNeighbor(_direction) is var rightCaptureCell
+                && rightCaptureCell.IsOccupied
+                && rightCaptureCell.Piece?.Color != Color)
             {
-                yield return new Move(rightCell, Position);
+                yield return new Move(rightCaptureCell, Position);
             }
 
             // capture en passant right
-
-            if (ParentBoard[Position.X + 1, Position.Y - 1] is var frontRightCell
-                && ParentBoard[Position.X + 1, Position.Y] is var backRightCell
+            if (rightCaptureCell.IsOccupied == false
                 // TODO: check in logs if last move was two squares pawn move
-                // TODO: check in logs if pawn is on the left side of moved pawn
+                // TODO: check in logs if piece on the right is that pawn which has just moved two squares
+                //                        ^^^^^^^^^^^^^^^^^ <= Position.GetRightNeighbor(_direction)
                )
             {
-                yield return new Move(ParentBoard[Position.X - 1, Position.Y - 1],
-                    Position, ParentBoard[Position.X - 1, Position.Y]);
+                yield return new Move(rightCaptureCell, Position, Position.GetRightNeighbor(_direction));
             }
         }
     }
