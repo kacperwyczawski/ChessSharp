@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Drawing;
 using ChessSharp.Core.ChessPieces;
@@ -45,4 +46,84 @@ public class Cell
     public Cell GetNorthWestNeighbor() => _parentBoard[X - 1, Y - 1];
     public Cell GetSouthEastNeighbor() => _parentBoard[X + 1, Y + 1];
     public Cell GetSouthWestNeighbor() => _parentBoard[X - 1, Y + 1];
+
+    public Cell GetFrontNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetNorthNeighbor(),
+        AttackDirection.South => GetSouthNeighbor(),
+        AttackDirection.East => GetEastNeighbor(),
+        AttackDirection.West => GetWestNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetBackNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetSouthNeighbor(),
+        AttackDirection.South => GetNorthNeighbor(),
+        AttackDirection.East => GetWestNeighbor(),
+        AttackDirection.West => GetEastNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetLeftNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetWestNeighbor(),
+        AttackDirection.South => GetEastNeighbor(),
+        AttackDirection.East => GetNorthNeighbor(),
+        AttackDirection.West => GetSouthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetRightNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetEastNeighbor(),
+        AttackDirection.South => GetWestNeighbor(),
+        AttackDirection.East => GetSouthNeighbor(),
+        AttackDirection.West => GetNorthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetFrontLeftNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetNorthWestNeighbor(),
+        AttackDirection.South => GetSouthEastNeighbor(),
+        AttackDirection.East => GetNorthNeighbor(),
+        AttackDirection.West => GetSouthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetFrontRightNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetNorthEastNeighbor(),
+        AttackDirection.South => GetSouthWestNeighbor(),
+        AttackDirection.East => GetSouthNeighbor(),
+        AttackDirection.West => GetNorthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetBackLeftNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetSouthWestNeighbor(),
+        AttackDirection.South => GetNorthEastNeighbor(),
+        AttackDirection.East => GetSouthNeighbor(),
+        AttackDirection.West => GetNorthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
+    
+    public Cell GetBackRightNeighbor(AttackDirection attackDirection) => attackDirection switch
+    {
+        AttackDirection.North => GetSouthEastNeighbor(),
+        AttackDirection.South => GetNorthWestNeighbor(),
+        AttackDirection.East => GetSouthNeighbor(),
+        AttackDirection.West => GetNorthNeighbor(),
+        _ => throw new InvalidEnumArgumentException(nameof(attackDirection),
+            (int)attackDirection, typeof(AttackDirection))
+    };
 }
