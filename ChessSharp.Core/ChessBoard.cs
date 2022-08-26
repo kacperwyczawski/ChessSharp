@@ -30,14 +30,14 @@ public class ChessBoard
 
         #region Initialize White Pieces
         
-        this[0, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[1, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[2, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[3, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[4, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[5, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[6, 6].CreateAndSetPiece<Pawn>(Color.White);
-        this[7, 6].CreateAndSetPiece<Pawn>(Color.White);
+        this[0, 6].Piece = new Pawn(Color.White, this[0, 6], this, AttackDirection.North);
+        this[1, 6].Piece = new Pawn(Color.White, this[1, 6], this, AttackDirection.North);
+        this[2, 6].Piece = new Pawn(Color.White, this[2, 6], this, AttackDirection.North);
+        this[3, 6].Piece = new Pawn(Color.White, this[3, 6], this, AttackDirection.North);
+        this[4, 6].Piece = new Pawn(Color.White, this[4, 6], this, AttackDirection.North);
+        this[5, 6].Piece = new Pawn(Color.White, this[5, 6], this, AttackDirection.North);
+        this[6, 6].Piece = new Pawn(Color.White, this[6, 6], this, AttackDirection.North);
+        this[7, 6].Piece = new Pawn(Color.White, this[7, 6], this, AttackDirection.North);
         this[0, 7].CreateAndSetPiece<Rook>(Color.White);
         this[1, 7].CreateAndSetPiece<Knight>(Color.White);
         this[2, 7].CreateAndSetPiece<Bishop>(Color.White);
@@ -51,15 +51,15 @@ public class ChessBoard
         
         #region Initialize Black Pieces
         
-        this[0, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[1, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[2, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[3, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[4, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[5, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[6, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        this[7, 1].CreateAndSetPiece<Pawn>(Color.Black);
-        
+        this[0, 1].Piece = new Pawn(Color.Black, this[0, 1], this, AttackDirection.South);
+        this[1, 1].Piece = new Pawn(Color.Black, this[1, 1], this, AttackDirection.South);
+        this[2, 1].Piece = new Pawn(Color.Black, this[2, 1], this, AttackDirection.South);
+        this[3, 1].Piece = new Pawn(Color.Black, this[3, 1], this, AttackDirection.South);
+        this[4, 1].Piece = new Pawn(Color.Black, this[4, 1], this, AttackDirection.South);
+        this[5, 1].Piece = new Pawn(Color.Black, this[5, 1], this, AttackDirection.South);
+        this[6, 1].Piece = new Pawn(Color.Black, this[6, 1], this, AttackDirection.South);
+        this[7, 1].Piece = new Pawn(Color.Black, this[7, 1], this, AttackDirection.South);
+
         this[0, 0].CreateAndSetPiece<Rook>(Color.Black);
         this[1, 0].CreateAndSetPiece<Knight>(Color.Black);
         this[2, 0].CreateAndSetPiece<Bishop>(Color.Black);
@@ -126,7 +126,7 @@ public class ChessBoard
                 switch (cellStringsArray[i, j][^1])
                 {
                     case 'P':
-                        this[i, j].CreateAndSetPiece<Pawn>(color);
+                        throw new NotImplementedException();
                         break;
                     case 'R':
                         this[i, j].CreateAndSetPiece<Rook>(color);

@@ -40,7 +40,7 @@ public class ChessBoardTests
         {
             Assert.That(chessBoard[3, 3].Piece, Is.EqualTo(knight));
             Assert.That(chessBoard[0, 0].Piece, Is.EqualTo(null));
-            Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black, chessBoard[1, 1], chessBoard)));
+            Assert.That(chessBoard[1, 1].Piece, Is.EqualTo(new Pawn(Color.Black, chessBoard[1, 1], chessBoard, AttackDirection.South)));
         });
     }
 
@@ -58,7 +58,7 @@ public class ChessBoardTests
         Assert.Multiple(() =>
         {
             Assert.That(board[0, 6].Piece, Is.EqualTo(null));
-            Assert.That(board[0, 4].Piece, Is.EqualTo(new Pawn(Color.White, board[0, 4], board)));
+            Assert.That(board[0, 4].Piece, Is.EqualTo(new Pawn(Color.White, board[0, 4], board, AttackDirection.North)));
             
             Assert.That(board[6, 0].Piece, Is.EqualTo(null));
             Assert.That(board[5, 2].Piece, Is.EqualTo(new Knight(Color.Black, board[5, 2], board)));

@@ -5,13 +5,16 @@ namespace ChessSharp.Core.ChessPieces;
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class Pawn : ChessPiece
 {
+    private readonly AttackDirection _direction;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Pawn"/> class.
     /// </summary>
     /// <inheritdoc/>
-    public Pawn(Color color, Cell position, ChessBoard parentBoard)
+    public Pawn(Color color, Cell position, ChessBoard parentBoard, AttackDirection direction)
         : base(color, position, parentBoard)
     {
+        _direction = direction;
     }
 
     /// <inheritdoc/>
