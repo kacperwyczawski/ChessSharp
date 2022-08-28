@@ -30,6 +30,9 @@ public readonly struct Move
     /// </param>
     public Move(Cell destinationAndCaptureCell, Cell sourceCell)
     {
+        if (sourceCell.IsOccupied == false)
+            throw new ArgumentException("Source cell have to have a piece on it", nameof(sourceCell));
+        
         _sourceCell = sourceCell;
         _captureCell = DestinationCell = destinationAndCaptureCell;
     }
@@ -52,6 +55,9 @@ public readonly struct Move
     /// </param>
     public Move(Cell destinationCell, Cell sourceCell, Cell? captureCell)
     {
+        if (sourceCell.IsOccupied == false)
+            throw new ArgumentException("Source cell have to have a piece on it", nameof(sourceCell));
+
         DestinationCell = destinationCell;
         _sourceCell = sourceCell;
         _captureCell = captureCell;
