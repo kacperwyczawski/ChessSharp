@@ -59,7 +59,11 @@ public abstract class ChessPiece
     /// </summary>
     public Cell Position { get; set; }
     
-    
+    /// <summary>
+    /// Indicates whether chess piece has moved or not.
+    /// </summary>
+    public bool HasMoved { get; set; }
+
     /// <summary>
     /// Gets board on which chess piece is located.
     /// </summary>

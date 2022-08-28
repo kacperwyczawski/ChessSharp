@@ -7,9 +7,6 @@ namespace ChessSharp.Core.ChessPieces;
 public sealed class Pawn : ChessPiece
 {
     private readonly AttackDirection _direction;
-    
-    // TODO: Implement, probably in base class
-    private override bool _hasMoved = false;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Pawn"/> class.
@@ -75,7 +72,7 @@ public sealed class Pawn : ChessPiece
             yield return new Move(Position.GetFrontNeighbor(_direction), Position, null);
         
         // two square move
-        if (_hasMoved == false
+        if (HasMoved == false
             && Position.GetFrontNeighbor(_direction).IsOccupied == false
             && Position.GetFrontNeighbor(_direction).GetFrontNeighbor(_direction) is var cellInFrontOfCellInFront
             && cellInFrontOfCellInFront.IsOccupied == false)

@@ -137,6 +137,9 @@ public readonly struct Move
 
     public void ExecuteMove()
     {
+        // set HasMoved to true for piece on source cell
+        _sourceCell.Piece!.HasMoved = true;
+        
         // If there is a capture cell, remove piece from capture cell
         _captureCell?.RemovePiece();
         
