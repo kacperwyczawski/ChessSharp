@@ -64,10 +64,10 @@ public readonly struct Move
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="Move"/> struct.
+    ///     Initializes a new instance of the <see cref="Move"/> struct using ChessSharpMoveNotation (CSMN).
     /// </summary>
     /// <param name="moveString">
-    ///     string representation of move. Spaces are optional
+    ///     string representation of move in CSMN system. Spaces are optional
     ///     <example>
     ///         Remember that almost all moves should have capture cell, except for example regular pawn move<br/>
     ///         <c>"1,2 > 1,4 x 1,3"</c> - move piece from cell 1,2 to 1,4 and capture piece on 1,3<br/>
