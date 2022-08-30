@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace ChessSharp.Core.ChessPieces;
+﻿namespace ChessSharp.Core.BoardRepresentation.ChessPieces;
 
 /// <inheritdoc cref="ChessPiece"/>
 public sealed class Knight : ChessPiece

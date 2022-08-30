@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace ChessSharp.Core.ChessPieces;
+﻿namespace ChessSharp.Core.BoardRepresentation.ChessPieces;
 
 /// <summary>
 /// Represents single chess piece.

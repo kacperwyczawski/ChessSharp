@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ChessSharp.Core;
+namespace ChessSharp.Core.BoardRepresentation;
 
 /// <summary>
 /// represents a valid move for a piece

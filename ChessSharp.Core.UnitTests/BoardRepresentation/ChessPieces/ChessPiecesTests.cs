@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Drawing;
+using ChessSharp.Core.BoardRepresentation;
+using ChessSharp.Core.BoardRepresentation.ChessPieces;
 
-using ChessSharp.Core.ChessPieces;
-
-namespace ChessSharp.Core.UnitTests.ChessPieces;
+namespace ChessSharp.Core.UnitTests.BoardRepresentation.ChessPieces;
 
 public class ChessPiecesTests
 {

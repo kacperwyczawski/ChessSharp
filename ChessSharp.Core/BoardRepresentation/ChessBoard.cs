@@ -1,8 +1,7 @@
 ﻿using System.Drawing;
+using ChessSharp.Core.BoardRepresentation.ChessPieces;
 
-namespace ChessSharp.Core;
-
-using ChessPieces;
+namespace ChessSharp.Core.BoardRepresentation;
 
 /// <summary>
 /// Represents chess board.
