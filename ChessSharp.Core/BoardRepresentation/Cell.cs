@@ -26,11 +26,6 @@ public class Cell
         Y = y;
         _parentBoard = parentBoard;
     }
-
-    public void CreateAndSetPiece<T>(Color color) where T : ChessPiece
-    {
-        Piece = (T?)Activator.CreateInstance(typeof(T), color, this, _parentBoard);
-    }
     
     public void RemovePiece()
     {
