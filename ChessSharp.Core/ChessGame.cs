@@ -46,6 +46,7 @@ public class ChessGame
         
         #Player:John:White:North;;
         #Player:Lisa:Black:South;;
+        #CurrentPlayer:John;;
         #Board:8
         :John'sRook:John'sKnight:John'sBishop:John'sQueen:John'sKing:John'sBishop:John'sKnight:John'sRook
         :John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn
@@ -79,6 +80,9 @@ public class ChessGame
                 case "#Player":
                     HandlePlayerTag(values);
                     break;
+                case "#CurrentPlayer":
+                    HandleCurrentPlayerTag(values);
+                    break;
                 case "#Board":
                     HandleBoardTag(values);
                     break;
@@ -98,6 +102,14 @@ public class ChessGame
                 Color.FromName(values[1]),
                 (AttackDirection)Enum.Parse(typeof(AttackDirection), values[2])
             ));
+        }
+
+        void HandleCurrentPlayerTag(string[] values)
+        {
+            if (values.Length != 1)
+                throw new ArgumentException("Invalid number of values for tag #CurrentPlayer");
+            
+            CurrentPlayer = Players.First(p => p.Name == values[0]);
         }
 
         void HandleBoardTag(string[] values)
