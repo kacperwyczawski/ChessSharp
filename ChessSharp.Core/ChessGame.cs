@@ -15,7 +15,7 @@ public class ChessGame
 
     public Player? Winner { get; private set; } = null;
 
-    private IEnumerable<ChessPiece> _ChessPieces => Board.GetAllChessPieces();
+    private IEnumerable<ChessPiece> ChessPieces => Board.GetAllChessPieces();
 
     // TODO: Add method for accessing players, that returns this list as a read-only
     public List<Player> Players { get; } = new();
@@ -160,7 +160,8 @@ public class ChessGame
                     var pieceType = Type.GetType(pieceString)
                                     ?? throw new ArgumentException($"Unknown piece type: {pieceString}");
                     // create piece
-                    var piece = (ChessPiece) Activator.CreateInstance(pieceType, Board[x, y], Board, player);
+                    var piece = Activator.CreateInstance(pieceType, Board[x, y], Board, player) as ChessPiece
+                                ?? throw new ArgumentException($"Could not create piece of type {pieceType}");
                     
                     // add piece to board
                     Board[x, y].Piece = piece;
