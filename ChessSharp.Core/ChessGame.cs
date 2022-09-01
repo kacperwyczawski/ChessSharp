@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using System.Text;
+using System.Text.RegularExpressions;
 using ChessSharp.Core.BoardRepresentation;
 using ChessSharp.Core.BoardRepresentation.ChessPieces;
 
@@ -38,7 +38,7 @@ public class ChessGame
         /*
         
         Chess Sharp Game Notation (CSGN)
-        - line breaks are ignored
+        - line breaks and whitespaces are ignored
         - each section begins with a tag and ends with two semicolons
         - each tag is # followed by a tag name
         - inside section, values are separated by colons 
@@ -58,9 +58,9 @@ public class ChessGame
         :Lisa'sRook:Lisa'sKnight:Lisa'sBishop:Lisa'sQueen:Lisa'sKing:Lisa'sBishop:LisaKnight:Lisa'sRook;;
         
         */
-
-        // remove line breaks from string
-        csgnString = csgnString.Replace("\n", "").Replace("\r", "");
+        
+        // remove whitespaces and line breaks from string
+        csgnString = Regex.Replace(csgnString, @"\s+", "");
 
         // split string into sections
         var sections = csgnString.Split(";;");
