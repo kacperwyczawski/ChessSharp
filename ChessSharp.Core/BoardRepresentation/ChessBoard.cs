@@ -9,8 +9,7 @@ namespace ChessSharp.Core.BoardRepresentation;
 public class ChessBoard
 {
     /// <summary>
-    /// Represents cells on board.
-    /// Should be modified only by ChessBoard's indexer.
+    /// Represents cells on board. Should be modified only by ChessBoard's indexer.
     /// </summary>
     private readonly Cell[,] _boardArray = new Cell[8, 8];
 
