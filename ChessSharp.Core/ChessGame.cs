@@ -41,7 +41,8 @@ public class ChessGame
         - line breaks and whitespaces are ignored
         - each section begins with a tag and ends with two semicolons
         - each tag is # followed by a tag name
-        - inside section, values are separated by colons 
+        - inside section, values are separated by colons
+        - Empty in board section can also by represented as a `-` (single dash)
         Example:
         
         #Player:John:White:North;;
@@ -134,7 +135,7 @@ public class ChessGame
                     var currentValue = values[currentValueIndex];
                     
                     // leave empty if "Empty"
-                    if(currentValue is "Empty" or "empty")
+                    if(currentValue is "Empty" or "-")
                         continue;
                     
                     // get player and piece strings
