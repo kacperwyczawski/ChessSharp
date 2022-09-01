@@ -91,6 +91,18 @@ public class ChessGame
                     throw new ArgumentException($"Unknown tag: {tag}");
             }
         }
+        
+        // throw exception if there is not enough players
+        if (Players.Count < 2)
+            throw new ArgumentException("Please provide at least two valid #Player tags");
+        
+        // throw exception if there is no current player
+        if (CurrentPlayer == null)
+            throw new ArgumentException("Please provide a valid #CurrentPlayer tag");
+        
+        // throw exception if there is no board
+        if (Board == null)
+            throw new ArgumentException("Please provide a valid #Board tag");
 
         // End
         return;
