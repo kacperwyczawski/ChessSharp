@@ -8,26 +8,26 @@ public abstract class ChessPiece
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessPiece"/> class.
     /// </summary>
-    /// <param name="color">
-    /// Color of chess piece.
-    /// </param>
     /// <param name="position">
     /// Cell on which chess piece is placed.
     /// </param>
     /// <param name="parentBoard">
     /// Board on which chess piece is located.
     /// </param>
-    public ChessPiece(Color color, Cell position, ChessBoard parentBoard)
+    /// <param name="player">
+    /// Player who owns chess piece.
+    /// </param>
+    public ChessPiece(Cell position, ChessBoard parentBoard, Player player)
     {
-        Color = color;
         Position = position;
         ParentBoard = parentBoard;
+        Player = player;
     }
-
+    
     /// <summary>
-    /// Gets color of chess piece.
+    /// Player who owns chess piece.
     /// </summary>
-    public Color Color { get; }
+    public Player Player { get; }
     
     
     /// <summary>
