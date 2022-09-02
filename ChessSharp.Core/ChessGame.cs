@@ -17,8 +17,7 @@ public class ChessGame
 
     private IEnumerable<ChessPiece> ChessPieces => Board.GetAllChessPieces();
 
-    // TODO: Add method for accessing players, that returns this list as a read-only
-    public List<Player> Players { get; } = new();
+    private readonly List<Player> _players = new();
 
     public ChessGame(Player firstPlayer, Player secondPlayer, params Player[] additionalPlayers)
     {
@@ -26,9 +25,9 @@ public class ChessGame
         if (additionalPlayers.Length > 0)
             throw new NotImplementedException();
 
-        Players.Add(firstPlayer);
-        Players.Add(secondPlayer);
-        Players.AddRange(additionalPlayers);
+        _players.Add(firstPlayer);
+        _players.Add(secondPlayer);
+        _players.AddRange(additionalPlayers);
         CurrentPlayer = firstPlayer;
         Board = new ChessBoard(firstPlayer, secondPlayer);
     }
@@ -93,7 +92,7 @@ public class ChessGame
         }
         
         // throw exception if there is not enough players
-        if (Players.Count < 2)
+        if (_players.Count < 2)
             throw new ArgumentException("Please provide at least two valid #Player tags");
         
         // throw exception if there is no current player
@@ -109,7 +108,7 @@ public class ChessGame
 
         void HandlePlayerTag(string[] values)
         {
-            Players.Add(new Player
+            _players.Add(new Player
             (
                 values[0],
                 Color.FromName(values[1]),
@@ -122,7 +121,7 @@ public class ChessGame
             if (values.Length != 1)
                 throw new ArgumentException("Invalid number of values for tag #CurrentPlayer");
             
-            CurrentPlayer = Players.First(p => p.Name == values[0]);
+            CurrentPlayer = _players.First(p => p.Name == values[0]);
         }
 
         void HandleBoardTag(string[] values)
@@ -135,7 +134,7 @@ public class ChessGame
                 throw new ArgumentException("Not enough values for given board size");
             
             // create board
-            Board = new ChessBoard(Players[0], Players[1], true);
+            Board = new ChessBoard(_players[0], _players[1], true);
 
             // fill array with chess pieces from values
             var currentValueIndex = 0;
@@ -155,7 +154,7 @@ public class ChessGame
                     var pieceString = currentValue.Split("'s")[1];
                     
                     // get owner of piece
-                    var player = Players.First(p => p.Name == playerString);
+                    var player = _players.First(p => p.Name == playerString);
                     // get piece type
                     var pieceType = Type.GetType(pieceString)
                                     ?? throw new ArgumentException($"Unknown piece type: {pieceString}");
@@ -171,5 +170,10 @@ public class ChessGame
                 }
             }
         }
+    }
+    
+    public IReadOnlyList<Player> GetPlayers()
+    {
+        return _players.AsReadOnly();
     }
 }
