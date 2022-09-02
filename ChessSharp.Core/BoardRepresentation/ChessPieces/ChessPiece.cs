@@ -5,28 +5,6 @@
 /// </summary>
 public abstract class ChessPiece
 {
-    private bool Equals(ChessPiece other)
-    {
-        return Color.Equals(other.Color);
-    }
-
-    /// <inheritdoc/>
-    public override bool Equals(object? obj)
-    {
-        if (ReferenceEquals(null, obj))
-            return false;
-        if (ReferenceEquals(this, obj))
-            return true;
-        if (obj.GetType() != GetType())
-            return false;
-        return Equals((ChessPiece)obj);
-    }
-
-    public override int GetHashCode()
-    {
-        return Color.GetHashCode();
-    }
-
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessPiece"/> class.
     /// </summary>
