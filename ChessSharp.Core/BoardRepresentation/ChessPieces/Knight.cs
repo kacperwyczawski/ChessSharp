@@ -7,8 +7,8 @@ public sealed class Knight : ChessPiece
     /// Initializes a new instance of the <see cref="Knight"/> class.
     /// </summary>
     /// <inheritdoc/>
-    public Knight(Color color, Cell position, ChessBoard parentBoard)
-        : base(color, position, parentBoard)
+    public Knight(Cell position, ChessBoard parentBoard, Player player)
+        : base(position, parentBoard, player)
     {
     }
 
