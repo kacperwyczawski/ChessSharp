@@ -7,8 +7,8 @@ public sealed class Rook : ChessPiece
     /// Initializes a new instance of the <see cref="Rook"/> class.
     /// </summary>
     /// <inheritdoc/>
-    public Rook(Color color, Cell position, ChessBoard parentBoard)
-        : base(color, position, parentBoard)
+    public Rook(Cell position, ChessBoard parentBoard, Player player)
+        : base(position, parentBoard, player)
     {
     }
 
