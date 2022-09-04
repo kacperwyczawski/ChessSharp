@@ -4,11 +4,11 @@
 public sealed class Bishop : ChessPiece
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="Bishop"/> class.
-    /// </summary>
-    /// <inheritdoc/>
-    public Bishop(Color color, Cell position, ChessBoard parentBoard) 
-        : base(color, position, parentBoard)
+     /// Initializes a new instance of the <see cref="Bishop"/> class.
+     /// </summary>
+     /// <inheritdoc/>
+    public Bishop(Cell position, ChessBoard parentBoard, Player player)
+        : base(position, parentBoard, player)
     {
     }
     
