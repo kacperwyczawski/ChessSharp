@@ -11,10 +11,10 @@ public sealed class Pawn : ChessPiece
     /// Initializes a new instance of the <see cref="Pawn"/> class.
     /// </summary>
     /// <inheritdoc/>
-    public Pawn(Color color, Cell position, ChessBoard parentBoard, AttackDirection direction)
-        : base(color, position, parentBoard)
+    public Pawn(Cell position, ChessBoard parentBoard, Player player)
+        : base(position, parentBoard, player)
     {
-        _direction = direction;
+        _direction = player.AttackDirection;
     }
 
     /// <inheritdoc/>
@@ -85,7 +85,7 @@ public sealed class Pawn : ChessPiece
             // capture left
             if (Position.GetFrontLeftNeighbor(_direction) is var leftCaptureCell
                 && leftCaptureCell.IsOccupied
-                && leftCaptureCell.Piece?.Color != Color)
+                && ReferenceEquals(leftCaptureCell.Piece?.Player, Player))
             {
                 yield return new Move(leftCaptureCell, Position);
             }
@@ -107,7 +107,7 @@ public sealed class Pawn : ChessPiece
             // capture right
             if (Position.GetFrontRightNeighbor(_direction) is var rightCaptureCell
                 && rightCaptureCell.IsOccupied
-                && rightCaptureCell.Piece?.Color != Color)
+                && ReferenceEquals(rightCaptureCell.Piece?.Player, Player))
             {
                 yield return new Move(rightCaptureCell, Position);
             }
