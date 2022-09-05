@@ -171,7 +171,55 @@ public class ChessGame
             }
         }
     }
-    
+
+    public ChessGame(Player uppercasePlayer, Player lowercasePlayer, string simplifiedFenString)
+    {
+        // TODO: validate
+
+        _players.Add(lowercasePlayer);
+        _players.Add(uppercasePlayer);
+        CurrentPlayer = uppercasePlayer;
+        Board = new ChessBoard(uppercasePlayer, lowercasePlayer, true);
+
+        var rows = simplifiedFenString.Split("/");
+
+        for (var rowIndex = 0; rowIndex < rows.Length; rowIndex++)
+        {
+            var row = rows[rowIndex];
+            
+            var columnIndex = 0;
+            foreach (var character in row)
+            {
+                if (char.IsDigit(character))
+                {
+                    columnIndex += int.Parse(character.ToString());
+                    continue;
+                }
+
+                var player = char.IsUpper(character) ? uppercasePlayer : lowercasePlayer;
+                var pieceType = character switch
+                {
+                    // TODO: Use reflection or something to get the type and follow OCP
+                    'P' => typeof(Pawn),
+                    'R' => typeof(Rook),
+                    'N' => typeof(Knight),
+                    'B' => typeof(Bishop),
+                    'Q' => typeof(Queen),
+                    'K' => typeof(King),
+                    _ => throw new ArgumentException($"Unknown piece type: {character}")
+                };
+
+                var piece =
+                    Activator.CreateInstance(pieceType, Board[columnIndex, rowIndex], Board, player) as ChessPiece
+                    ?? throw new ArgumentException($"Could not create piece of type {pieceType}");
+
+                Board[columnIndex, rowIndex].Piece = piece;
+
+                columnIndex++;
+            }
+        }
+    }
+
     public IReadOnlyList<Player> GetPlayers()
     {
         return _players.AsReadOnly();
