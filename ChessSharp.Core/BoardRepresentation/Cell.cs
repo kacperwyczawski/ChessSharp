@@ -31,7 +31,9 @@ public class Cell
     {
         Piece = null;
     }
-    
+
+    public override string ToString() => $"{X},{Y}";
+
     public Cell GetNorthNeighbor() => _parentBoard[X, Y - 1];
     public Cell GetSouthNeighbor() => _parentBoard[X, Y + 1];
     public Cell GetEastNeighbor() => _parentBoard[X + 1, Y];
