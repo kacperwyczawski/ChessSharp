@@ -12,6 +12,8 @@ public class ChessBoard
     /// Represents cells on board. Should be modified only by ChessBoard's indexer.
     /// </summary>
     private readonly Cell[,] _boardArray = new Cell[8, 8];
+    
+    // TODO: Add stack, queue or something to log moves.
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessBoard"/> class.
