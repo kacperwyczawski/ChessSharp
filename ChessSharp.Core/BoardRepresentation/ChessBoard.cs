@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using ChessSharp.Core.BoardRepresentation.ChessPieces;
+﻿using ChessSharp.Core.BoardRepresentation.ChessPieces;
 
 namespace ChessSharp.Core.BoardRepresentation;
 
