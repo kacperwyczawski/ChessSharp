@@ -171,6 +171,6 @@ public readonly struct Move
     }
 
     public override string ToString() => _captureCell is null
-        ? $"{_sourceCell} > {DestinationCell} n"
-        : $"{_sourceCell} > {DestinationCell} x {_captureCell}";
+        ? $"[{_sourceCell} > {DestinationCell} n]"
+        : $"[{_sourceCell} > {DestinationCell} x {_captureCell}]";
 }
