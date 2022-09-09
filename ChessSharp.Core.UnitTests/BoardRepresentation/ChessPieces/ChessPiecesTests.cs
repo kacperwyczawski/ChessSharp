@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿// TODO: Remove this after writing new tests
+// This is temporary left here for copilot
+
+
+/*
+
+using System.Collections;
 using System.Drawing;
 using ChessSharp.Core.BoardRepresentation;
 using ChessSharp.Core.BoardRepresentation.ChessPieces;
@@ -7,32 +13,90 @@ namespace ChessSharp.Core.UnitTests.BoardRepresentation.ChessPieces;
 
 public class ChessPiecesTests
 {
-    private static readonly ChessBoard Board = new();
+    private static readonly Player P1 = new Player("Player 1", Color.Blue, AttackDirection.North);
+    private static readonly Player P2 = new Player("Player 2", Color.Red, AttackDirection.South);
+    private static readonly Player P3 = new Player("Player 3", Color.Green, AttackDirection.East);
+    private static readonly Player P4 = new Player("Player 4", Color.Yellow, AttackDirection.West);
+
+    private static readonly ChessBoard StandardBoard = new ChessBoard(P1, P2, true);
+    private static readonly ChessBoard RotatedBoard = new ChessBoard(P3, P4, true);
 
     [TestCaseSource(nameof(GetValidMovesTestCases))]
-    public void GetValidMoves(ChessPiece piece, IEnumerable<Cell> expectedValidMoves, Cell[] obstacleCells)
-    {
-        // clear board
-        for (var i = 0; i < 8; i++)
-        {
-            for (var j = 0; j < 8; j++)
-            {
-                Board[i, j].Piece = null;
-            }
-        }
-
-        // set up obstacles
-        foreach (var cell in obstacleCells)
-            cell.CreateAndSetPiece<Pawn>(Color.White);
-        
-        // set up piece
-        piece.Position.Piece = piece;
-
-        // assert
+    public void GetValidMoves(ChessPiece piece, IEnumerable<Move> expectedValidMoves) =>
         Assert.That(piece.GetValidMoves(), Is.EquivalentTo(expectedValidMoves));
+
+    private static IEnumerable<TestCaseData> GetValidMovesTestCases
+    {
+        // T__ODO: Finish this
+        get
+        {
+            #region Pawn
+
+            // north-attacking pawn on 4, 4
+            StandardBoard.ClearBoard();
+            StandardBoard.SetPieceAt(4, 4, typeof(Pawn), P1);
+            Move.Board = StandardBoard;
+            
+            yield return new TestCaseData
+            (
+                StandardBoard[4, 4].Piece,
+                new List<Move>
+                {
+                    new("4, 4 > 4, 3 n"),
+                    new("4, 4 > 4, 2 n") // can move two spaces on first move
+                }
+            ).SetName("{m} North-Attacking Pawn on 4, 4");
+            
+            // T__ODO: Add more tests after implementing en passant and promotion
+
+            #endregion
+
+            #region Knight
+
+            // north-attacking knight on 4, 4
+            StandardBoard.ClearBoard();
+            StandardBoard.SetPieceAt(4, 4, typeof(Knight), P1);
+            Move.Board = StandardBoard;
+            
+            yield return new TestCaseData
+            (
+                StandardBoard[4, 4].Piece,
+                new List<Move>
+                {
+                    new("4, 4 > 2, 3"),
+                    new("4, 4 > 2, 5"),
+                    new("4, 4 > 3, 2"),
+                    new("4, 4 > 3, 6"),
+                    new("4, 4 > 5, 2"),
+                    new("4, 4 > 5, 6"),
+                    new("4, 4 > 6, 3"),
+                    new("4, 4 > 6, 5")
+                }
+            ).SetName("{m} North-Attacking Knight on 4, 4");
+            
+            // north-attacking knight on 0, 0 with obstacle in 2, 1 and 1, 0
+            StandardBoard.ClearBoard();
+            StandardBoard.SetPieceAt(0, 0, typeof(Knight), P1);
+            StandardBoard.SetPieceAt(2, 1, typeof(Pawn), P2);
+            StandardBoard.SetPieceAt(1, 0, typeof(Pawn), P2);
+            Move.Board = StandardBoard;
+            
+            yield return new TestCaseData
+            (
+                StandardBoard[0, 0].Piece,
+                new List<Move>
+                {
+                    new("0, 0 > 1, 2"),
+                    new("0, 0 > 2, 1")
+                }
+            ).SetName("{m} North-Attacking Knight on 0, 0 with obstacle in 2, 1 and 1, 0");
+
+            #endregion
+        }
     }
 
-    private static IEnumerable GetValidMovesTestCases
+    /*
+    private static IEnumerable GetValidMovesTestCasesOLD
     {
         get
         {
@@ -338,4 +402,4 @@ public class ChessPiecesTests
             #endregion
         }
     }
-}
+    */
