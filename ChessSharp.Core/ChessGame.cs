@@ -34,6 +34,18 @@ public class ChessGame
 
     public ChessGame(string csgnString)
     {
+        // TODO: Improve this, board should be represented like this:
+        // 1R 1N 1B 1Q 1K 1B 1N 1R
+        // 1P 1P 1P 1P 1P 1P 1P 1P
+        // -- -- -- -- -- -- -- --
+        // -- -- -- -- -- -- -- --
+        // -- -- -- -- -- -- -- --
+        // -- -- -- -- -- -- -- --
+        // 2P 2P 2P 2P 2P 2P 2P 2P
+        // 2R 2N 2B 2Q 2K 2B 2N 2R
+        // TODO: Players should be declared in order
+        // TODO: Numbers before pieces should represent player index, starting from 1
+
         /*
         
         Chess Sharp Game Notation (CSGN)
