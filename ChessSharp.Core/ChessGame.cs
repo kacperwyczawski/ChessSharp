@@ -158,9 +158,20 @@ public class ChessGame
                     // get current value from values of section
                     var currentValue = values[currentValueIndex];
                     
-                    // leave empty if "Empty"
-                    if(currentValue is "Empty" or "-")
+                    // leave empty if should be empty
+                    if(currentValue is "Empty" or "1")
+                    {
+                        currentValueIndex++;
                         continue;
+                    }
+                    
+                    // if current value is a number > 1, skip that many squares
+                    if(int.TryParse(currentValue, out var emptySquares))
+                    {
+                        currentValueIndex += emptySquares;
+                        y += emptySquares - 1; // minus 1 because y will be incremented by 1 at the end of the loop
+                        continue;
+                    }
                     
                     // get player and piece strings
                     var playerString = currentValue.Split("'s")[0];
