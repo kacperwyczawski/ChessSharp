@@ -180,7 +180,7 @@ public class ChessGame
                     // get owner of piece
                     var player = _players.First(p => p.Name == playerString);
                     // get piece type
-                    var pieceType = Type.GetType(pieceString)
+                    var pieceType = Type.GetType("ChessSharp.Core.BoardRepresentation.ChessPieces." + pieceString)
                                     ?? throw new ArgumentException($"Unknown piece type: {pieceString}");
                     // create piece
                     var piece = Activator.CreateInstance(pieceType, Board[x, y], Board, player) as ChessPiece
