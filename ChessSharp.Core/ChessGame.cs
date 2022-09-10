@@ -53,7 +53,7 @@ public class ChessGame
         - each section begins with a tag and ends with two semicolons
         - each tag is # followed by a tag name
         - inside section, values are separated by colons
-        - Empty in board section can also by represented as a `-` (single dash)
+        - Empty squares can be also represented by numbers
         Example:
         
         #Player:John:White:North;;
@@ -63,9 +63,9 @@ public class ChessGame
         :John'sRook:John'sKnight:John'sBishop:John'sQueen:John'sKing:John'sBishop:John'sKnight:John'sRook
         :John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn
         :Empty:Empty:Empty:Empty:Empty:Empty:Empty:Empty
-        :Empty:Empty:Empty:Empty:Empty:Empty:Empty:Empty
-        :Empty:Empty:Empty:Empty:Empty:Empty:Empty:Empty
-        :Empty:Empty:Empty:Empty:Empty:Empty:Empty:Empty
+        :1:1:Empty:Empty:Empty:Empty:2
+        :4:4
+        :8
         :Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:
         :Lisa'sRook:Lisa'sKnight:Lisa'sBishop:Lisa'sQueen:Lisa'sKing:Lisa'sBishop:LisaKnight:Lisa'sRook;;
         
