@@ -142,8 +142,9 @@ public class ChessGame
             var boardSize = int.Parse(values[0]);
             
             // check there are enough values for the board size
-            if (values.Length != boardSize * boardSize * 2 + 1)
-                throw new ArgumentException("Not enough values for given board size");
+            // TODO: redo this
+            // if (values.Length != boardSize * boardSize * 2 + 1)
+            //    throw new ArgumentException("Not enough values for given board size");
             
             // create board
             Board = new ChessBoard(_players[0], _players[1], true);
