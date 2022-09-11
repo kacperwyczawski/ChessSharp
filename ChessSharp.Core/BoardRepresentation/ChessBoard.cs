@@ -17,7 +17,7 @@ public class ChessBoard
     /// <summary>
     /// Initializes a new instance of the <see cref="ChessBoard"/> class.
     /// </summary>
-    public ChessBoard()
+    public ChessBoard(Player firstPlayer, Player secondPlayer, bool initializeEmpty = false)
     {
         for (var i = 0; i < 8; i++)
         {
@@ -27,46 +27,51 @@ public class ChessBoard
             }
         }
 
-        #region Initialize White Pieces
+        if (initializeEmpty)
+            return;
+
+        #region Initialize First Player's Pieces
         
-        this[0, 6].Piece = new Pawn(Color.White, this[0, 6], this, AttackDirection.North);
-        this[1, 6].Piece = new Pawn(Color.White, this[1, 6], this, AttackDirection.North);
-        this[2, 6].Piece = new Pawn(Color.White, this[2, 6], this, AttackDirection.North);
-        this[3, 6].Piece = new Pawn(Color.White, this[3, 6], this, AttackDirection.North);
-        this[4, 6].Piece = new Pawn(Color.White, this[4, 6], this, AttackDirection.North);
-        this[5, 6].Piece = new Pawn(Color.White, this[5, 6], this, AttackDirection.North);
-        this[6, 6].Piece = new Pawn(Color.White, this[6, 6], this, AttackDirection.North);
-        this[7, 6].Piece = new Pawn(Color.White, this[7, 6], this, AttackDirection.North);
-        this[0, 7].CreateAndSetPiece<Rook>(Color.White);
-        this[1, 7].CreateAndSetPiece<Knight>(Color.White);
-        this[2, 7].CreateAndSetPiece<Bishop>(Color.White);
-        this[3, 7].CreateAndSetPiece<Queen>(Color.White);
-        this[4, 7].CreateAndSetPiece<King>(Color.White);
-        this[5, 7].CreateAndSetPiece<Bishop>(Color.White);
-        this[6, 7].CreateAndSetPiece<Knight>(Color.White);
-        this[7, 7].CreateAndSetPiece<Rook>(Color.White);
+        this[0, 6].Piece = new Pawn(this[0, 6], this, firstPlayer);
+        this[1, 6].Piece = new Pawn(this[1, 6], this, firstPlayer);
+        this[2, 6].Piece = new Pawn(this[2, 6], this, firstPlayer);
+        this[3, 6].Piece = new Pawn(this[3, 6], this, firstPlayer);
+        this[4, 6].Piece = new Pawn(this[4, 6], this, firstPlayer);
+        this[5, 6].Piece = new Pawn(this[5, 6], this, firstPlayer);
+        this[6, 6].Piece = new Pawn(this[6, 6], this, firstPlayer);
+        this[7, 6].Piece = new Pawn(this[7, 6], this, firstPlayer);
+        
+        this[0, 7].Piece = new Rook(this[0, 7], this, firstPlayer);
+        this[1, 7].Piece = new Knight(this[1, 7], this, firstPlayer);
+        this[2, 7].Piece = new Bishop(this[2, 7], this, firstPlayer);
+        this[3, 7].Piece = new Queen(this[3, 7], this, firstPlayer);
+        this[4, 7].Piece = new King(this[4, 7], this, firstPlayer);
+        this[5, 7].Piece = new Bishop(this[5, 7], this, firstPlayer);
+        this[6, 7].Piece = new Knight(this[6, 7], this, firstPlayer);
+        this[7, 7].Piece = new Rook(this[7, 7], this, firstPlayer);
+        
         
         #endregion
         
-        #region Initialize Black Pieces
+        #region Initialize Second Player's Pieces
         
-        this[0, 1].Piece = new Pawn(Color.Black, this[0, 1], this, AttackDirection.South);
-        this[1, 1].Piece = new Pawn(Color.Black, this[1, 1], this, AttackDirection.South);
-        this[2, 1].Piece = new Pawn(Color.Black, this[2, 1], this, AttackDirection.South);
-        this[3, 1].Piece = new Pawn(Color.Black, this[3, 1], this, AttackDirection.South);
-        this[4, 1].Piece = new Pawn(Color.Black, this[4, 1], this, AttackDirection.South);
-        this[5, 1].Piece = new Pawn(Color.Black, this[5, 1], this, AttackDirection.South);
-        this[6, 1].Piece = new Pawn(Color.Black, this[6, 1], this, AttackDirection.South);
-        this[7, 1].Piece = new Pawn(Color.Black, this[7, 1], this, AttackDirection.South);
-
-        this[0, 0].CreateAndSetPiece<Rook>(Color.Black);
-        this[1, 0].CreateAndSetPiece<Knight>(Color.Black);
-        this[2, 0].CreateAndSetPiece<Bishop>(Color.Black);
-        this[3, 0].CreateAndSetPiece<Queen>(Color.Black);
-        this[4, 0].CreateAndSetPiece<King>(Color.Black);
-        this[5, 0].CreateAndSetPiece<Bishop>(Color.Black);
-        this[6, 0].CreateAndSetPiece<Knight>(Color.Black);
-        this[7, 0].CreateAndSetPiece<Rook>(Color.Black);
+        this[0, 1].Piece = new Pawn(this[0, 1], this, secondPlayer);
+        this[1, 1].Piece = new Pawn(this[1, 1], this, secondPlayer);
+        this[2, 1].Piece = new Pawn(this[2, 1], this, secondPlayer);
+        this[3, 1].Piece = new Pawn(this[3, 1], this, secondPlayer);
+        this[4, 1].Piece = new Pawn(this[4, 1], this, secondPlayer);
+        this[5, 1].Piece = new Pawn(this[5, 1], this, secondPlayer);
+        this[6, 1].Piece = new Pawn(this[6, 1], this, secondPlayer);
+        this[7, 1].Piece = new Pawn(this[7, 1], this, secondPlayer);
+        
+        this[0, 0].Piece = new Rook(this[0, 0], this, secondPlayer);
+        this[1, 0].Piece = new Knight(this[1, 0], this, secondPlayer);
+        this[2, 0].Piece = new Bishop(this[2, 0], this, secondPlayer);
+        this[3, 0].Piece = new Queen(this[3, 0], this, secondPlayer);
+        this[4, 0].Piece = new King(this[4, 0], this, secondPlayer);
+        this[5, 0].Piece = new Bishop(this[5, 0], this, secondPlayer);
+        this[6, 0].Piece = new Knight(this[6, 0], this, secondPlayer);
+        this[7, 0].Piece = new Rook(this[7, 0], this, secondPlayer);
 
         #endregion
     }
