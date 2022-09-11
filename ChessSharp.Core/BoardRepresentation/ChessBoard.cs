@@ -106,26 +106,20 @@ public class ChessBoard
         get => _boardArray[y, x];
         private init => _boardArray[y, x] = value;
     }
-    public void MovePiece(ChessPiece piece, Cell to)
+    // TODO add indexer that uses char and int for coordinates.
+    // TODO implementation should use char to int conversion and old indexer.
+    
+    public IEnumerable<ChessPiece> GetAllChessPieces()
     {
-        try
-        {
-            piece
-                // Get valid moves for this piece
-                // returns: IEnumerable<Move>
-                .GetValidMoves()
-                // get valid move where destination match destination passed as parameter
-                // if no matching move is found, InvalidOperationException will be thrown by First method
-                // returns: Move
-                // -- or --
-                // throws: InvalidOperationException
-                .First(m => m.DestinationCell == to)
-                // if exception is not thrown, execute move
-                .ExecuteMove();
-        }
-        catch (InvalidOperationException)
-        {
-            throw new Exception("Invalid move.");
-        }
+        return
+            from Cell cell in _boardArray
+            where cell.IsOccupied
+            select cell.Piece!;
+    }
+
+    public void ClearBoard()
+    {
+        foreach (var cell in _boardArray)
+            cell.RemovePiece();
     }
 }
