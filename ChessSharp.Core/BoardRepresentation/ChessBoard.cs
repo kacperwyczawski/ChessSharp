@@ -203,26 +203,4 @@ public class ChessBoard
             throw new Exception("Invalid move.");
         }
     }
-    
-    /// <summary>
-    /// Converts <see cref="ChessBoard"/> to an array of <see cref="char"/> representing chess pieces.
-    /// </summary>
-    /// <returns>An array of <see cref="char"/> representing chess pieces.</returns>
-    public char?[,] ToCharArray()
-    {
-        var charArray = new char?[8, 8];
-
-        for (var i = 0; i < 8; i++)
-        {
-            for (var j = 0; j < 8; j++)
-            {
-                if (this[i, j].Piece is { } piece)
-                    charArray[j, i] = piece.ToChar();
-                else
-                    charArray[j, i] = ' ';
-            }
-        }
-
-        return charArray;
-    }
 }
