@@ -1,5 +1,5 @@
 ﻿// TODO: Remove this after writing new tests
-// This is temporary left here for copilot
+// This is temporally left here for copilot
 
 
 /*
