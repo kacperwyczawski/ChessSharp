@@ -32,166 +32,88 @@ public class ChessGame
         Board = new ChessBoard(firstPlayer, secondPlayer);
     }
 
-    public ChessGame(string csgnString)
+    public ChessGame(string csgnString, Player firstPlayer, Player secondPlayer, params Player[] additionalPlayers)
     {
-        // TODO: Improve this, board should be represented like this:
-        // 1R 1N 1B 1Q 1K 1B 1N 1R
-        // 1P 1P 1P 1P 1P 1P 1P 1P
-        // -- -- -- -- -- -- -- --
-        // -- -- -- -- -- -- -- --
-        // -- -- -- -- -- -- -- --
-        // -- -- -- -- -- -- -- --
-        // 2P 2P 2P 2P 2P 2P 2P 2P
-        // 2R 2N 2B 2Q 2K 2B 2N 2R
-        // TODO: Players should be declared in order
-        // TODO: Numbers before pieces should represent player index, starting from 1
-
         /*
-        
+         
         Chess Sharp Game Notation (CSGN)
-        - line breaks and whitespaces are ignored
-        - each section begins with a tag and ends with two semicolons
-        - each tag is # followed by a tag name
-        - inside section, values are separated by colons
-        - Empty squares can be also represented by numbers
-        Example:
         
-        #Player:John:White:North;;
-        #Player:Lisa:Black:South;;
-        #CurrentPlayer:John;;
-        #Board:8
-        :John'sRook:John'sKnight:John'sBishop:John'sQueen:John'sKing:John'sBishop:John'sKnight:John'sRook
-        :John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn:John'sPawn
-        :Empty:Empty:Empty:Empty:Empty:Empty:Empty:Empty
-        :1:1:Empty:Empty:Empty:Empty:2
-        :4:4
-        :8
-        :Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:Lisa'sPawn:
-        :Lisa'sRook:Lisa'sKnight:Lisa'sBishop:Lisa'sQueen:Lisa'sKing:Lisa'sBishop:LisaKnight:Lisa'sRook;;
+        Whitespaces and newlines are ignored.
+            
+        1R 1N 1B 1Q 1K 1B 1N 1R;
+        1P 1P 1P 1P 1P 1P 1P 1P;
+        -- -- -- -- -- -- -- --;
+        -- -- -- -- -- -- -- --;
+        -- -- -- -- -- -- -- --;
+        -- -- -- -- -- -- -- --;
+        2P 2P 2P 2P 2P 2P 2P 2P;
+        2R 2N 2B 2Q 2K 2B 2N 2R;
+        
+        [] [] [] 1R 1N 1B 1Q 1K 1B 1N 1R [] [] [];
+        [] [] [] 1P 1P 1P 1P 1P 1P 1P 1P [] [] [];
+        [] [] [] -- -- -- -- -- -- -- -- [] [] [];
+        4R 4P -- -- -- -- -- -- -- -- -- -- 2P 2R;
+        4N 4P -- -- -- -- -- -- -- -- -- -- 2P 2N;
+        4B 4P -- -- -- -- -- -- -- -- -- -- 2P 2B;
+        4Q 4P -- -- -- -- -- -- -- -- -- -- 2P 2Q;
+        4K 4P -- -- -- -- -- -- -- -- -- -- 2P 2K;
+        4B 4P -- -- -- -- -- -- -- -- -- -- 2P 2B;
+        4N 4P -- -- -- -- -- -- -- -- -- -- 2P 2N;
+        4R 4P -- -- -- -- -- -- -- -- -- -- 2P 2R;
+        [] [] [] -- -- -- -- -- -- -- -- [] [] [];
+        [] [] [] 3P 3P 3P 3P 3P 3P 3P 3P [] [] [];
+        [] [] [] 3R 3N 3B 3Q 3K 3B 3N 3R [] [] [];
         
         */
         
-        // remove whitespaces and line breaks from string
+        // add players and create board
+        // TODO: Implement additional players and remove these two lines below
+        if (additionalPlayers.Length > 0)
+            throw new NotImplementedException();
+
+        _players.Add(firstPlayer);
+        _players.Add(secondPlayer);
+        _players.AddRange(additionalPlayers);
+        CurrentPlayer = firstPlayer;
+        Board = new ChessBoard(firstPlayer, secondPlayer);
+        
+        // remove whitespaces and newlines from string
         csgnString = Regex.Replace(csgnString, @"\s+", "");
-
-        // split string into sections
-        var sections = csgnString.Split(";;");
-
-        foreach (var section in sections)
+        
+        // split string into rows
+        var rows = csgnString.Split(';', StringSplitOptions.RemoveEmptyEntries);
+        
+        // fill board
+        for (var y = 0; y < rows.Length; y++)
         {
-            // split section
-            var tagAndValues = section.Split(":");
-
-            // get tag and values
-            var tag = tagAndValues[0];
-            var values = tagAndValues[1..];
-
-            // parse tag and values
-            switch (tag)
+            var row = rows[y];
+            for (var x = 0; x < rows.Length; x++)
             {
-                case "#Player":
-                    HandlePlayerTag(values);
-                    break;
-                case "#CurrentPlayer":
-                    HandleCurrentPlayerTag(values);
-                    break;
-                case "#Board":
-                    HandleBoardTag(values);
-                    break;
-                default:
-                    throw new ArgumentException($"Unknown tag: {tag}");
-            }
-        }
-        
-        // throw exception if there is not enough players
-        if (_players.Count < 2)
-            throw new ArgumentException("Please provide at least two valid #Player tags");
-        
-        // throw exception if there is no current player
-        if (CurrentPlayer == null)
-            throw new ArgumentException("Please provide a valid #CurrentPlayer tag");
-        
-        // throw exception if there is no board
-        if (Board == null)
-            throw new ArgumentException("Please provide a valid #Board tag");
-
-        // End
-        return;
-
-        void HandlePlayerTag(string[] values)
-        {
-            _players.Add(new Player
-            (
-                values[0],
-                Color.FromName(values[1]),
-                (AttackDirection)Enum.Parse(typeof(AttackDirection), values[2])
-            ));
-        }
-
-        void HandleCurrentPlayerTag(string[] values)
-        {
-            if (values.Length != 1)
-                throw new ArgumentException("Invalid number of values for tag #CurrentPlayer");
-            
-            CurrentPlayer = _players.First(p => p.Name == values[0]);
-        }
-
-        void HandleBoardTag(string[] values)
-        {
-            // get board size from first value
-            var boardSize = int.Parse(values[0]);
-            
-            // check there are enough values for the board size
-            // TODO: redo this
-            // if (values.Length != boardSize * boardSize * 2 + 1)
-            //    throw new ArgumentException("Not enough values for given board size");
-            
-            // create board
-            Board = new ChessBoard(_players[0], _players[1], true);
-
-            // fill array with chess pieces from values
-            var currentValueIndex = 0;
-            for (var x = 0; x < boardSize; x++)
-            {
-                for (var y = 0; y < boardSize; y++)
+                var cell = row.Substring(x * 2, 2);
+                
+                // skip empty cells
+                if (cell == "--")
+                    continue;
+                
+                // TODO: if cell == "[]" add wall
+                
+                var player = _players[int.Parse(cell[0].ToString()) - 1];
+                var pieceType = cell[1] switch
                 {
-                    // get current value from values of section
-                    var currentValue = values[currentValueIndex];
-                    
-                    // leave empty if should be empty
-                    if(currentValue is "Empty" or "1")
-                    {
-                        currentValueIndex++;
-                        continue;
-                    }
-                    
-                    // if current value is a number > 1, skip that many squares
-                    if(int.TryParse(currentValue, out var emptySquares))
-                    {
-                        currentValueIndex += emptySquares;
-                        y += emptySquares - 1; // minus 1 because y will be incremented by 1 at the end of the loop
-                        continue;
-                    }
-                    
-                    // get player and piece strings
-                    var playerString = currentValue.Split("'s")[0];
-                    var pieceString = currentValue.Split("'s")[1];
-                    
-                    // get owner of piece
-                    var player = _players.First(p => p.Name == playerString);
-                    // get piece type
-                    var pieceType = Type.GetType("ChessSharp.Core.BoardRepresentation.ChessPieces." + pieceString)
-                                    ?? throw new ArgumentException($"Unknown piece type: {pieceString}");
-                    // create piece
-                    var piece = Activator.CreateInstance(pieceType, Board[x, y], Board, player) as ChessPiece
-                                ?? throw new ArgumentException($"Could not create piece of type {pieceType}");
-                    
-                    // add piece to board
-                    Board[x, y].Piece = piece;
-                    
-                    // increment current value index
-                    currentValueIndex++;
-                }
+                    // TODO: Use reflection or something to get the type and follow OCP
+                    'P' => typeof(Pawn),
+                    'R' => typeof(Rook),
+                    'N' => typeof(Knight),
+                    'B' => typeof(Bishop),
+                    'Q' => typeof(Queen),
+                    'K' => typeof(King),
+                    _ => throw new ArgumentException($"Unknown piece type: {cell[1]}")
+                };
+                var piece =
+                    Activator.CreateInstance(pieceType, Board[x, y], Board, player) as ChessPiece
+                    ?? throw new ArgumentException($"Could not create piece of type {pieceType}");
+                
+                Board[x, y].Piece = piece;
             }
         }
     }
