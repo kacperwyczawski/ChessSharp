@@ -9,11 +9,11 @@ public class ChessGame
 {
     public ChessBoard Board { get; private set; }
 
-    public Player CurrentPlayer { get; private set; }
+    public Player CurrentPlayer { get; private set; } // TODO: Change on move execution
 
-    public bool IsOver { get; private set; } = false;
+    public bool IsOver { get; private set; } = false; // TODO: Implement this
 
-    public Player? Winner { get; private set; } = null;
+    public Player? Winner { get; private set; } = null; // TODO: Implement this
 
     private IEnumerable<ChessPiece> ChessPieces => Board.GetAllChessPieces();
 
