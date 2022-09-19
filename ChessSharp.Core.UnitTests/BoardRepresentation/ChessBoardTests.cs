@@ -16,6 +16,7 @@ public class ChessBoardTests
         
         var piece = board[0, 0].Piece;
         var pawn = new Pawn(board[3, 3], board, p1);
+        board[3, 3].Piece = pawn;
         
         Assert.Multiple(() =>
         {
