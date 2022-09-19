@@ -3,6 +3,7 @@ using ChessSharp.Core.BoardRepresentation;
 
 namespace ChessSharp.Core.UnitTests;
 
+// TODO: Move this to readme as example usage
 [TestFixture]
 public class BigAssTopLevelTests
 {
