@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using ChessSharp.Core.BoardRepresentation;
 using ChessSharp.Core.BoardRepresentation.ChessPieces;
 
