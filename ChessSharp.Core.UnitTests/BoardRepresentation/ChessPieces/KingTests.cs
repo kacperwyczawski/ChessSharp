@@ -44,4 +44,31 @@ public class KingTests
             }));
         });
     }
+
+    [Test]
+    public void GetValidMovesWhenEnemyKingIsNearby()
+    {
+        var game = new ChessGame(csgnString:
+            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- -- 2K -- -- --;" +
+            "-- -- -- -- -- 1K -- --;" +
+            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- -- -- -- -- --;",
+            new Player("P1", Color.White, AttackDirection.North),
+            new Player("P2", Color.Black, AttackDirection.South));
+        
+        Move.Board = game.Board;
+        
+        Assert.That(game.Board[4, 4].Piece!.GetValidMoves(), Is.EquivalentTo(new List<Move>
+        {
+            new ("4,4 > 3,3"),
+            new ("4,4 > 3,4"),
+            new ("4,4 > 3,5"),
+            new ("4,4 > 4,3"),
+            new ("4,4 > 5,3")
+        }));
+    }
 }
