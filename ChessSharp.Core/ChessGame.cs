@@ -74,7 +74,7 @@ public class ChessGame
         _players.Add(secondPlayer);
         _players.AddRange(additionalPlayers);
         CurrentPlayer = firstPlayer;
-        Board = new ChessBoard(firstPlayer, secondPlayer);
+        Board = new ChessBoard(firstPlayer, secondPlayer, true);
         
         // remove whitespaces and newlines from string
         csgnString = Regex.Replace(csgnString, @"\s+", "");
