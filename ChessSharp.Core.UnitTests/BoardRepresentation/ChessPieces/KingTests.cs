@@ -12,7 +12,7 @@ public class KingTests
             "1K 2P -- -- -- -- -- --;" +
             "-- -- -- -- -- -- -- --;" +
             "-- -- -- -- -- -- -- --;" +
-            "-- -- -- -- -- -- -- --;" +
+            "-- -- -- 2K -- -- -- --;" +
             "-- -- -- -- 2K -- -- --;" +
             "-- -- -- -- -- 1R -- --;" +
             "-- -- -- -- -- -- -- --;" +
@@ -31,7 +31,6 @@ public class KingTests
             }));
             Assert.That(game.Board[4, 4].Piece!.GetValidMoves(), Is.EquivalentTo(new List<Move>
             {
-                new("4,4 > 3,3"),
                 new("4,4 > 3,4"),
                 new("4,4 > 3,5"),
 
