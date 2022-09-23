@@ -41,7 +41,6 @@ public class KnightTests
             }));
             Assert.That(game.Board[4, 4].Piece!.GetValidMoves(), Is.EquivalentTo(new List<Move>
             {
-                new("4,4 > 2,3"),
                 new("4,4 > 6,3"),
                 new("4,4 > 5,6"),
                 new("4,4 > 3,6"),
