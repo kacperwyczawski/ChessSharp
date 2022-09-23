@@ -93,7 +93,7 @@ public class QueenTests
                 new("4,4 > 1,7")
             }));
             Assert.That(game.Board[7, 4].Piece!.GetValidMoves(), Has.None.EqualTo(new Move("7,4 > 4,4")));
+            Assert.That(game.Board[7, 4].Piece!.GetValidMoves(), Has.None.EqualTo(new Move("7,4 > 3,4")));
         });
-        Assert.That(game.Board[7, 4].Piece!.GetValidMoves(), Has.None.EqualTo(new Move("7,4 > 3,4")));
     }
 }
