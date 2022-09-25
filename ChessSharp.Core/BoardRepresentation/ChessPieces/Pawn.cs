@@ -90,6 +90,7 @@ public sealed class Pawn : ChessPiece
                 yield return new Move(leftCaptureCell, Position);
             }
             
+            /*
             // capture en passant left
             if (leftCaptureCell.IsOccupied == false
                 // TODO: check in logs if last move was two squares pawn move
@@ -99,6 +100,7 @@ public sealed class Pawn : ChessPiece
             {
                 yield return new Move(leftCaptureCell, Position, Position.GetLeftNeighbor(_direction));
             }
+            */
         }
         
         // captures on the right-hand side of the pawn
@@ -111,7 +113,8 @@ public sealed class Pawn : ChessPiece
             {
                 yield return new Move(rightCaptureCell, Position);
             }
-
+            
+            /*
             // capture en passant right
             if (rightCaptureCell.IsOccupied == false
                 // TODO: check in logs if last move was two squares pawn move
@@ -121,6 +124,7 @@ public sealed class Pawn : ChessPiece
             {
                 yield return new Move(rightCaptureCell, Position, Position.GetRightNeighbor(_direction));
             }
+            */
         }
     }
 }
