@@ -85,7 +85,7 @@ public sealed class Pawn : ChessPiece
             // capture left
             if (Position.GetFrontLeftNeighbor(_direction) is var leftCaptureCell
                 && leftCaptureCell.IsOccupied
-                && ReferenceEquals(leftCaptureCell.Piece?.Player, Player))
+                && !ReferenceEquals(leftCaptureCell.Piece?.Player, Player))
             {
                 yield return new Move(leftCaptureCell, Position);
             }
@@ -109,7 +109,7 @@ public sealed class Pawn : ChessPiece
             // capture right
             if (Position.GetFrontRightNeighbor(_direction) is var rightCaptureCell
                 && rightCaptureCell.IsOccupied
-                && ReferenceEquals(rightCaptureCell.Piece?.Player, Player))
+                && !ReferenceEquals(rightCaptureCell.Piece?.Player, Player))
             {
                 yield return new Move(rightCaptureCell, Position);
             }
