@@ -157,6 +157,9 @@ public readonly struct Move
     {
         // set HasMoved to true for piece on source cell
         _sourceCell.Piece!.HasMoved = true;
+        
+        // change piece's position
+        _sourceCell.Piece.Position = DestinationCell;
 
         // If there is a capture cell, remove piece from capture cell
         _captureCell?.RemovePiece();
