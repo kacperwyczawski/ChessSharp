@@ -9,7 +9,7 @@ public class PawnTests
     public void GetValidMoves()
     {
         var game = new ChessGame(csgnString:
-            "-- 2P -- -- -- -- -- --;" +
+            "-- 2P -- -- 1P -- -- --;" +
             "-- -- -- -- -- -- -- --;" +
             "-- -- -- -- -- -- -- --;" +
             "-- -- -- -- -- -- -- --;" +
@@ -46,6 +46,7 @@ public class PawnTests
                 new("5,5 > 5,6 n"),
                 new("5,5 > 5,7 n")
             }));
+            Assert.That(game.Board[5, 5].Piece!.GetValidMoves(), Is.Empty);
         });
     }
 
