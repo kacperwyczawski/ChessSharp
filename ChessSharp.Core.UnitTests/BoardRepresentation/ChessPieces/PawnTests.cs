@@ -46,7 +46,7 @@ public class PawnTests
                 new("5,5 > 5,6 n"),
                 new("5,5 > 5,7 n")
             }));
-            Assert.That(game.Board[5, 5].Piece!.GetValidMoves(), Is.Empty);
+            Assert.That(game.Board[4, 0].Piece!.GetValidMoves(), Is.Empty);
         });
     }
 
