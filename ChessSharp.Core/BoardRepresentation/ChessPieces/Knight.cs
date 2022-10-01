@@ -17,21 +17,44 @@ public sealed class Knight : ChessPiece
 
     public override IEnumerable<Move> GetValidMoves()
     {
-        if (Position.X - 1 >= 0 && Position.Y - 2 >= 0)
+        if (Position.X - 1 >= 0
+            && Position.Y - 2 >= 0
+            && !ReferenceEquals(ParentBoard[Position.X - 1, Position.Y - 2].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X - 1, Position.Y - 2], Position);
-        if(Position.X + 1 <= 7 && Position.Y - 2 >= 0)
+        
+        if (Position.X + 1 < 8
+            && Position.Y - 2 >= 0
+            && !ReferenceEquals(ParentBoard[Position.X + 1, Position.Y - 2].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X + 1, Position.Y - 2], Position);
-        if(Position.X + 2 <= 7 && Position.Y - 1 >= 0)
+        
+        if (Position.X + 2 < 8
+            && Position.Y - 1 >= 0
+            && !ReferenceEquals(ParentBoard[Position.X + 2, Position.Y - 1].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X + 2, Position.Y - 1], Position);
-        if(Position.X + 2 <= 7 && Position.Y + 1 <= 7)
+        
+        if (Position.X + 2 < 8
+            && Position.Y + 1 < 8
+            && !ReferenceEquals(ParentBoard[Position.X + 2, Position.Y + 1].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X + 2, Position.Y + 1], Position);
-        if(Position.X + 1 <= 7 && Position.Y + 2 <= 7)
+        
+        if (Position.X + 1 < 8
+            && Position.Y + 2 < 8
+            && !ReferenceEquals(ParentBoard[Position.X + 1, Position.Y + 2].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X + 1, Position.Y + 2], Position);
-        if(Position.X - 1 >= 0 && Position.Y + 2 <= 7)
+        
+        if (Position.X - 1 >= 0
+            && Position.Y + 2 < 8
+            && !ReferenceEquals(ParentBoard[Position.X - 1, Position.Y + 2].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X - 1, Position.Y + 2], Position);
-        if(Position.X - 2 >= 0 && Position.Y + 1 <= 7)
+        
+        if (Position.X - 2 >= 0
+            && Position.Y + 1 < 8
+            && !ReferenceEquals(ParentBoard[Position.X - 2, Position.Y + 1].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X - 2, Position.Y + 1], Position);
-        if(Position.X - 2 >= 0 && Position.Y - 1 >= 0)
+        
+        if (Position.X - 2 >= 0
+            && Position.Y - 1 >= 0
+            && !ReferenceEquals(ParentBoard[Position.X - 2, Position.Y - 1].Piece?.Player, Player))
             yield return new Move(ParentBoard[Position.X - 2, Position.Y - 1], Position);
     }
 }
