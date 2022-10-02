@@ -70,4 +70,10 @@ public class KingTests
             new ("4,4 > 5,3")
         }));
     }
+    
+    [Test]
+    public void GetValidMovesUnderCheck()
+    {
+        throw new NotImplementedException();
+    }
 }
