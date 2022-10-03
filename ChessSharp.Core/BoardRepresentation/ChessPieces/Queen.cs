@@ -18,48 +18,72 @@ public sealed class Queen : ChessPiece
     public override IEnumerable<Move> GetValidMoves()
     {
         // Combined mechanics of rook and bishop
-        
+
         // North
         // y is decrementing, x is constant
         for (var currentY = Position.Y - 1; currentY >= 0; currentY--)
         {
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[Position.X, currentY].Piece?.Player, Player))
+                break;
+
             // return new move
             yield return new Move(ParentBoard[Position.X, currentY], Position);
-            
-            // if there is a piece, break this direction, but return move anyway, because it is a valid capture
+
+            // break if the cell is occupied by enemy piece
             if (ParentBoard[Position.X, currentY].IsOccupied)
                 break;
         }
-        
+
         // North-East
         // y is decrementing, x is incrementing
-        for (int x = Position.X + 1, y = Position.Y - 1; x <= 7 && y >= 0; x++, y--)
+        for (int currentX = Position.X + 1, currentY = Position.Y - 1;
+             currentX <= 7 && currentY >= 0;
+             currentX++, currentY--)
         {
-            yield return new Move(ParentBoard[x, y],
-                ParentBoard[Position.X, Position.Y]);
-            
-            if (ParentBoard[x, y].IsOccupied)
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, currentY].Piece?.Player, Player))
+                break;
+
+            // return new move
+            yield return new Move(ParentBoard[currentX, currentY], Position);
+
+            // break if the cell is occupied by enemy piece
+            if (ParentBoard[currentX, currentY].IsOccupied)
                 break;
         }
-        
+
         // East
-        // x is incrementing, y is constant
+        // y is constant, x is incrementing
         for (var currentX = Position.X + 1; currentX <= 7; currentX++)
         {
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, Position.Y].Piece?.Player, Player))
+                break;
+
+            // return new move
             yield return new Move(ParentBoard[currentX, Position.Y], Position);
-            
+
+            // break if the cell is occupied by enemy piece
             if (ParentBoard[currentX, Position.Y].IsOccupied)
                 break;
         }
         
         // South-East
         // y is incrementing, x is incrementing
-        for (int x = Position.X + 1, y = Position.Y + 1; x <= 7 && y <= 7; x++, y++)
+        for (int currentX = Position.X + 1, currentY = Position.Y + 1;
+             currentX <= 7 && currentY <= 7;
+             currentX++, currentY++)
         {
-            yield return new Move(ParentBoard[x, y],
-                ParentBoard[Position.X, Position.Y]);
-            
-            if (ParentBoard[x, y].IsOccupied)
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, currentY].Piece?.Player, Player))
+                break;
+
+            // return new move
+            yield return new Move(ParentBoard[currentX, currentY], Position);
+
+            // break if the cell is occupied by enemy piece
+            if (ParentBoard[currentX, currentY].IsOccupied)
                 break;
         }
         
@@ -67,41 +91,67 @@ public sealed class Queen : ChessPiece
         // y is incrementing, x is constant
         for (var currentY = Position.Y + 1; currentY <= 7; currentY++)
         {
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[Position.X, currentY].Piece?.Player, Player))
+                break;
+
+            // return new move
             yield return new Move(ParentBoard[Position.X, currentY], Position);
-            
+
+            // break if the cell is occupied by enemy piece
             if (ParentBoard[Position.X, currentY].IsOccupied)
                 break;
         }
         
         // South-West
         // y is incrementing, x is decrementing
-        for (int x = Position.X - 1, y = Position.Y + 1; x >= 0 && y <= 7; x--, y++)
+        for (int currentX = Position.X - 1, currentY = Position.Y + 1;
+             currentX >= 0 && currentY <= 7;
+             currentX--, currentY++)
         {
-            yield return new Move(ParentBoard[x, y],
-                ParentBoard[Position.X, Position.Y]);
-            
-            if (ParentBoard[x, y].IsOccupied)
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, currentY].Piece?.Player, Player))
+                break;
+
+            // return new move
+            yield return new Move(ParentBoard[currentX, currentY], Position);
+
+            // break if the cell is occupied by enemy piece
+            if (ParentBoard[currentX, currentY].IsOccupied)
                 break;
         }
         
         // West
-        // x is decrementing, y is constant
+        // y is constant, x is decrementing
         for (var currentX = Position.X - 1; currentX >= 0; currentX--)
         {
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, Position.Y].Piece?.Player, Player))
+                break;
+
+            // return new move
             yield return new Move(ParentBoard[currentX, Position.Y], Position);
-            
+
+            // break if the cell is occupied by enemy piece
             if (ParentBoard[currentX, Position.Y].IsOccupied)
                 break;
         }
         
         // North-West
         // y is decrementing, x is decrementing
-        for (int x = Position.X - 1, y = Position.Y - 1; x >= 0 && y >= 0; x--, y--)
+        for (int currentX = Position.X - 1, currentY = Position.Y - 1;
+             currentX >= 0 && currentY >= 0;
+             currentX--, currentY--)
         {
-            yield return new Move(ParentBoard[x, y],
-                ParentBoard[Position.X, Position.Y]);
-            
-            if (ParentBoard[x, y].IsOccupied)
+            // break if the cell is occupied by a piece of the same player
+            if (ReferenceEquals(ParentBoard[currentX, currentY].Piece?.Player, Player))
+                break;
+
+            // return new move
+            yield return new Move(ParentBoard[currentX, currentY], Position);
+
+            // break if the cell is occupied by enemy piece
+            if (ParentBoard[currentX, currentY].IsOccupied)
                 break;
         }
     }
